@@ -7,10 +7,11 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0);
   const [data, setData] = useState(null);
+  const API_BASE = import.meta.env.VITE_API_URL;
 
   const fetchAPI = async () => {
     try {
-      const response = await axios.get('/api/ping');
+      const response = await axios.get(`${API_BASE}/api/ping`);
       setData(response.data);
     } catch (error) {
       console.error('There has been a problem with your fetch operation:', error);
