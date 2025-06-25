@@ -1,10 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect, use } from 'react'
+import axios from 'axios'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [data, setData] = useState(null);
+
+  const fetchAPI = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:5000/ping');
+      setData(response.data);
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
 
   return (
     <>
@@ -22,7 +37,9 @@ function App() {
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          {
+            data ? `Response from Flask API: ${data.message}` : 'Loading...'
+          }
         </p>
       </div>
       <p className="read-the-docs">
