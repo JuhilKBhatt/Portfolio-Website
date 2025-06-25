@@ -1,3 +1,4 @@
+# ./flask-server/app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -9,7 +10,7 @@ cors = CORS(app, origins='*')
 
 app.config['DEBUG'] = environ.get('FLASK_DEBUG')
 
-@app.route('/ping')
+@app.route('/api/ping')
 def ping():
     return jsonify({'message': 'pong'})
 

@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://juhilkbhatt.github.io/Portfolio-Website/",
-  "proxy": "http://127.0.0.1:5000",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
