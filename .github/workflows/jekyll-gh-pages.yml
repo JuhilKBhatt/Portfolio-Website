@@ -27,6 +27,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          
+      - name: Inject environment variables into .env.production
+        working-directory: ./client
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env.production
+          # Add more secrets as needed
 
       - name: Install dependencies and build
         working-directory: ./client
