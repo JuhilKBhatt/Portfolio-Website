@@ -7,7 +7,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0);
   const [data, setData] = useState(null);
-  const API_BASE = import.meta.env.VITE_API_URL;
+  const API_BASE = import.meta.env.FLASK_API_URL;
 
   const fetchAPI = async () => {
     try {
