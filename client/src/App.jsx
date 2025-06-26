@@ -12,7 +12,6 @@ function App() {
 
   const fetchAPI = async () => {
     try {
-      console.log("API Base:", import.meta.env.VITE_FLASK_API_URL);
       const response = await axios.get(`${API_BASE}/api/ping`);
       setData(response.data);
     } catch (error) {
