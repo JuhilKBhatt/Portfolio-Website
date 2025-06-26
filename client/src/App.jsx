@@ -8,10 +8,11 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0);
   const [data, setData] = useState(null);
-  const API_BASE = import.meta.env.FLASK_API_URL;
+  const API_BASE = import.meta.env.VITE_FLASK_API_URL;
 
   const fetchAPI = async () => {
     try {
+      console.log("API Base:", import.meta.env.VITE_FLASK_API_URL);
       const response = await axios.get(`${API_BASE}/api/ping`);
       setData(response.data);
     } catch (error) {

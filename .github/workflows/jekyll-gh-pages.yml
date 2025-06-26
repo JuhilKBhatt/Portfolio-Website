@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  FLASK_API_URL: ${{ secrets.FLASK_API_URL }}
+  VITE_FLASK_API_URL: ${{ secrets.FLASK_API_URL }}
 
 jobs:
   build:
