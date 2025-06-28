@@ -1,17 +1,17 @@
 // src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/header/navbar";
-import { getNavList } from "./scripts/getNavList";
+import Sidebar from "./components/header/sidebar.jsx";
+import { getNavList } from "./scripts/getNavList.js";
 
 const routes = getNavList();
 
 function App() {
   return (
     <Router>
-      <Navbar />
+      < Sidebar />
       <Routes>
-        {routes.map((route, idx) => (
-          <Route key={idx} path={route.path} element={<route.element />} />
+        {routes.map((route) => (
+          <Route key={route.path} path={route.path} element={<route.element />} />
         ))}
       </Routes>
     </Router>

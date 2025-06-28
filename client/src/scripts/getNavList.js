@@ -1,17 +1,21 @@
 // src/scripts/getNavList.js
 // This uses Vite's glob import to get all files in pages
 
+import { setNavIcon } from "./setNavIcon.js";
+
 export const getNavList = () => {
   const pages = import.meta.glob("../pages/*.jsx", { eager: true });
 
   const pageList = Object.keys(pages).map((path) => {
     const fileName = path.split("/").pop().replace(".jsx", "");
     const label = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+    const fileKey = fileName.toLowerCase();
 
     return {
       label,
       path: fileName === "home" ? "/" : `/${fileName.toLowerCase()}`,
       fileName,
+      icon: setNavIcon[fileKey],
       element: pages[path].default,
     };
   });
