@@ -1,38 +1,21 @@
-// ./client/src/App.jsx
-import { useState, useEffect, use } from 'react'
-import axios from 'axios'
-import './App.css'
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/header/navbar";
+import { getNavList } from "./scripts/getNavList";
+
+const routes = getNavList();
 
 function App() {
-  const [data, setData] = useState(null);
-  const API_BASE = import.meta.env.VITE_FLASK_API_URL;
-
-  const fetchAPI = async () => {
-    try {
-      const response = await axios.get(`${API_BASE}/api/ping`);
-      setData(response.data);
-    } catch (error) {
-      console.error('There has been a problem with your fetch operation:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchAPI();
-  }, []);
-
   return (
-    <>
-      <div>
-      </div>
-      <div className="card">
-        <p>
-          {
-            data ? `Response from Flask API: ${data.message}` : 'Loading...'
-          }
-        </p>
-      </div>
-    </>
-  )
+    <Router>
+      <Navbar />
+      <Routes>
+        {routes.map((route, idx) => (
+          <Route key={idx} path={route.path} element={<route.element />} />
+        ))}
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
