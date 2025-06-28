@@ -20,7 +20,6 @@ const AppLayout = () => {
   } = theme.useToken();
 
   const navItems = getNavList();
-  console.log("Navigation Items:", navItems);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
