@@ -8,6 +8,7 @@ import {
   BookOutlined,
 } from "@ant-design/icons";
 
+// Export an object mapping navigation keys to their respective icons
 export const setNavIcon = {
   home: HomeOutlined,
   projects: FolderOpenOutlined,

@@ -23,10 +23,18 @@ const AppLayout = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
+      <Sider 
+        trigger={null}
+        collapsible collapsed={collapsed}
+        style={{
+          background: "#394D65",
+          textAlign: "center",
+          width: collapsed ? 80 : 200,
+        }}>
+        <div />
         <Menu
           theme="dark"
+          style={{ background: "#394D65" }}
           mode="inline"
           selectedKeys={[location.pathname]}
           onClick={({ key }) => navigate(key)}
@@ -38,12 +46,12 @@ const AppLayout = () => {
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <Header style={{ padding: 0, background: "#FFD700" }}>
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
-            style={{ fontSize: "16px", width: 64, height: 64 }}
+            style={{ fontSize: "38px", width: 64, height: 64 }}
           />
         </Header>
         <Content
@@ -68,7 +76,7 @@ const AppLayout = () => {
 
 // Wrap with Router
 const App = () => (
-  <Router basename="/Portfolio-Website">
+  <Router>
     <AppLayout />
   </Router>
 );

@@ -6,6 +6,7 @@ import { setNavIcon } from "./setNavIcon.js";
 export const getNavList = () => {
   const pages = import.meta.glob("../pages/*.jsx", { eager: true });
 
+  // Convert the pages object into an array of objects with label, key, element, and icon
   const pageList = Object.keys(pages).map((path) => {
     const fileName = path.split("/").pop().replace(".jsx", "");
     const label = fileName.charAt(0).toUpperCase() + fileName.slice(1);
@@ -13,7 +14,7 @@ export const getNavList = () => {
 
     return {
       label,
-      key: fileKey === "home" ? "/" : `/${fileKey}`, // ✅ this will be used by Menu
+      key: fileKey === "home" ? "/" : `/${fileKey}`,
       element: pages[path].default,
       icon: setNavIcon[fileKey],
       fileKey,
