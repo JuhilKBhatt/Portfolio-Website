@@ -23,8 +23,7 @@ const AppLayout = () => {
 
   const navItems = getNavList();
   const activePage = navItems.find(item => item.key === location.pathname);
-  const pageTitle = activePage?.label?.props?.children || "Page";
-
+  const pageTitle = activePage?.label || "Page";
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
