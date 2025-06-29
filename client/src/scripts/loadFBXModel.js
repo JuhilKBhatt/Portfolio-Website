@@ -19,8 +19,14 @@ function loadFBXModel(modelPath, location, scene, onLoaded) {
             object.position.copy(location);
             scene.add(object);
 
+            const mixer = new THREE.AnimationMixer(object);
+            if (object.animations.length > 0) {
+                const action = mixer.clipAction(object.animations[0]);
+                action.play();
+            }
+
             if (onLoaded) {
-                onLoaded(object);
+                onLoaded(object, mixer);
             }
             console.log('FBX model loaded successfully:', modelPath);
         },

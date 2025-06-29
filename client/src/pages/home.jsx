@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "../scripts/build/three.module.js";
 import { OrbitControls } from "../scripts/build/OrbitControls.js";
-import { loadGLBModel } from "../scripts/loadGLBModel.js";
+import { loadFBXModel } from "../scripts/loadFBXModel.js";
 
 export default function Home() {
   const containerRef = useRef();
@@ -27,14 +27,15 @@ export default function Home() {
     renderer.setClearColor(0xd5debf, 0.1);
     containerRef.current.appendChild(renderer.domElement);
 
-    // White Flower Model
-    loadGLBModel(
-      "models/characterAvatar.glb",
+    let mixer;
+
+    loadFBXModel(
+      "models/AvatarWaving.fbx",
       new THREE.Vector3(0, -1, 0),
       scene,
-      (model) => {
+      (model, loadedMixer) => {
         model.scale.set(1, 1, 1);
-        console.log("White flower GLB model loaded:", model);
+        mixer = loadedMixer;
       }
     );
 
@@ -43,10 +44,17 @@ export default function Home() {
     light.position.set(5, 5, 5);
     scene.add(light);
 
+    const clock = new THREE.Clock();
+
     // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
+      const delta = clock.getDelta();
       controls.update();
+
+      if (mixer) {
+        mixer.update(delta);
+      }
       renderer.render(scene, camera);
     };
 
