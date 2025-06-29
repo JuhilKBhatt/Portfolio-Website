@@ -14,7 +14,7 @@ export const getNavList = () => {
 
     return {
       label,
-      key: fileKey === "home" ? "/" : fileKey,
+      key: fileKey === "home" ? "/" : `/${fileKey}`,
       element: pages[path].default,
       icon: setNavIcon[fileKey],
       fileKey,

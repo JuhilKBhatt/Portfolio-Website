@@ -6,7 +6,7 @@ import {
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { getNavList } from "./scripts/getNavList";
 import "./styles/customNav.css"; // Custom styles for the navigation
 import "./styles/customHeader.css"; // Custom styles for the header
@@ -22,8 +22,14 @@ const AppLayout = () => {
   } = theme.useToken();
 
   const navItems = getNavList();
-  const activePage = navItems.find(item => item.key === location.pathname);
+  const currentPath = location.pathname; // React Router normalizes it for you
+  console.log("Current Path:", currentPath); // Should be e.g. "/" or "/contact"
+
+  const activePage = navItems.find(item => item.key === currentPath);
+  console.log("Active Page:", activePage);
+
   const pageTitle = activePage?.label || "Page";
+  console.log("Page Title:", pageTitle);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -38,7 +44,7 @@ const AppLayout = () => {
         <Menu
           theme="dark"
           mode="inline"
-          selectedKeys={[location.pathname]}
+          selectedKeys={[currentPath]}
           onClick={({ key }) => navigate(key)}
           items={navItems.map(({ key, label, icon }) => ({
             key,
@@ -83,7 +89,7 @@ const AppLayout = () => {
 
 // Wrap with Router
 const App = () => (
-  <Router basename="/Portfolio-Website">
+  <Router>
     <AppLayout />
   </Router>
 );
