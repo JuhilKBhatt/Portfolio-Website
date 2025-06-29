@@ -22,14 +22,10 @@ const AppLayout = () => {
   } = theme.useToken();
 
   const navItems = getNavList();
-  const currentPath = location.pathname; // React Router normalizes it for you
-  console.log("Current Path:", currentPath); // Should be e.g. "/" or "/contact"
 
+  const currentPath = location.pathname;
   const activePage = navItems.find(item => item.key === currentPath);
-  console.log("Active Page:", activePage);
-
   const pageTitle = activePage?.label || "Page";
-  console.log("Page Title:", pageTitle);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>

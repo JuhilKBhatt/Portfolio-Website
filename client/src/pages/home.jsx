@@ -2,38 +2,48 @@
 import {useEffect, useRef} from "react";
 import { Layout } from "antd";
 import * as THREE from "three";
+import { loadFBXModel } from "../scripts/LoadFBXModel";
 
 export default function Home() {
-const containerRef = useRef();
+  const containerRef = useRef();
 
   useEffect(() => {
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, containerRef.current.clientWidth / containerRef.current.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      containerRef.current.clientWidth / containerRef.current.clientHeight,
+      0.1,
+      1000
+    );
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(
+      containerRef.current.clientWidth,
+      containerRef.current.clientHeight
+    );
     containerRef.current.appendChild(renderer.domElement);
-
-    // Example: Add a cube
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
 
     const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(5, 5, 5);
     scene.add(light);
 
-    camera.position.z = 5;
+    camera.position.set(0, 1, 3);
+
+    // Load FBX Model
+    loadFBXModel("/Portfolio-Website/assets/models/whiteFlower.fbx", new THREE.Vector3(0, 0, 0), scene, 1)
+      .then((model) => {
+        console.log("Model loaded:", model);
+      })
+      .catch((err) => {
+        console.error("Model loading failed:", err);
+      });
 
     const animate = () => {
       requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
       renderer.render(scene, camera);
     };
 
     animate();
   }, []);
 
-  return <div ref={containerRef} style={{ width: '100%', height: '100vh' }} />;
+  return <div ref={containerRef} style={{ width: "100%", height: "100vh" }} />;
 }
