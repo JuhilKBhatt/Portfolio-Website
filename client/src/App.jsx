@@ -8,6 +8,7 @@ import {
 import { Layout, Menu, Button, theme } from "antd";
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { getNavList } from "./scripts/getNavList";
+import "./styles/customNav.css"; // Custom styles for the navigation
 
 const { Header, Sider, Content } = Layout;
 
@@ -26,27 +27,22 @@ const AppLayout = () => {
       <Sider 
         trigger={null}
         collapsible collapsed={collapsed}
-        style={{
-          background: "#394D65",
-          textAlign: "center",
-          width: collapsed ? 80 : 200,
-        }}>
+        >
         <div />
         <Menu
           theme="dark"
-          style={{ background: "#394D65" }}
           mode="inline"
           selectedKeys={[location.pathname]}
           onClick={({ key }) => navigate(key)}
           items={navItems.map(({ key, label, icon }) => ({
             key,
             icon: React.createElement(icon),
-            label,
+            label: <span>{label}</span>,
           }))}
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: "#FFD700" }}>
+        <Header style={{ padding: 0, background: "rgb(241, 241, 241)" }}>
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
