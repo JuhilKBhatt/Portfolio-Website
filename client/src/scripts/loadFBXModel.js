@@ -1,49 +1,40 @@
 // ./client/src/scripts/LoadFBXModel.js
 
-import * as THREE from 'three';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
-
-// Cache for storing the promise
-const rawModelLoadPromises = new Map();
+import * as THREE from './build/three.module.js';
+import { FBXLoader } from './build/FBXLoader.js';
 
 /**
- * Loads and adds an FBX model to a scene at a given position and scale.
- *
- * @param {string} modelPath - Path to the FBX model file (relative to /public or static assets).
- * @param {THREE.Vector3} location - Position to place this instance of the model.
- * @param {THREE.Scene} scene - The scene to add this instance of the model to.
- * @param {number} [scale=0.0005] - Uniform scale factor for this instance of the model.
- * @returns {Promise<THREE.Object3D>} A promise that resolves with the configured model instance.
+ * @param {string} modelPath
+ * @param {THREE.Vector3} location
+ * @param {THREE.Scene} scene
+ * @param {function} onLoaded
  */
-export function loadFBXModel(modelPath, location, scene, scale = 0.0005) {
-  let rawModelPromise;
+function loadFBXModel(modelPath, location, scene, onLoaded) {
+    const loader = new FBXLoader();
 
-  if (rawModelLoadPromises.has(modelPath)) {
-    rawModelPromise = rawModelLoadPromises.get(modelPath);
-  } else {
-    rawModelPromise = new Promise((resolve, reject) => {
-      const loader = new FBXLoader();
-      loader.load(
+    loader.load(
         modelPath,
-        (loadedObject) => {
-          resolve(loadedObject);
-        },
-        undefined,
-        (error) => {
-          console.error(`Error loading model ${modelPath}:`, error);
-          rawModelLoadPromises.delete(modelPath);
-          reject(error);
-        }
-      );
-    });
-    rawModelLoadPromises.set(modelPath, rawModelPromise);
-  }
+        (object) => {
+            object.position.copy(location);
+            scene.add(object);
 
-  return rawModelPromise.then(rawModel => {
-    const modelInstance = rawModel.clone();
-    modelInstance.position.copy(location);
-    modelInstance.scale.set(scale, scale, scale);
-    scene.add(modelInstance);
-    return modelInstance;
-  });
+            if (onLoaded) {
+                onLoaded(object);
+            }
+            console.log('FBX model loaded successfully:', modelPath);
+        },
+        (xhr) => {
+            if (xhr.lengthComputable) {
+                const percentComplete = xhr.loaded / xhr.total * 100;
+                console.log(`FBX model ${modelPath} loading: ${percentComplete.toFixed(2)}% loaded`);
+            } else {
+                console.log(`FBX model ${modelPath} loading: loading...`);
+            }
+        },
+        (error) => {
+            console.error('Error loading FBX model:', modelPath, error);
+        }
+    );
 }
+
+export { loadFBXModel };
