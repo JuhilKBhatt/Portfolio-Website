@@ -1,8 +1,7 @@
 // ./client/src/pages/home.jsx
 
 import { useEffect, useRef } from "react";
-import * as THREE from "../scripts/build/three.module.js";
-import { OrbitControls } from "../scripts/build/OrbitControls.js";
+import * as THREE from 'three';
 import { loadFBXModel } from "../scripts/loadFBXModel.js";
 
 export default function Home() {
@@ -14,13 +13,9 @@ export default function Home() {
 
     // Scene setup
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 1000);
-    camera.position.set(5, 12, 10);
+    const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
+    camera.position.set(14, 120, 200);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-    // Orbit Controls
-    const controls = new OrbitControls(camera, containerRef.current);
-    controls.enableDamping = true;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
@@ -30,30 +25,43 @@ export default function Home() {
     let mixer;
 
     loadFBXModel(
-      "models/AvatarWaving.fbx",
-      new THREE.Vector3(0, -1, 0),
+      "models/AvatarWavingGesture.fbx",
+      new THREE.Vector3(10, 0, 0),
       scene,
       (model, loadedMixer) => {
-        model.scale.set(1, 1, 1);
+        model.scale.set(0.5, 0.5, 0.5);
         mixer = loadedMixer;
       }
     );
 
-    // Light
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(5, 5, 5);
-    scene.add(light);
+    // LIGHTING SETUP
+    // Main light (soft)
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    directionalLight.position.set(3, 10, 5);
+    directionalLight.castShadow = true;
+    scene.add(directionalLight);
+
+    // Ambient light (overall soft light)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    // Backlight for better outline
+    const backLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    backLight.position.set(-5, 5, -5);
+    scene.add(backLight);
+
+    // Fill light from the side
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    fillLight.position.set(0, 2, -5);
+    scene.add(fillLight);
 
     const clock = new THREE.Clock();
 
-    // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
       const delta = clock.getDelta();
-      controls.update();
-
       if (mixer) {
-        mixer.update(delta);
+        mixer.update(delta / 1.5);
       }
       renderer.render(scene, camera);
     };
@@ -62,7 +70,7 @@ export default function Home() {
   }, []);
 
   return (
-        <div
+    <div
       style={{
         position: "relative",
         width: "100%",

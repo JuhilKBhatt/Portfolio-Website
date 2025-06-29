@@ -1,5 +1,7 @@
-import * as THREE from './build/three.module.js';
-import { GLTFLoader } from './build/GLTFLoader.js';
+// ./client/src/scripts/loadGLBModel.js
+
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 /**
  * Loads a GLB model into the scene.
