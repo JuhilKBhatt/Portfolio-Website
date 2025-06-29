@@ -9,6 +9,7 @@ import { Layout, Menu, Button, theme } from "antd";
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { getNavList } from "./scripts/getNavList";
 import "./styles/customNav.css"; // Custom styles for the navigation
+import "./styles/customHeader.css"; // Custom styles for the header
 
 const { Header, Sider, Content } = Layout;
 
