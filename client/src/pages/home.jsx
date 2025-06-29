@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { Layout } from "antd";
 import * as THREE from "../scripts/build/three.module.js";
-import { OrbitControls } from "../scripts/build/OrbitControls.js";
 import { loadFBXModel } from "../scripts/loadFBXModel.js"; // Import FBXLoader if needed
 
 export default function Home() {
@@ -15,24 +14,21 @@ export default function Home() {
 
     // Scene setup
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.set(2, 2, 5);
+    const camera = new THREE.PerspectiveCamera(35, width / height, 0.5, 1000);
+    camera.position.set(5, 12, 10);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
     containerRef.current.appendChild(renderer.domElement);
 
-    // Orbit Controls
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-
     // White Flower Model
     loadFBXModel(
       "public/models/whiteFlower.fbx",
-      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(0, -1, 0),
       scene,
       (model) => {
-        model.scale.set(0.01, 0.01, 0.01); // Adjust scale as needed
+        model.scale.set(0.05, 0.05, 0.05);
         console.log("White flower model loaded:", model);
       }
     );
@@ -45,7 +41,6 @@ export default function Home() {
     // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
-      controls.update();
       renderer.render(scene, camera);
     };
 
