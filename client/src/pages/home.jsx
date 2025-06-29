@@ -1,7 +1,6 @@
 // ./client/src/pages/home.jsx
 
 import { useEffect, useRef } from "react";
-import { Layout } from "antd";
 import * as THREE from "../scripts/build/three.module.js";
 import { loadFBXModel } from "../scripts/loadFBXModel.js"; // Import FBXLoader if needed
 
@@ -20,11 +19,12 @@ export default function Home() {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
+    renderer.setClearColor(0xd5debf, 0.1);
     containerRef.current.appendChild(renderer.domElement);
 
     // White Flower Model
     loadFBXModel(
-      "public/models/whiteFlower.fbx",
+      "models/whiteFlower.fbx",
       new THREE.Vector3(0, -1, 0),
       scene,
       (model) => {
@@ -48,6 +48,42 @@ export default function Home() {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ width: "100%", height: "100vh" }} />
+        <div
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100vh",
+        backgroundColor: "#ffffff",
+        overflow: "hidden",
+      }}
+    >
+      {/* Text behind canvas */}
+      <div
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          zIndex: 0,
+          color: "#333",
+        }}
+      >
+        <p style={{ fontSize: "24px", marginBottom: "10px" }}>
+          Hello, I'm Juhil Kalpeshkumar Bhatt. Here you can check out what I've been working on.
+        </p>
+      </div>
+
+      {/* 3D canvas above the text */}
+      <div
+        ref={containerRef}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: 1,
+          width: "100%",
+          height: "100%",
+        }}
+      />
+    </div>
   );
 }
