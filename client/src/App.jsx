@@ -25,8 +25,11 @@ const AppLayout = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider 
+        width={250}
+        className="custom-sider"
         trigger={null}
-        collapsible collapsed={collapsed}
+        collapsible
+        collapsed={collapsed}
         >
         <div />
         <Menu
