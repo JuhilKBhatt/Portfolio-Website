@@ -83,7 +83,7 @@ const AppLayout = () => {
 
 // Wrap with Router
 const App = () => (
-  <Router>
+  <Router basename="/Portfolio-Website">
     <AppLayout />
   </Router>
 );
