@@ -9,6 +9,7 @@ import { FBXLoader } from './build/FBXLoader.js';
  * @param {THREE.Scene} scene
  * @param {function} onLoaded
  */
+
 function loadFBXModel(modelPath, location, scene, onLoaded) {
     const loader = new FBXLoader();
 

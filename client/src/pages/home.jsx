@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import * as THREE from "../scripts/build/three.module.js";
-import { loadFBXModel } from "../scripts/loadFBXModel.js"; // Import FBXLoader if needed
+import { OrbitControls } from "../scripts/build/OrbitControls.js";
+import { loadGLBModel } from "../scripts/loadGLBModel.js";
 
 export default function Home() {
   const containerRef = useRef();
@@ -13,9 +14,13 @@ export default function Home() {
 
     // Scene setup
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(35, width / height, 0.5, 1000);
+    const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 1000);
     camera.position.set(5, 12, 10);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+    // Orbit Controls
+    const controls = new OrbitControls(camera, containerRef.current);
+    controls.enableDamping = true;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
@@ -23,13 +28,13 @@ export default function Home() {
     containerRef.current.appendChild(renderer.domElement);
 
     // White Flower Model
-    loadFBXModel(
-      "models/whiteFlower.fbx",
+    loadGLBModel(
+      "models/characterAvatar.glb",
       new THREE.Vector3(0, -1, 0),
       scene,
       (model) => {
-        model.scale.set(0.05, 0.05, 0.05);
-        console.log("White flower model loaded:", model);
+        model.scale.set(1, 1, 1);
+        console.log("White flower GLB model loaded:", model);
       }
     );
 
@@ -41,6 +46,7 @@ export default function Home() {
     // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
+      controls.update();
       renderer.render(scene, camera);
     };
 
@@ -61,14 +67,23 @@ export default function Home() {
       <div
         style={{
           position: "absolute",
-          top: "20px",
-          left: "20px",
+          top: "40px",
+          left: "40px",
           zIndex: 0,
-          color: "#333",
+          maxWidth: "500px",
+          padding: "20px",
+          background: "rgba(255, 255, 255, 0.8)",
+          borderRadius: "12px",
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+          lineHeight: "1.6",
+          color: "#222",
         }}
       >
-        <p style={{ fontSize: "24px", marginBottom: "10px" }}>
-          Hello, I'm Juhil Kalpeshkumar Bhatt. Here you can check out what I've been working on.
+        <p style={{ fontSize: "20px", margin: 0 }}>
+          Hi, I'm <strong>Juhil Kalpeshkumar Bhatt</strong>.
+          <br />
+          Welcome to my portfolio — explore the projects I've been building and experimenting with.
         </p>
       </div>
 
