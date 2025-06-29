@@ -22,6 +22,9 @@ const AppLayout = () => {
   } = theme.useToken();
 
   const navItems = getNavList();
+  const activePage = navItems.find(item => item.key === location.pathname);
+  const pageTitle = activePage?.label?.props?.children || "Page";
+
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -46,13 +49,18 @@ const AppLayout = () => {
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: "rgb(241, 241, 241)" }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{ fontSize: "38px", width: 64, height: 64 }}
-          />
+        <Header className="custom-header">
+          <div className="header-inner">
+            <Button
+              className="headerMenuButton"
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+            />
+            <div className="headerTitleWrapper">
+              <span className="headerTitle">{pageTitle}</span>
+            </div>
+          </div>
         </Header>
         <Content
           style={{
