@@ -99,7 +99,7 @@ export default function Home() {
         <p style={{ fontSize: "20px", margin: 0 }}>
           Hi, I'm <strong>Juhil Kalpeshkumar Bhatt</strong>.
           <br />
-          Welcome to my portfolio — explore the projects I've been building and experimenting with.
+          Welcome to my portfolio — explore the projects to see what I've been building and experimenting with.
         </p>
       </div>
 
