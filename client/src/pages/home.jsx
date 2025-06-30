@@ -13,20 +13,20 @@ export default function Home() {
 
     // Scene setup
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
-    camera.position.set(14, 120, 200);
+    const camera = new THREE.PerspectiveCamera(30, width / height, 0.1, 1000);
+    camera.position.set(14, 50, 200);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);
-    renderer.setClearColor(0xd5debf, 0.1);
+    renderer.setClearColor(0xd5debf, 0);
     containerRef.current.appendChild(renderer.domElement);
 
     let mixer;
 
     loadFBXModel(
       "models/AvatarWavingGesture.fbx",
-      new THREE.Vector3(10, 0, 0),
+      new THREE.Vector3(10, -50, 0),
       scene,
       (model, loadedMixer) => {
         model.scale.set(0.5, 0.5, 0.5);
@@ -36,13 +36,13 @@ export default function Home() {
 
     // LIGHTING SETUP
     // Main light (soft)
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(3, 10, 5);
     directionalLight.castShadow = true;
     scene.add(directionalLight);
 
     // Ambient light (overall soft light)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambientLight);
 
     // Backlight for better outline
@@ -56,7 +56,6 @@ export default function Home() {
     scene.add(fillLight);
 
     const clock = new THREE.Clock();
-
     const animate = () => {
       requestAnimationFrame(animate);
       const delta = clock.getDelta();
@@ -67,6 +66,23 @@ export default function Home() {
     };
 
     animate();
+
+    const handleResize = () => {
+      const newWidth = containerRef.current.clientWidth;
+      const newHeight = containerRef.current.clientHeight;
+
+      camera.aspect = newWidth / newHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(newWidth, newHeight);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      renderer.dispose();
+    };
   }, []);
 
   return (
@@ -108,13 +124,14 @@ export default function Home() {
         ref={containerRef}
         style={{
           position: "absolute",
-          top: 0,
-          left: 0,
+          top: 90,
+          left: 200,
           zIndex: 1,
-          width: "100%",
-          height: "100%",
+          width: "500px",
+          height: "500px",
+          pointerEvents: "none",
         }}
       />
-    </div>
+      </div>
   );
 }
