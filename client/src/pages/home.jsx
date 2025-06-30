@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from 'three';
 import { loadFBXModel } from "../scripts/loadFBXModel.js";
+import "../styles/customHomePage.css";
+import { addDefaultLights } from "../scripts/addDefaultLights.js";
 
 export default function Home() {
   const containerRef = useRef();
@@ -35,25 +37,7 @@ export default function Home() {
     );
 
     // LIGHTING SETUP
-    // Main light (soft)
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(3, 10, 5);
-    directionalLight.castShadow = true;
-    scene.add(directionalLight);
-
-    // Ambient light (overall soft light)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-    scene.add(ambientLight);
-
-    // Backlight for better outline
-    const backLight = new THREE.DirectionalLight(0xffffff, 0.3);
-    backLight.position.set(-5, 5, -5);
-    scene.add(backLight);
-
-    // Fill light from the side
-    const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
-    fillLight.position.set(0, 2, -5);
-    scene.add(fillLight);
+    addDefaultLights(scene);
 
     const clock = new THREE.Clock();
     const animate = () => {
@@ -86,33 +70,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100vh",
-        backgroundColor: "#ffffff",
-        overflow: "hidden",
-      }}
-    >
+    <div className="home-container">
       {/* Text behind canvas */}
-      <div
-        style={{
-          position: "absolute",
-          top: "40px",
-          left: "40px",
-          zIndex: 0,
-          maxWidth: "500px",
-          padding: "20px",
-          background: "rgba(255, 255, 255, 0.8)",
-          borderRadius: "12px",
-          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-          lineHeight: "1.6",
-          color: "#222",
-        }}
-      >
-        <p style={{ fontSize: "20px", margin: 0 }}>
+      <div className="home-text-box">
+        <p>
           Hi, I'm <strong>Juhil Kalpeshkumar Bhatt</strong>.
           <br />
           Welcome to my portfolio — explore the projects to see what I've been building and experimenting with.
@@ -120,18 +81,7 @@ export default function Home() {
       </div>
 
       {/* 3D canvas above the text */}
-      <div
-        ref={containerRef}
-        style={{
-          position: "absolute",
-          top: 90,
-          left: 200,
-          zIndex: 1,
-          width: "500px",
-          height: "500px",
-          pointerEvents: "none",
-        }}
-      />
-      </div>
+      <div ref={containerRef} className="home-canvas" />
+    </div>
   );
 }
