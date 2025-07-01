@@ -48,84 +48,85 @@ const AppLayout = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return (
-    <Layout style={{ minHeight: "100vh", height: "auto" }}>
-      {/* Sidebar for desktop */}
-      {!isMobile && (
-        <Sider
-          className="custom-sider"
-          trigger={null}
-          collapsible
-          collapsed={collapsed}
-        >
-          <Menu
-            theme="dark"
-            mode="inline"
-            selectedKeys={[currentPath]}
-            onClick={({ key }) => navigate(key)}
-            items={navItems.map(({ key, label, icon }) => ({
-              key,
-              icon: React.createElement(icon),
-              label: <span>{label}</span>,
-            }))}
-          />
-        </Sider>
+return (
+  <Layout style={{ minHeight: "100vh", height: "auto" }}>
+    {/* Sidebar for desktop */}
+    {!isMobile && (
+      <Sider
+        className="custom-sider"
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+      >
+        <Menu
+          theme="dark"
+          mode="inline"
+          selectedKeys={[currentPath]}
+          onClick={({ key }) => navigate(key)}
+          items={navItems.map(({ key, label, icon }) => ({
+            key,
+            icon: React.createElement(icon),
+            label: <span>{label}</span>,
+          }))}
+        />
+      </Sider>
+    )}
+
+    <Layout>
+      {/* Mobile top menu */}
+      {isMobile && !collapsed && (
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          selectedKeys={[currentPath]}
+          onClick={({ key }) => {
+            setCollapsed(true);
+            navigate(key);
+          }}
+          items={navItems.map(({ key, label, icon }) => ({
+            key,
+            icon: React.createElement(icon),
+            label: <span>{label}</span>,
+          }))}
+          style={{ width: "100%" }}
+        />
       )}
 
-      <Layout>
-        <Header className="custom-header">
-          <div className="header-inner">
-            <Button
-              className="headerMenuButton"
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{ marginRight: 16 }}
-            />
+      {/* Header with title and toggle */}
+      <Header className="custom-header">
+        <div className="header-inner">
+          <Button
+            className="headerMenuButton"
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{ marginRight: 16 }}
+          />
+          <span className="headerTitle">{pageTitle}</span>
+        </div>
+      </Header>
 
-            <span className="headerTitle">{pageTitle}</span>
-
-            {/* Top menu for mobile */}
-            {isMobile && !collapsed && (
-              <Menu
-                theme="dark"
-                mode="horizontal"
-                selectedKeys={[currentPath]}
-                onClick={({ key }) => {
-                  setCollapsed(true);
-                  navigate(key);
-                }}
-                items={navItems.map(({ key, label, icon }) => ({
-                  key,
-                  icon: React.createElement(icon),
-                  label: <span>{label}</span>,
-                }))}
-                style={{ width: "100%", marginTop: 16 }}
-              />
-            )}
-          </div>
-        </Header>
-
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-            overflowX: "auto",
-            overflowY: "auto",
-          }}
-        >
-          <Routes>
-            {navItems.map(({ key, element }) => (
-              <Route key={key} path={key} element={React.createElement(element)} />
-            ))}
-            <Route path="*" element={<div>404: Page Not Found</div>} />
-          </Routes>
-        </Content>
-      </Layout>
+      {/* Page content */}
+      <Content
+        style={{
+          margin: "24px 16px",
+          padding: 24,
+          background: colorBgContainer,
+          borderRadius: borderRadiusLG,
+          overflowX: "auto",
+          overflowY: "auto",
+        }}
+      >
+        <Routes>
+          {navItems.map(({ key, element }) => (
+            <Route key={key} path={key} element={React.createElement(element)} />
+          ))}
+          <Route path="*" element={<div>404: Page Not Found</div>} />
+        </Routes>
+      </Content>
     </Layout>
-  );
+  </Layout>
+);
 };
 
 // Wrap with Router
