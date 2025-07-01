@@ -1,11 +1,7 @@
 // ./client/App.jsx
 
 import React, { useState, useEffect } from "react";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu, Button, theme } from "antd";
+import { Layout, Menu, theme } from "antd";
 import { HashRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { getNavList } from "./scripts/getNavList";
 import "./styles/customNav.css"; // Custom styles for the navigation
@@ -14,8 +10,8 @@ import "./styles/customHeader.css"; // Custom styles for the header
 const { Header, Sider, Content } = Layout;
 
 const AppLayout = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [collapsed, setCollapsed] = useState(window.innerWidth < 968);
+  const [isMobile, setIsMobile] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,25 +24,24 @@ const AppLayout = () => {
   const activePage = navItems.find(item => item.key === currentPath);
   const pageTitle = activePage?.label || "Page";
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 968) {
-        setCollapsed(true);
-        if (window.innerWidth < 768) {
-          setIsMobile(true);
-          setCollapsed(false);
-        }else {
-          setIsMobile(false);
-          setCollapsed(true);
-        }
-      }
-      else {
-        setCollapsed(false);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+useEffect(() => {
+  const handleResize = () => {
+    const width = window.innerWidth;
+    setIsMobile(width < 768);
+    setCollapsed(width < 968 && width >= 768);
+  };
+
+  // Initial check
+  handleResize();
+  window.addEventListener("resize", handleResize);
+
+  // Also run handleResize every 1 second
+  const interval = setInterval(handleResize, 1000);
+  return () => {
+    window.removeEventListener("resize", handleResize);
+    clearInterval(interval);
+  };
+}, []);
 
 return (
   <Layout style={{ minHeight: "100vh", height: "auto" }}>
@@ -95,13 +90,6 @@ return (
       {/* Header with title and toggle */}
       <Header className="custom-header">
         <div className="header-inner">
-          <Button
-            className="headerMenuButton"
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{ marginRight: 16 }}
-          />
           <span className="headerTitle">{pageTitle}</span>
         </div>
       </Header>
