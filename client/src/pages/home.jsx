@@ -1,6 +1,6 @@
 // ./client/src/pages/home.jsx
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from 'three';
 import { loadFBXModel } from "../scripts/loadFBXModel.js";
 import "../styles/customHomePage.css";
@@ -8,6 +8,10 @@ import { addDefaultLights } from "../scripts/addDefaultLights.js";
 
 export default function Home() {
   const containerRef = useRef();
+  const [canvasPosition, setCanvasPosition] = useState({
+    top: "90px",
+    left: "200px",
+  });
 
   useEffect(() => {
     const width = containerRef.current.clientWidth;
@@ -69,6 +73,26 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const updateCanvasPosition = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setCanvasPosition({ top: "90px", left: "calc(60% - 150px)" }); // Center-ish for mobile
+      } else if (width < 1024) {
+        setCanvasPosition({ top: "90px", left: "150px" });
+      } else {
+        setCanvasPosition({ top: "90px", left: "200px" }); // Desktop default
+      }
+    };
+
+    updateCanvasPosition(); // Initial call
+    window.addEventListener("resize", updateCanvasPosition);
+
+    return () => {
+      window.removeEventListener("resize", updateCanvasPosition);
+    };
+  }, []);
+
   return (
     <div className="home-container">
       {/* Text behind canvas */}
@@ -81,7 +105,13 @@ export default function Home() {
       </div>
 
       {/* 3D canvas above the text */}
-      <div ref={containerRef} className="home-canvas" />
+      <div 
+        ref={containerRef}
+        style={{
+          top: canvasPosition.top,
+          left: canvasPosition.left,
+        }}
+        className="home-canvas" />
     </div>
   );
 }
