@@ -1,12 +1,22 @@
 // ./client/src/pages/work.jsx
 
-import { Layout } from "antd";
+import React, { useEffect, useState } from "react";
+import { Layout, Spin } from "antd";
+import { extractWorkData } from "../scripts/extractWorkData";
+import { formatWorkData } from "../scripts/formatWorkData";
+
+const { Content } = Layout;
 
 export default function Work() {
+  const [workData, setWorkData] = useState(null);
+
+  useEffect(() => {
+    extractWorkData().then((data) => setWorkData(data));
+  }, []);
+
   return (
-    <Layout.Content className="p-4">
-      <p>This is the work page content.</p>
-      <p>Here you can showcase your projects, achievements, and professional experiences.</p>
-    </Layout.Content>
+    <Content style={{ padding: 24 }}>
+      {workData ? formatWorkData(workData) : <Spin />}
+    </Content>
   );
 }

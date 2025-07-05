@@ -1,14 +1,14 @@
-// ./client/src/scripts/formatEducationData.js
+// ./client/src/scripts/formatWorkData.jsx
 
 import { Timeline, Card, Typography } from "antd";
 const { Title, Text, Paragraph } = Typography;
 
-export function formatEducationData(educationEntries) {
+export function formatWorkData(workEntries) {
   return (
     <Timeline
       mode="left"
       style={{ padding: "24px" }}
-      items={educationEntries.map((entry) => ({
+      items={workEntries.map((entry) => ({
         label: `${entry.dateFrom || "?"} - ${entry.dateTo || "Present"}`,
         children: (
           <Card
@@ -16,15 +16,15 @@ export function formatEducationData(educationEntries) {
             variant="borderless"
             style={{ maxWidth: 700 }}
           >
-            <Text strong>Degree:</Text>
-            <Paragraph>{entry.degree}</Paragraph>
+            <Text strong>Position:</Text>
+            <Paragraph>{entry.position}</Paragraph>
 
-            {entry.description && entry.description.length > 0 && (
+            {entry.description?.length > 0 && (
               <>
                 <Text strong>Description:</Text>
                 <ul style={{ paddingLeft: 20 }}>
-                  {entry.description.map((item) => (
-                    <li key={item}>
+                  {entry.description.map((item, index) => (
+                    <li key={index}>
                       <Text>{item}</Text>
                     </li>
                   ))}
