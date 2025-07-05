@@ -1,4 +1,5 @@
 # ./flask-server/app.py
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_mail import Mail, Message
@@ -54,4 +55,4 @@ def contact():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=int(environ.get("PORT", 5000)))
