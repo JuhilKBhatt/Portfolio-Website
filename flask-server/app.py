@@ -8,13 +8,7 @@ from os import environ
 
 load_dotenv()
 app = Flask(__name__)
-cors = CORS(app, resources={
-    r"/api/*": {
-        "origins": [
-            r"http://localhost:\d+",
-            "https://juhilkbhatt.github.io"
-        ]}
-})
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 app.config['DEBUG'] = environ.get('FLASK_DEBUG')
 
