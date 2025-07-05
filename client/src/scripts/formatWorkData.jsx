@@ -23,8 +23,8 @@ export function formatWorkData(workEntries) {
               <>
                 <Text strong>Description:</Text>
                 <ul style={{ paddingLeft: 20 }}>
-                  {entry.description.map((item, index) => (
-                    <li key={index}>
+                  {entry.description.map((item) => (
+                    <li key={item}>
                       <Text>{item}</Text>
                     </li>
                   ))}
