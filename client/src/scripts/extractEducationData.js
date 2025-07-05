@@ -6,17 +6,16 @@ export async function extractEducationData() {
     const text = await response.text();
 
     const lines = text.split("\n").map(line => line.trim()).filter(Boolean);
-
     const educationEntriesMap = {};
 
     for (let line of lines) {
       const [key, ...rest] = line.split(":");
       const value = rest.join(":").trim();
       const [entryIdRaw, fieldKey] = key.split("-");
-      const entryId = entryIdRaw.split(".")[0]; // group by "1", "2", etc.
+      const entryId = entryIdRaw.split(".")[0];
 
       if (!educationEntriesMap[entryId]) {
-        educationEntriesMap[entryId] = { entry: entryIdRaw }; // keep first key like 1.0, 2.0
+        educationEntriesMap[entryId] = { entry: entryIdRaw };
       }
 
       switch (fieldKey) {
@@ -40,7 +39,22 @@ export async function extractEducationData() {
       }
     }
 
-    return Object.values(educationEntriesMap);
+    const entries = Object.values(educationEntriesMap);
+
+    // 🧠 Convert to Date objects and sort
+    const parseDate = (str) => {
+      if (!str) return null;
+      const [month, year] = str.split("/");
+      return new Date(parseInt(year), parseInt(month) - 1);
+    };
+
+    entries.sort((a, b) => {
+      const dateA = parseDate(a.dateTo) || parseDate(a.dateFrom);
+      const dateB = parseDate(b.dateTo) || parseDate(b.dateFrom);
+      return dateB - dateA; // most recent first
+    });
+
+    return entries;
   } catch (error) {
     console.error("Failed to extract education data:", error);
     return [];

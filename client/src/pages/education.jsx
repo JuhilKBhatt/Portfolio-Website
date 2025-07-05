@@ -1,14 +1,25 @@
 // ./client/src/pages/education.jsx
 
-import { Layout } from "antd";
-import { extractEducationData } from "../scripts/extractEducationData";
+import React, { useEffect, useState } from "react";
+import { Layout, Spin } from "antd";
+import { extractEducationData } from "../scripts/extractEducationData.js";
+import { formatEducationData } from "../scripts/formatEducationData.jsx";
+
+const { Content } = Layout;
 
 export default function Education() {
-  console.log(extractEducationData());
+  const [educationData, setEducationData] = useState(null);
+  console.log(extractEducationData);
+
+  useEffect(() => {
+    extractEducationData().then((data) => {
+      setEducationData(data);
+    });
+  }, []);
+
   return (
-    <Layout.Content className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Education Page</h1>
-      <p>This is the education page content.</p>
-    </Layout.Content>
+    <Content style={{ padding: 24 }}>
+      {educationData ? formatEducationData(educationData) : <Spin />}
+    </Content>
   );
 }
