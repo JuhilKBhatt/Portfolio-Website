@@ -97,12 +97,10 @@ return (
       {/* Page content */}
       <Content
         style={{
-          margin: "24px 16px",
-          padding: 24,
+          margin: isMobile ? "12px 8px" : "24px 16px",
+          padding: isMobile ? 12 : 24,
           background: colorBgContainer,
           borderRadius: borderRadiusLG,
-          overflowX: "auto",
-          overflowY: "auto",
         }}
       >
         <Routes>
