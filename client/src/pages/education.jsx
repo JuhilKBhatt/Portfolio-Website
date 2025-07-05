@@ -1,11 +1,9 @@
 // ./client/src/pages/education.jsx
 
 import React, { useEffect, useState } from "react";
-import { Layout, Spin } from "antd";
+import { Spin } from "antd";
 import { extractEducationData } from "../scripts/extractEducationData.js";
 import { formatEducationData } from "../scripts/formatEducationData.jsx";
-
-const { Content } = Layout;
 
 export default function Education() {
   const [educationData, setEducationData] = useState(null);
@@ -17,10 +15,8 @@ export default function Education() {
   }, []);
 
   return (
-    <Content style={{ padding: 24, maxWidth: "100%" }}>
-      <div style={{ width: "100%", maxWidth: "100%", overflowX: "hidden" }} >
-        {educationData ? formatEducationData(educationData) : <Spin />}
-      </div>
-    </Content>
+    <div style={{ width: "100%", maxWidth: "100%", overflowX: "hidden" }} >
+      {educationData ? formatEducationData(educationData) : <Spin />}
+    </div>
   );
 }

@@ -6,7 +6,7 @@ const { Title, Text, Paragraph } = Typography;
 export function formatWorkData(workEntries) {
   return (
     <Timeline
-      mode="right"
+      mode="left"
       style={{ padding: "24px" }}
       items={workEntries.map((entry) => ({
         label: `${entry.dateFrom || "?"} - ${entry.dateTo || "Present"}`,
@@ -24,10 +24,10 @@ export function formatWorkData(workEntries) {
             {entry.description?.length > 0 && (
               <>
                 <Text strong>Description:</Text>
-                <ul style={{ paddingLeft: 20 }}>
+                <ul>
                   {entry.description.map((item) => (
                     <li key={item}>
-                      <Text>{item}</Text>
+                      <Text>- {item}</Text>
                     </li>
                   ))}
                 </ul>
