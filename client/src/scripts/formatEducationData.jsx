@@ -6,7 +6,7 @@ const { Title, Text, Paragraph } = Typography;
 export function formatEducationData(educationEntries) {
   return (
     <Timeline
-      mode="left"
+      mode="right"
       style={{ padding: "24px" }}
       items={educationEntries.map((entry) => ({
         label: `${entry.dateFrom || "?"} - ${entry.dateTo || "Present"}`,
@@ -14,10 +14,12 @@ export function formatEducationData(educationEntries) {
           <Card
             title={<Title level={4}>{entry.name}</Title>}
             variant="borderless"
-            style={{ maxWidth: 700 }}
+            style={{ width: "100%", maxWidth: "700px", wordBreak: "break-word" }}
           >
             <Text strong>Degree:</Text>
-            <Paragraph>{entry.degree}</Paragraph>
+            <Paragraph style={{ wordBreak: "break-word", whiteSpace: "normal" }}>
+              {entry.degree}
+            </Paragraph>
 
             {entry.description && entry.description.length > 0 && (
               <>

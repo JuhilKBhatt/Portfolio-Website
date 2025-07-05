@@ -17,8 +17,10 @@ export default function Education() {
   }, []);
 
   return (
-    <Content style={{ padding: 24 }}>
-      {educationData ? formatEducationData(educationData) : <Spin />}
+    <Content style={{ padding: 24, maxWidth: "100%" }}>
+      <div style={{ width: "100%", maxWidth: "100%", overflowX: "hidden" }} >
+        {educationData ? formatEducationData(educationData) : <Spin />}
+      </div>
     </Content>
   );
 }

@@ -6,7 +6,7 @@ const { Title, Text, Paragraph } = Typography;
 export function formatWorkData(workEntries) {
   return (
     <Timeline
-      mode="left"
+      mode="right"
       style={{ padding: "24px" }}
       items={workEntries.map((entry) => ({
         label: `${entry.dateFrom || "?"} - ${entry.dateTo || "Present"}`,
@@ -14,10 +14,12 @@ export function formatWorkData(workEntries) {
           <Card
             title={<Title level={4}>{entry.name}</Title>}
             variant="borderless"
-            style={{ maxWidth: 700 }}
+            style={{ width: "100%", maxWidth: "700px", wordBreak: "break-word" }}
           >
             <Text strong>Position:</Text>
-            <Paragraph>{entry.position}</Paragraph>
+            <Paragraph style={{ wordBreak: "break-word", whiteSpace: "normal" }}>
+              {entry.position}
+            </Paragraph>
 
             {entry.description?.length > 0 && (
               <>

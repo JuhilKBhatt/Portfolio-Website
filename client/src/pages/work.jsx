@@ -15,8 +15,10 @@ export default function Work() {
   }, []);
 
   return (
-    <Content style={{ padding: 24 }}>
-      {workData ? formatWorkData(workData) : <Spin />}
+    <Content style={{ padding: 24, maxWidth: "100%" }}>
+      <div style={{ width: "100%", maxWidth: "100%", overflowX: "hidden" }} >
+        {workData ? formatWorkData(workData) : <Spin />}
+      </div>
     </Content>
   );
 }
