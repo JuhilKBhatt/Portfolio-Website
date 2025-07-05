@@ -48,5 +48,7 @@ def contact():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+# gunicorn app:app --bind 0.0.0.0:$PORT
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(environ.get("PORT", 5000)))
