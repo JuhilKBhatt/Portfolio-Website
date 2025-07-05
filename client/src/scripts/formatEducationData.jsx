@@ -21,14 +21,18 @@ export function formatEducationData(educationEntries) {
             <Text strong>Degree:</Text>
             <Paragraph>{entry.degree}</Paragraph>
 
-            <Text strong>Description:</Text>
-            <ul style={{ paddingLeft: 20 }}>
-              {entry.description.map((item, index) => (
-                <li key={index}>
-                  <Text>{item}</Text>
-                </li>
-              ))}
-            </ul>
+            {entry.description && entry.description.length > 0 && (
+              <>
+                <Text strong>Description:</Text>
+                <ul style={{ paddingLeft: 20 }}>
+                  {entry.description.map((item) => (
+                    <li key={item}>
+                      <Text>{item}</Text>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </Card>
         ),
       }))}

@@ -8,8 +8,3 @@
 2.2-DateTo:
 2.3-Degree:Bachelor of Science in Information Technology + International Studies
 2.4-Description: Not Finished
-3.0-Name:Google
-3.1-DateFrom:02/2023
-3.2-DateTo:05/2023
-3.3-Degree:Certificate
-3.4-Description: 

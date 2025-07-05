@@ -31,17 +31,18 @@ export async function extractEducationData() {
         case "Degree":
           educationEntriesMap[entryId].degree = value;
           break;
-        case "Description":
-          educationEntriesMap[entryId].description = value
-            .split("\\n")
-            .map(desc => desc.trim());
+        case "Description": {
+          const items = value.split("\\n").map(desc => desc.trim()).filter(Boolean);
+          if (items.length > 0) {
+            educationEntriesMap[entryId].description = items;
+          }
           break;
+        }
       }
     }
 
     const entries = Object.values(educationEntriesMap);
 
-    // 🧠 Convert to Date objects and sort
     const parseDate = (str) => {
       if (!str) return null;
       const [month, year] = str.split("/");
@@ -49,8 +50,15 @@ export async function extractEducationData() {
     };
 
     entries.sort((a, b) => {
+      const aHasNoEnd = !a.dateTo;
+      const bHasNoEnd = !b.dateTo;
+
+      if (aHasNoEnd && !bHasNoEnd) return -1; // a is ongoing
+      if (!aHasNoEnd && bHasNoEnd) return 1;  // b is ongoing
+
       const dateA = parseDate(a.dateTo) || parseDate(a.dateFrom);
       const dateB = parseDate(b.dateTo) || parseDate(b.dateFrom);
+
       return dateB - dateA; // most recent first
     });
 

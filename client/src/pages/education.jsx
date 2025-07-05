@@ -9,7 +9,6 @@ const { Content } = Layout;
 
 export default function Education() {
   const [educationData, setEducationData] = useState(null);
-  console.log(extractEducationData);
 
   useEffect(() => {
     extractEducationData().then((data) => {
