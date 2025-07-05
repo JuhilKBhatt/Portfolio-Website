@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Layout, Menu, theme } from "antd";
 import { HashRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { getNavList } from "./scripts/getNavList";
-import "./styles/customNav.css"; // Custom styles for the navigation
-import "./styles/customHeader.css"; // Custom styles for the header
+import "./styles/customNav.css";
+import "./styles/customHeader.css";
 
 const { Header, Sider, Content } = Layout;
 
