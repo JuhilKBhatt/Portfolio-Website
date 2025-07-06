@@ -4,9 +4,10 @@ import React, { useState, useEffect } from "react";
 import { Layout, Menu, Flex, Dropdown, Button, Space } from "antd";
 import { HashRouter as Router, Routes, Route, useNavigate, useLocation, } from "react-router-dom";
 import { getNavList } from "./scripts/getNavList";
-import { MenuOutlined } from "@ant-design/icons";
+import { MenuOutlined, GithubOutlined } from "@ant-design/icons";
 import "./styles/customApp.css";
 import "./styles/customHeader.css";
+import "./styles/customFooter.css";
 
 const { Header, Content, Footer } = Layout;
 
@@ -106,7 +107,22 @@ const AppLayout = () => {
           </Content>
 
           {/* Footer */}
-          <Footer className="footerStyle">© {new Date().getFullYear()} Juhil K Bhatt</Footer>
+          <Footer className="footerStyle">
+            <div className="footer-container">
+              <a
+                href="https://github.com/JuhilKBhatt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-github-link"
+              >
+                <GithubOutlined />
+                <span>GitHub</span>
+              </a>
+              <span className="footer-text">
+                © {new Date().getFullYear()} Juhil Kalpeshkumar Bhatt. All Rights Reserved.
+              </span>
+            </div>
+          </Footer>
         </Layout>
       </Flex>
     </>

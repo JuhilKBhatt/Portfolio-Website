@@ -30,21 +30,8 @@ body{
     background: "transparent";
 }
 
-.headerStyle {
-  background: rgba(211,175,55, 0.5) !important;
-  color: #fff;
-  margin: 20px;
-  border-radius: 15px;
-}
-
 .contentStyle {
   padding: 24px;
   background: rgba(255, 255, 255, 0.85);
   min-height: 280px;
-};
-
-.footerStyle {
-  text-align: center;
-  background: rgba(0,0,0,0.05);
-  padding: 12px 50px;
-};
+}

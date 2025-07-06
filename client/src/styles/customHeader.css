@@ -1,5 +1,12 @@
 /* ./client/src/styles/customHeader.css */
 
+.headerStyle {
+  background: rgba(211,175,55, 0.5) !important;
+  color: #fff;
+  margin: 20px;
+  border-radius: 15px;
+}
+
 /* Header container */
 .header-name {
   width: 100%;
