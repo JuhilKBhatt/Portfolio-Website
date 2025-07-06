@@ -62,7 +62,7 @@ const AppLayout = () => {
                     key,
                     label,
                   }))}
-                  className="desktop-nav-menu"
+                  className="pill-nav-menu"
                 />
               )}
 
@@ -79,8 +79,9 @@ const AppLayout = () => {
                       key,
                       label,
                     })),
+                    className: "mobile-dropdown-menu",
                   }}
-                  trigger={["click"]}
+                  trigger={["hover"]}
                 >
                   <Button
                     type="text"
