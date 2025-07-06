@@ -1,10 +1,15 @@
 // ./client/App.jsx
-
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, Flex, Dropdown, Button, Space } from "antd";
-import { HashRouter as Router, Routes, Route, useNavigate, useLocation, } from "react-router-dom";
+import { Layout, Menu, Flex, Dropdown } from "antd";
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { getNavList } from "./scripts/getNavList";
-import { MenuOutlined, GithubOutlined } from "@ant-design/icons";
+import { GithubOutlined } from "@ant-design/icons";
 import "./styles/customApp.css";
 import "./styles/customHeader.css";
 import "./styles/customFooter.css";
@@ -16,7 +21,6 @@ const AppLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
   const navItems = getNavList();
   const currentPath = location.pathname;
 
@@ -29,12 +33,21 @@ const AppLayout = () => {
 
     handleResize();
     window.addEventListener("resize", handleResize);
-    const interval = setInterval(handleResize, 1000);
+    // No need for setInterval here, resize event is sufficient
     return () => {
       window.removeEventListener("resize", handleResize);
-      clearInterval(interval);
     };
   }, []);
+
+  const menuItems = navItems.map(({ key, label }) => ({
+    key,
+    label,
+  }));
+
+  const handleMenuClick = ({ key }) => {
+    navigate(key);
+    setCollapsed(false); // Close the dropdown after clicking an item
+  };
 
   return (
     <>
@@ -57,62 +70,50 @@ const AppLayout = () => {
                 <Menu
                   mode="horizontal"
                   selectedKeys={[currentPath]}
-                  onClick={({ key }) => navigate(key)}
-                  items={navItems.map(({ key, label }) => ({
-                    key,
-                    label,
-                  }))}
+                  onClick={handleMenuClick}
+                  items={menuItems}
                   className="pill-nav-menu"
                 />
               )}
 
               {/* Mobile Dropdown Menu */}
               {isMobile && (
-                <>
-                  <div
+                <Dropdown
+                  open={collapsed}
+                  onOpenChange={setCollapsed}
+                  menu={{
+                    selectedKeys: [currentPath],
+                    onClick: handleMenuClick,
+                    items: menuItems,
+                    className: "mobile-dropdown-menu",
+                  }}
+                  trigger={["click"]}
+                >
+                  <button
+                    type="button"
                     className={`menu-icon ${collapsed ? "open" : ""}`}
+                    aria-label="Open navigation menu"
                     onClick={() => setCollapsed(!collapsed)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        setCollapsed(!collapsed);
+                      }
+                    }}
                   >
                     <span />
                     <span />
                     <span />
-                  </div>
-
-                  {collapsed && (
-                    <Dropdown
-                      open
-                      menu={{
-                        selectedKeys: [currentPath],
-                        onClick: ({ key }) => {
-                          setCollapsed(false);
-                          navigate(key);
-                        },
-                        items: navItems.map(({ key, label }) => ({
-                          key,
-                          label,
-                        })),
-                        className: "mobile-dropdown-menu",
-                      }}
-                      trigger={["click"]}
-                    >
-                      {/* AntD requires a SINGLE valid React element as its child */}
-                      <div style={{ display: "none" }} />
-                    </Dropdown>
-                  )}
-                </>
+                  </button>
+                </Dropdown>
               )}
             </div>
           </Header>
-          
+
           {/* Content */}
           <Content className="contentStyle">
             <Routes>
               {navItems.map(({ key, element }) => (
-                <Route
-                  key={key}
-                  path={key}
-                  element={React.createElement(element)}
-                />
+                <Route key={key} path={key} element={React.createElement(element)} />
               ))}
               <Route path="*" element={<div>404: Page Not Found</div>} />
             </Routes>
