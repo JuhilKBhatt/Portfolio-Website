@@ -11,7 +11,7 @@ import "./styles/customHeader.css";
 const { Header, Content, Footer } = Layout;
 
 const AppLayout = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -57,9 +57,8 @@ const AppLayout = () => {
                   mode="horizontal"
                   selectedKeys={[currentPath]}
                   onClick={({ key }) => navigate(key)}
-                  items={navItems.map(({ key, label, icon }) => ({
+                  items={navItems.map(({ key, label }) => ({
                     key,
-                    icon: React.createElement(icon),
                     label,
                   }))}
                   className="desktop-nav-menu"

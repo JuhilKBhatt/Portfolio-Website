@@ -1,5 +1,6 @@
 /* ./client/src/styles/customHeader.css */
 
+/* Header container */
 .header-name {
   width: 100%;
   font-size: 28px;
@@ -7,26 +8,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 24px;
 }
 
+/* Name link */
 .header-link {
-  color: inherit;
+  color: white;
   text-decoration: none;
   display: flex;
   align-items: flex-end;
   position: relative;
+  font-family: 'Lexend', sans-serif;
 }
 
+/* "K." */
 .k-letter {
   position: absolute;
   top: 10%;
   left: 48%;
-  transform: translateX(-50%) scale(1);
+  transform: translateX(-50%);
   font-family: 'Schoolbell', cursive;
   font-size: 32px;
   line-height: 1;
+  color: white;
 }
 
+/* Invisible spacer to hold position for the caret */
 .k-spacer {
   margin: 0 8px;
   position: relative;
@@ -34,24 +41,38 @@
   opacity: 0;
 }
 
+/* "^" caret below K. */
 .k-caret {
   position: absolute;
   top: 60%;
   left: 48%;
-  transform: translateX(-50%) scale(1);
+  transform: translateX(-50%);
   font-family: 'Schoolbell', cursive;
   font-size: 38px;
   line-height: 1;
+  color: white;
 }
 
+/* Desktop nav menu styling */
 .desktop-nav-menu {
   margin-left: auto;
   background: transparent;
   border-bottom: none;
+  font-size: 18px;
+  color: white;
 }
 
+/* Menu item override (AntD) */
+.desktop-nav-menu .ant-menu-item a,
+.desktop-nav-menu .ant-menu-title-content {
+  color: white !important;
+}
+
+/* Hamburger menu button on mobile */
 .menu-button {
   margin-left: auto;
-  color: #fff;
-  font-size: 32px;
+  color: white;
+  font-size: 24px;
+  background: transparent;
+  border: none;
 }
