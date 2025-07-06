@@ -1,9 +1,10 @@
 // ./client/App.jsx
 
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, Flex } from "antd";
+import { Layout, Menu, Flex, Dropdown, Button, Space } from "antd";
 import { HashRouter as Router, Routes, Route, useNavigate, useLocation, } from "react-router-dom";
 import { getNavList } from "./scripts/getNavList";
+import { MenuOutlined } from "@ant-design/icons";
 import "./styles/customApp.css";
 import "./styles/customHeader.css";
 
@@ -44,50 +45,54 @@ const AppLayout = () => {
             <div className="header-name">
               <a href="/" className="header-link">
                 <span>Juhil</span>
-
                 <span className="k-letter">K.</span>
                 <span className="k-spacer">....</span>
                 <span className="k-caret">^</span>
-
                 <span>Bhatt</span>
               </a>
-            </div>
 
-            {/* Desktop Menu */}
-            {!isMobile && (
+              {/* Desktop Nav Menu */}
+              {!isMobile && (
                 <Menu
-                  theme="dark"
-                  mode="inline"
+                  mode="horizontal"
                   selectedKeys={[currentPath]}
                   onClick={({ key }) => navigate(key)}
                   items={navItems.map(({ key, label, icon }) => ({
                     key,
                     icon: React.createElement(icon),
-                    label: <span>{label}</span>,
+                    label,
                   }))}
+                  className="desktop-nav-menu"
                 />
-            )}
+              )}
 
-            {/* Mobile Menu */}
-            {isMobile && !collapsed && (
-              <Menu
-                theme="dark"
-                mode="horizontal"
-                selectedKeys={[currentPath]}
-                onClick={({ key }) => {
-                  setCollapsed(true);
-                  navigate(key);
-                }}
-                items={navItems.map(({ key, label, icon }) => ({
-                  key,
-                  icon: React.createElement(icon),
-                  label: <span>{label}</span>,
-                }))}
-                style={{ width: "100%" }}
-              />
-            )}
+              {/* Mobile Dropdown Menu */}
+              {isMobile && (
+                <Dropdown
+                  menu={{
+                    selectedKeys: [currentPath],
+                    onClick: ({ key }) => {
+                      setCollapsed(true);
+                      navigate(key);
+                    },
+                    items: navItems.map(({ key, label, icon }) => ({
+                      key,
+                      icon: React.createElement(icon),
+                      label,
+                    })),
+                  }}
+                  trigger={["click"]}
+                >
+                  <Button
+                    type="text"
+                    icon={<MenuOutlined />}
+                    className="menu-button"
+                  />
+                </Dropdown>
+              )}
+            </div>
           </Header>
-
+          
           {/* Content */}
           <Content className="contentStyle">
             <Routes>

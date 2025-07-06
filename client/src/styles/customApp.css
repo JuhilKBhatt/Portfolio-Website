@@ -31,9 +31,10 @@ body{
 }
 
 .headerStyle {
-  background: rgba(0,0,0,0.6);
+  background: rgba(211,175,55, 0.5) !important;
   color: #fff;
-  padding: 0 16px;
+  margin: 20px;
+  border-radius: 15px;
 }
 
 .contentStyle {

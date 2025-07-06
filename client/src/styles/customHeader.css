@@ -1,10 +1,12 @@
 /* ./client/src/styles/customHeader.css */
 
 .header-name {
+  width: 100%;
   font-size: 28px;
   font-weight: bold;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .header-link {
@@ -40,4 +42,16 @@
   font-family: 'Schoolbell', cursive;
   font-size: 38px;
   line-height: 1;
+}
+
+.desktop-nav-menu {
+  margin-left: auto;
+  background: transparent;
+  border-bottom: none;
+}
+
+.menu-button {
+  margin-left: auto;
+  color: #fff;
+  font-size: 32px;
 }
