@@ -3,7 +3,7 @@
 /* Header container */
 .header-name {
   width: 100%;
-  font-size: 28px;
+  font-size: clamp(20px, 2.5vw, 32px);
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@
   left: 48%;
   transform: translateX(-50%);
   font-family: 'Schoolbell', cursive;
-  font-size: 32px;
+  font-size: clamp(20px, 2.5vw, 32px);
   line-height: 1;
   color: white;
 }
@@ -48,7 +48,7 @@
   left: 48%;
   transform: translateX(-50%);
   font-family: 'Schoolbell', cursive;
-  font-size: 38px;
+  font-size: clamp(20px, 2.5vw, 32px);
   line-height: 1;
   color: white;
 }
@@ -58,7 +58,7 @@
   margin-left: auto;
   background: transparent;
   border-bottom: none;
-  font-size: 18px;
+  font-size: 24px;
   color: white;
 }
 
@@ -75,4 +75,38 @@
   font-size: 24px;
   background: transparent;
   border: none;
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .header-name {
+    font-size: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .k-letter {
+    font-size: 24px;
+    top: 12%;
+    left: 50%;
+  }
+
+  .k-caret {
+    font-size: 28px;
+    top: 60%;
+    left: 50%;
+  }
+
+  .desktop-nav-menu {
+    font-size: 16px;
+  }
+
+  .menu-button {
+    font-size: 20px;
+  }
+
+  .header-link span {
+    font-size: 20px;
+  }
 }

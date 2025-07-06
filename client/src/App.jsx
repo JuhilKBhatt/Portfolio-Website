@@ -11,7 +11,7 @@ import "./styles/customHeader.css";
 const { Header, Content, Footer } = Layout;
 
 const AppLayout = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 770);
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,8 +22,8 @@ const AppLayout = () => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      setIsMobile(width < 768);
-      setCollapsed(width < 968 && width >= 768);
+      setIsMobile(width < 770);
+      setCollapsed(width < 968 && width >= 770);
     };
 
     handleResize();
