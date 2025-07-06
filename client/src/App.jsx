@@ -72,10 +72,14 @@ const AppLayout = () => {
         <Layout style={layoutStyle}>
           {/* Header */}
           <Header style={headerStyle}>
-            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
-              <a href="/">
+            <div className="header-name">
+              <a href="/" className="header-link">
                 <span>Juhil</span>
-                <span style={{ margin: "0 8px" }}>K</span>
+
+                <span className="k-letter">K.</span>
+                <span className="k-spacer">....</span>
+                <span className="k-caret">^</span>
+
                 <span>Bhatt</span>
               </a>
             </div>

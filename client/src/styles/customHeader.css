@@ -1,42 +1,43 @@
 /* ./client/src/styles/customHeader.css */
 
-.ant-layout-header {
-
-  padding-top: 25px;
-  height: 64px;
+.header-name {
+  font-size: 28px;
+  font-weight: bold;
   display: flex;
   align-items: center;
 }
 
-.header-inner {
+.header-link {
+  color: inherit;
+  text-decoration: none;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0px;
+  align-items: flex-end;
   position: relative;
 }
 
-.headerMenuButton {
-
-  font-size: 42px;
-  width: 64px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
-.headerTitleWrapper {
+.k-letter {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
+  top: 10%;
+  left: 48%;
+  transform: translateX(-50%) scale(1);
+  font-family: 'Schoolbell', cursive;
+  font-size: 32px;
+  line-height: 1;
 }
 
-.headerTitle {
-  font-size: 64px;
-  font-weight: bold;
-  color: #000;
+.k-spacer {
+  margin: 0 8px;
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+}
+
+.k-caret {
+  position: absolute;
+  top: 60%;
+  left: 48%;
+  transform: translateX(-50%) scale(1);
+  font-family: 'Schoolbell', cursive;
+  font-size: 38px;
+  line-height: 1;
 }
