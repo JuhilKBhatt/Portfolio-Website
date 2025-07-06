@@ -1,8 +1,8 @@
 /* ./client/src/styles/customHeader.css */
 
 .headerStyle {
-  background: rgba(211, 175, 55, 0.5) !important;
-  color: #fff;
+  background: rgba(245,245,245, 0.85) !important;
+  color: #333;
   border-radius: 15px;
   padding: 8px 20px;
   margin: 20px;
@@ -24,7 +24,7 @@
 
 /* Left: Name Link */
 .header-link {
-  color: white;
+  color: #333;
   text-decoration: none;
   display: flex;
   align-items: flex-end;
@@ -41,7 +41,7 @@
   font-family: 'Schoolbell', cursive;
   font-size: clamp(20px, 2.5vw, 32px);
   line-height: 1;
-  color: white;
+  color: #737373;
 }
 
 /* Invisible spacer to align caret */
@@ -61,7 +61,7 @@
   font-family: 'Schoolbell', cursive;
   font-size: clamp(20px, 2.5vw, 32px);
   line-height: 1;
-  color: white;
+  color: #6a6767;
 }
 
 /* AntD menu items */
@@ -72,7 +72,7 @@
 
 /* Mobile hamburger */
 .menu-button {
-  color: white;
+  color: #333;
   font-size: 24px;
   background: transparent;
   border: none;
@@ -147,6 +147,71 @@
 .mobile-dropdown-menu .ant-dropdown-menu-item:hover {
   background-color: #f0f0f0 !important;
   color: #333 !important;
+}
+
+.dropdown-animate {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-animate.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-animate.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.menu-icon {
+  width: 28px;
+  height: 24px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #333;
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.3s ease;
+}
+
+.menu-icon span:nth-child(1) {
+  top: 0px;
+}
+
+.menu-icon span:nth-child(2) {
+  top: 10px;
+}
+
+.menu-icon span:nth-child(3) {
+  top: 20px;
+}
+
+.menu-icon.open span:nth-child(1) {
+  top: 10px;
+  transform: rotate(45deg);
+}
+
+.menu-icon.open span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+
+.menu-icon.open span:nth-child(3) {
+  top: 10px;
+  transform: rotate(-45deg);
 }
 
 /* Responsive for small screens */

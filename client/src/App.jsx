@@ -68,27 +68,38 @@ const AppLayout = () => {
 
               {/* Mobile Dropdown Menu */}
               {isMobile && (
-                <Dropdown
-                  menu={{
-                    selectedKeys: [currentPath],
-                    onClick: ({ key }) => {
-                      setCollapsed(true);
-                      navigate(key);
-                    },
-                    items: navItems.map(({ key, label, icon }) => ({
-                      key,
-                      label,
-                    })),
-                    className: "mobile-dropdown-menu",
-                  }}
-                  trigger={["hover"]}
-                >
-                  <Button
-                    type="text"
-                    icon={<MenuOutlined />}
-                    className="menu-button"
-                  />
-                </Dropdown>
+                <>
+                  <div
+                    className={`menu-icon ${collapsed ? "open" : ""}`}
+                    onClick={() => setCollapsed(!collapsed)}
+                  >
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+
+                  {collapsed && (
+                    <Dropdown
+                      open
+                      menu={{
+                        selectedKeys: [currentPath],
+                        onClick: ({ key }) => {
+                          setCollapsed(false);
+                          navigate(key);
+                        },
+                        items: navItems.map(({ key, label }) => ({
+                          key,
+                          label,
+                        })),
+                        className: "mobile-dropdown-menu",
+                      }}
+                      trigger={["click"]}
+                    >
+                      {/* AntD requires a SINGLE valid React element as its child */}
+                      <div style={{ display: "none" }} />
+                    </Dropdown>
+                  )}
+                </>
               )}
             </div>
           </Header>
