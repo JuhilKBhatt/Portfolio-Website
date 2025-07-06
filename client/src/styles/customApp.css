@@ -1,0 +1,49 @@
+/* ./client/src/styles/customBackground.css */
+
+body{
+    background-color: rgb(220, 221, 214) !important;
+}
+
+.ant-layout, .ant-layout-content, .ant-layout-header, .ant-layout-sider {
+  background: transparent !important;
+}
+
+.grid-background {
+    position:fixed;
+    z-index:-1;
+    border-radius:inherit;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background-image: url(../../public/img/graph-paper.svg);
+    background-repeat:repeat;
+    background-position:left top;
+    border:0;
+    background-size: 64px auto;
+    opacity: 0.1;
+}
+
+.layoutStyle {
+    min-height: 100vh;
+    flex: "1 1 100%";
+    background: "transparent";
+}
+
+.headerStyle {
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 0 16px;
+}
+
+.contentStyle {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.85);
+  min-height: 280px;
+};
+
+.footerStyle {
+  text-align: center;
+  background: rgba(0,0,0,0.05);
+  padding: 12px 50px;
+};

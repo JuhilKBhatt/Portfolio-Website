@@ -2,41 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { Layout, Menu, Flex } from "antd";
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useNavigate, useLocation, } from "react-router-dom";
 import { getNavList } from "./scripts/getNavList";
-import "./styles/customBackground.css";
+import "./styles/customApp.css";
+import "./styles/customHeader.css";
 
-const { Header, Sider, Content, Footer } = Layout;
-
-const layoutStyle = {
-  minHeight: "100vh",
-  flex: "1 1 100%",
-  background: "transparent",
-};
-
-const headerStyle = {
-  background: "rgba(0,0,0,0.6)",
-  color: "#fff",
-  padding: "0 16px",
-};
-
-const contentStyle = {
-  padding: "24px",
-  background: "rgba(255, 255, 255, 0.85)",
-  minHeight: "280px",
-};
-
-const footerStyle = {
-  textAlign: "center",
-  background: "rgba(0,0,0,0.05)",
-  padding: "12px 50px",
-};
+const { Header, Content, Footer } = Layout;
 
 const AppLayout = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -46,8 +17,6 @@ const AppLayout = () => {
 
   const navItems = getNavList();
   const currentPath = location.pathname;
-  const activePage = navItems.find((item) => item.key === currentPath);
-  const pageTitle = activePage?.label || "Page";
 
   useEffect(() => {
     const handleResize = () => {
@@ -69,9 +38,9 @@ const AppLayout = () => {
     <>
       <div className="grid-background" />
       <Flex gap="middle" wrap>
-        <Layout style={layoutStyle}>
+        <Layout className="layoutStyle">
           {/* Header */}
-          <Header style={headerStyle}>
+          <Header className="headerStyle">
             <div className="header-name">
               <a href="/" className="header-link">
                 <span>Juhil</span>
@@ -120,7 +89,7 @@ const AppLayout = () => {
           </Header>
 
           {/* Content */}
-          <Content style={contentStyle}>
+          <Content className="contentStyle">
             <Routes>
               {navItems.map(({ key, element }) => (
                 <Route
@@ -134,7 +103,7 @@ const AppLayout = () => {
           </Content>
 
           {/* Footer */}
-          <Footer style={footerStyle}>© {new Date().getFullYear()} Juhil K Bhatt</Footer>
+          <Footer className="footerStyle">© {new Date().getFullYear()} Juhil K Bhatt</Footer>
         </Layout>
       </Flex>
     </>
