@@ -11,7 +11,7 @@
   padding: 0 24px;
 }
 
-/* Name link */
+/* Left: Name Link */
 .header-link {
   color: white;
   text-decoration: none;
@@ -21,7 +21,7 @@
   font-family: 'Lexend', sans-serif;
 }
 
-/* "K." */
+/* "K." styling */
 .k-letter {
   position: absolute;
   top: 10%;
@@ -33,7 +33,7 @@
   color: white;
 }
 
-/* Invisible spacer to hold position for the caret */
+/* Invisible spacer to align caret */
 .k-spacer {
   margin: 0 8px;
   position: relative;
@@ -41,7 +41,7 @@
   opacity: 0;
 }
 
-/* "^" caret below K. */
+/* "^" caret styling */
 .k-caret {
   position: absolute;
   top: 60%;
@@ -53,60 +53,55 @@
   color: white;
 }
 
-/* Desktop nav menu styling */
+/* Desktop menu */
 .desktop-nav-menu {
-  margin-left: auto;
   background: transparent;
   border-bottom: none;
   font-size: 24px;
   color: white;
 }
 
-/* Menu item override (AntD) */
+/* AntD menu items */
 .desktop-nav-menu .ant-menu-item a,
 .desktop-nav-menu .ant-menu-title-content {
   color: white !important;
 }
 
-/* Hamburger menu button on mobile */
+/* Mobile hamburger */
 .menu-button {
-  margin-left: auto;
   color: white;
   font-size: 24px;
   background: transparent;
   border: none;
 }
 
-/* Responsive adjustments for smaller screens */
+/* Responsive for small screens */
 @media screen and (max-width: 768px) {
   .header-name {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 16px;
+  }
+
+  .header-link {
     font-size: 20px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
   }
 
   .k-letter {
-    font-size: 24px;
-    top: 12%;
+    font-size: 22px;
+    top: 8%;
     left: 50%;
   }
 
   .k-caret {
-    font-size: 28px;
+    font-size: 26px;
     top: 60%;
     left: 50%;
   }
 
-  .desktop-nav-menu {
-    font-size: 16px;
-  }
-
   .menu-button {
-    font-size: 20px;
-  }
-
-  .header-link span {
-    font-size: 20px;
+    font-size: 22px;
   }
 }

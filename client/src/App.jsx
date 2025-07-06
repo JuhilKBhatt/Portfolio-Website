@@ -76,7 +76,6 @@ const AppLayout = () => {
                     },
                     items: navItems.map(({ key, label, icon }) => ({
                       key,
-                      icon: React.createElement(icon),
                       label,
                     })),
                   }}
