@@ -1,0 +1,94 @@
+/* ./client/src/styles/customTimeline.css */
+
+/* Timeline Container */
+.ant-timeline {
+  padding: 24px;
+}
+
+/* Timeline Labels (Dates) */
+.ant-timeline-item-label {
+  color: #888;
+  font-size: clamp(14px, 1.2vw, 18px);
+  font-weight: 500;
+  font-family: 'Lexend', sans-serif;
+}
+
+/* Timeline Line */
+.ant-timeline-item-head {
+  background-color: #F04B24 !important;
+  border: none;
+}
+
+.ant-timeline-item-tail {
+  border-left: 2px solid #f0f0f0;
+}
+
+/* Timeline Content */
+.ant-card {
+  background-color: white;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.ant-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Header (Name) */
+.ant-card-meta-description h2 {
+  font-size: clamp(18px, 2vw, 24px);
+  color: #333;
+  font-family: 'Lexend', sans-serif;
+  margin-bottom: 8px;
+}
+
+/* Label Texts */
+.ant-typography {
+  font-size: clamp(14px, 1.1vw, 16px);
+  color: #333;
+}
+
+/* Description Text */
+.ant-typography strong {
+  color: #F04B24;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+ul li {
+  font-size: clamp(13px, 1vw, 15px);
+  color: #555;
+  margin-bottom: 4px;
+  list-style-type: disc;
+}
+
+/* Flex container for each card */
+.timeline-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 24px;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+  .ant-card {
+    padding: 12px;
+  }
+
+  .ant-timeline-item-label {
+    text-align: left;
+  }
+
+  ul {
+    padding-left: 16px;
+  }
+}

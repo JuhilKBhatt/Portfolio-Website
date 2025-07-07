@@ -2,7 +2,8 @@
 
 import React from "react";
 import { Timeline, Card, Typography, Flex } from "antd";
-const { Title, Text, Paragraph } = Typography;
+const { Text, Paragraph } = Typography;
+import '../styles/customTimeline.css';
 
 export function formatWorkData(workEntries) {
   return (
