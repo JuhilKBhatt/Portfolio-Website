@@ -7,8 +7,9 @@
 
 /* Timeline Labels (Dates) */
 .ant-timeline-item-label {
-  color: #888;
-  font-size: clamp(14px, 1.2vw, 18px);
+  color: #333;
+  translate: 0 -10%;
+  font-size: clamp(16px, 2.5vw, 18px);
   font-weight: 500;
   font-family: 'Lexend', sans-serif;
 }
@@ -20,7 +21,7 @@
 }
 
 .ant-timeline-item-tail {
-  border-left: 2px solid #f0f0f0;
+  border-left: 2px solid #F04B24 !important;
 }
 
 /* Timeline Content */
