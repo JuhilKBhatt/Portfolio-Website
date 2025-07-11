@@ -1,57 +1,39 @@
 // ./client/src/scripts/formatWorkData.jsx
 
-import React from "react";
-import { Timeline, Card, Typography, Flex } from "antd";
-const { Text, Paragraph } = Typography;
+import React from 'react';
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
 import '../styles/customTimeline.css';
 
 export function formatWorkData(workEntries) {
   return (
-    <Timeline
-      mode="left"
-      style={{ padding: "24px" }}
-      items={workEntries.map((entry) => ({
-        label: `${entry.dateFrom || "?"} - ${entry.dateTo || "Present"}`,
-        children: (
-          <Flex gap="large" vertical align="stretch">
-            <Card
-              key={entry.name}
-              style={{
-                width: "100%",
-                maxWidth: 700,
-                margin: "0 auto",
-                wordBreak: "break-word",
-                minWidth: 0,
-              }}
-            >
-              <Card.Meta
-                description={
-                  <div style={{ marginTop: 8 }}>
-                    <h2>{entry.name}</h2>
-                    <Text strong>Position:</Text>
-                    <Paragraph style={{ marginBottom: 8 }}>
-                      {entry.position}
-                    </Paragraph>
+    <VerticalTimeline>
+      {workEntries.map((entry, idx) => (
+        <VerticalTimelineElement
+          /* 👇  unique per element */
+          key={`${entry.name}-${idx}`}   
+          date={`${entry.dateFrom || '?'} – ${entry.dateTo || 'Present'}`}
+          contentStyle={{ background: 'white', color: '#333' }}
+          contentArrowStyle={{ borderRight: '7px solid #F04B24' }}
+          iconStyle={{ background: '#F04B24', color: '#fff' }}
+        >
+          <h3 className="vertical-timeline-element-title">{entry.name}</h3>
+          <h4 className="vertical-timeline-element-subtitle">
+            {entry.position}
+          </h4>
 
-                    {entry.description?.length > 0 && (
-                      <>
-                        <Text strong>Description:</Text>
-                        <ul>
-                          {entry.description.map((item) => (
-                            <li key={item}>
-                              <Text>- {item}</Text>
-                            </li>
-                          ))}
-                        </ul>
-                      </>
-                    )}
-                  </div>
-                }
-              />
-            </Card>
-          </Flex>
-        ),
-      }))}
-    />
+          {entry.description?.length > 0 && (
+            <ul>
+              {entry.description.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          )}
+        </VerticalTimelineElement>
+      ))}
+    </VerticalTimeline>
   );
 }
