@@ -110,7 +110,7 @@ const AppLayout = () => {
           </Header>
 
           {/* Content */}
-          <Content className="contentStyle">
+          <Content>
             <Routes>
               {navItems.map(({ key, element }) => (
                 <Route key={key} path={key} element={React.createElement(element)} />

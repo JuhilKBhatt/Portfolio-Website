@@ -1,4 +1,4 @@
-/* cardSection.css */
+/* ./client/src/styles/cardSection.css */
 
 .card-section-container {
   padding: 24px;
@@ -35,4 +35,19 @@
 .card-section-collapse {
   background-color: #fff;
   border-radius: 8px;
+}
+
+/* --- Mobile Styles --- */
+@media (max-width: 768px) {
+  .card-section-container {
+    padding: 0; /* Remove padding to allow card to be full-width */
+  }
+
+  .card-section {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 0; /* Remove rounded corners for a flush look */
+    box-shadow: none; /* Optional: remove shadow for a flatter mobile look */
+    padding: 24px 20px; /* Adjust padding to keep content off the edges */
+  }
 }
