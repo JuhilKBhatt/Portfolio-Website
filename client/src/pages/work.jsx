@@ -12,9 +12,9 @@ import { extractWorkData } from "../scripts/extractWorkData";
 import { formatWorkData } from "../scripts/formatWorkData";
 import { DownOutlined } from "@ant-design/icons";
 import { groupWorkDurations } from "../scripts/utility";
+import "../styles/cardSection.css";
 
 const { Title, Paragraph } = Typography;
-const { Panel } = Collapse;
 
 export default function Work() {
   const [workData, setWorkData] = useState(null);
@@ -24,19 +24,9 @@ export default function Work() {
   }, []);
 
   return (
-    <div style={{ padding: "24px" }}>
-      <Card
-        style={{
-          borderLeft: "6px solid #F04B24",
-          borderRadius: "12px",
-          boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-          padding: "24px",
-          maxWidth: 1000,
-          margin: "0 auto",
-          backgroundColor: "#f5f5f5",
-        }}
-      >
-        <Title level={2} style={{ color: "#333" }}>
+    <div className="card-section-container">
+      <Card className="card-section">
+        <Title level={2} className="card-section-title">
           Work Experience
         </Title>
 
@@ -44,24 +34,18 @@ export default function Work() {
           <>
             {Object.entries(groupWorkDurations(workData)).map(
               ([position, months]) => (
-                <Paragraph
-                  key={position}
-                  style={{
-                    marginBottom: 6,
-                    fontSize: "clamp(16px, 1.1vw, 18px)",
-                    color: "#333",
-                  }}
-                >
-                  <strong style={{ color: "#F04B24" }}>{position}:</strong>{" "}
+                <Paragraph key={position} className="card-section-paragraph">
+                  <strong>{position}:</strong>{" "}
                   {months} month{months !== 1 ? "s" : ""}
                 </Paragraph>
               )
             )}
 
-            <Divider style={{ margin: "16px 0" }} />
+            <Divider className="card-section-divider" />
 
             <Collapse
               accordion
+              className="card-section-collapse"
               expandIcon={({ isActive }) => (
                 <DownOutlined rotate={isActive ? 180 : 0} />
               )}
@@ -72,7 +56,6 @@ export default function Work() {
                   children: formatWorkData(workData),
                 },
               ]}
-              style={{ backgroundColor: "#fff", borderRadius: "8px" }}
             />
           </>
         ) : (
