@@ -1,10 +1,13 @@
 // ./client/src/scripts/utility.js
 
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
+dayjs.extend(customParseFormat);
 
 // Ensure this function is exactly as follows
 function cleanDate(str) {
-  return (str || "").replace(/[^\d/]/g, "").trim();
+  return (str || "").replace(/[^\d\/]/g, "").trim();
 }
 
 export function groupWorkDurations(entries) {
