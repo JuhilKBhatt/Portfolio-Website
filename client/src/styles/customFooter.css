@@ -24,14 +24,42 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #24292e; /* GitHub dark gray */
+  color: #24292e;
   font-size: 16px;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-github-link:hover {
-  color: #0366d6; /* GitHub link blue on hover */
+  color: #0366d6;
+}
+
+.footer-linkedin-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #24292e;
+  font-size: 16px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-linkedin-link:hover {
+  color: #005582;
+}
+
+.footer-email-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #24292e;
+  font-size: 16px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-email-link:hover {
+  color: #0366d6;
 }
 
 @media (max-width: 600px) {
