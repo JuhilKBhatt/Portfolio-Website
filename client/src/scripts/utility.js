@@ -6,18 +6,28 @@ export function groupWorkDurations(entries) {
   const totals = {};
 
   entries.forEach((entry) => {
-    const fromDate = dayjs(entry.dateFrom, "MM/YYYY", true); // strict
-    const toDate = entry.dateTo
-      ? dayjs(entry.dateTo, "MM/YYYY", true)
-      : dayjs();
+    let fromDate = dayjs(entry.dateFrom, ["MM/YYYY", "M/YYYY"]);
+    let toDate =
+      entry.dateTo && entry.dateTo.trim()
+        ? dayjs(entry.dateTo, ["MM/YYYY", "M/YYYY"])
+        : dayjs(); // default to now
 
-    // Handle invalid dates
-    if (!fromDate.isValid() || !toDate.isValid()) return;
+    // If parsing failed (invalid date), skip this entry
+    if (!fromDate.isValid()) {
+      console.warn("Invalid from date:", entry.dateFrom);
+      return;
+    }
+
+    if (!toDate.isValid()) {
+      console.warn("Invalid to date:", entry.dateTo);
+      return;
+    }
 
     let duration = toDate.diff(fromDate, "month");
-    if (duration === 0) duration = 1;
+    if (duration <= 0) duration = 1; // fallback if same month or bad diff
 
-    const roles = entry.position.split("+").map((role) => role.trim());
+    // Split positions by '+' and assign full duration to each
+    const roles = entry.position.split("+").map((r) => r.trim());
 
     roles.forEach((role) => {
       totals[role] = (totals[role] || 0) + duration;
