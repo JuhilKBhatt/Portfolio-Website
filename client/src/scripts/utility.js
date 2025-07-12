@@ -6,22 +6,21 @@ export function groupWorkDurations(entries) {
   const totals = {};
 
   entries.forEach((entry) => {
-    const fromDate = dayjs(entry.dateFrom, "MM/YYYY");
-    const toDate = entry.dateTo ? dayjs(entry.dateTo, "MM/YYYY") : dayjs();
+    const fromDate = dayjs(entry.dateFrom, "MM/YYYY", true); // strict
+    const toDate = entry.dateTo
+      ? dayjs(entry.dateTo, "MM/YYYY", true)
+      : dayjs();
+
+    // Handle invalid dates
+    if (!fromDate.isValid() || !toDate.isValid()) return;
 
     let duration = toDate.diff(fromDate, "month");
     if (duration === 0) duration = 1;
 
-    // Split positions by "+" and trim whitespace
-    const roles = entry.position.split("+").map(role => role.trim());
+    const roles = entry.position.split("+").map((role) => role.trim());
 
-    // Distribute full duration to each role
     roles.forEach((role) => {
-      if (totals[role]) {
-        totals[role] += duration;
-      } else {
-        totals[role] = duration;
-      }
+      totals[role] = (totals[role] || 0) + duration;
     });
   });
 
