@@ -1,5 +1,28 @@
 /* ./client/src/styles/customTimeline.css */
 
+.timeline-wrapper {
+  padding: 12px;
+  background-color: #f5eded;
+  border-radius: 12px;
+}
+
+.timeline-content-box {
+  background-color: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.vertical-timeline-element-date {
+  font-size: clamp(18px, 1.2vw, 24px);
+  font-weight: 600;
+  color: #333;
+  font-family: 'Lexend', sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Typography Styling */
 .vertical-timeline-element-title {
   font-size: clamp(18px, 2vw, 24px);
   font-family: 'Lexend', sans-serif;
@@ -27,5 +50,5 @@
 
 .vertical-timeline-element-content {
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
 }

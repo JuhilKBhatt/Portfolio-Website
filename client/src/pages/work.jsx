@@ -1,12 +1,20 @@
 // ./client/src/pages/work.jsx
 
 import React, { useEffect, useState } from "react";
-import { Spin, Typography, Divider, Card } from "antd";
+import {
+  Spin,
+  Typography,
+  Divider,
+  Card,
+  Collapse,
+} from "antd";
 import { extractWorkData } from "../scripts/extractWorkData";
 import { formatWorkData } from "../scripts/formatWorkData";
 import dayjs from "dayjs";
+import { DownOutlined } from "@ant-design/icons";
 
 const { Title, Paragraph } = Typography;
+const { Panel } = Collapse;
 
 function getDurationInMonths(from, to) {
   const fromDate = dayjs(from, "MM/YYYY");
@@ -24,7 +32,7 @@ export default function Work() {
   }, []);
 
   return (
-    <div>
+    <div style={{ padding: "24px" }}>
       <Card
         style={{
           borderLeft: "6px solid #F04B24",
@@ -49,7 +57,7 @@ export default function Work() {
                   key={`${entry.name}-${idx}`}
                   style={{
                     marginBottom: 6,
-                    fontSize: "clamp(18px, 1.1vw, 18px)",
+                    fontSize: "clamp(16px, 1.1vw, 18px)",
                     color: "#333",
                   }}
                 >
@@ -61,7 +69,17 @@ export default function Work() {
 
             <Divider style={{ margin: "16px 0" }} />
 
-            {formatWorkData(workData)}
+            <Collapse
+              accordion
+              expandIcon={({ isActive }) => (
+                <DownOutlined rotate={isActive ? 180 : 0} />
+              )}
+              style={{ backgroundColor: "#fff", borderRadius: "8px" }}
+            >
+              <Panel header="View Timeline Details" key="1">
+                {formatWorkData(workData)}
+              </Panel>
+            </Collapse>
           </>
         ) : (
           <Spin />
