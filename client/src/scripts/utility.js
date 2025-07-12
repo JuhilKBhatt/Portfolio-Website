@@ -4,7 +4,8 @@ import dayjs from "dayjs";
 
 function cleanDate(str) {
   return (str || "")
-    .replace(/[^\d\/]/g, "") // Keep only digits and slash
+    .replace(/["“”‘’'–—\-]+/g, "") // remove quotes and dashes (hyphen, en dash, em dash)
+    .replace(/[^\d\/]/g, "")       // remove all non-digit/non-slash leftovers
     .trim();
 }
 
@@ -14,6 +15,9 @@ export function groupWorkDurations(entries) {
   entries.forEach((entry) => {
     const rawFrom = cleanDate(entry.dateFrom);
     const rawTo = cleanDate(entry.dateTo);
+
+    console.log(`CLEANED FROM: "${rawFrom}" | ORIGINAL: "${entry.dateFrom}"`);
+    console.log(`CLEANED TO: "${rawTo}" | ORIGINAL: "${entry.dateTo}"`);
 
     const fromDate = dayjs(rawFrom, ["MM/YYYY", "M/YYYY"]);
     const toDate = rawTo ? dayjs(rawTo, ["MM/YYYY", "M/YYYY"]) : dayjs();
