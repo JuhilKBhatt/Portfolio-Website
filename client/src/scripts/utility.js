@@ -2,7 +2,8 @@
 
 import dayjs from "dayjs";
 
-export function cleanDate(str) {
+// Ensure this function is exactly as follows
+function cleanDate(str) {
   return (str || "").replace(/[^\d\/]/g, "").trim();
 }
 
@@ -13,18 +14,18 @@ export function groupWorkDurations(entries) {
     const rawFrom = cleanDate(entry.dateFrom);
     const rawTo = cleanDate(entry.dateTo);
 
-    console.log(`CLEANED FROM: "${rawFrom}" | ORIGINAL: "${entry.dateFrom}"`);
-    console.log(`CLEANED TO: "${rawTo}" | ORIGINAL: "${entry.dateTo}"`);
+    // ADD THIS LINE FOR DEBUGGING
+    console.log(`Attempting to parse: From -> "${rawFrom}", To -> "${rawTo}"`);
 
     const fromDate = dayjs(rawFrom, ["MM/YYYY", "M/YYYY"]);
     const toDate = rawTo ? dayjs(rawTo, ["MM/YYYY", "M/YYYY"]) : dayjs();
 
     if (!fromDate.isValid()) {
-      console.warn("Invalid from date:", entry.dateFrom);
+      console.warn("Invalid from date after cleaning:", entry.dateFrom);
       return;
     }
     if (!toDate.isValid()) {
-      console.warn("Invalid to date:", entry.dateTo);
+      console.warn("Invalid to date after cleaning:", entry.dateTo);
       return;
     }
 
