@@ -17,20 +17,8 @@ export function groupWorkDurations(entries) {
     const rawFrom = cleanDate(entry.dateFrom);
     const rawTo = cleanDate(entry.dateTo);
 
-    // ADD THIS LINE FOR DEBUGGING
-    console.log(`Attempting to parse: From -> "${rawFrom}", To -> "${rawTo}"`);
-
     const fromDate = dayjs(rawFrom, ["MM/YYYY", "M/YYYY"]);
     const toDate = rawTo ? dayjs(rawTo, ["MM/YYYY", "M/YYYY"]) : dayjs();
-
-    if (!fromDate.isValid()) {
-      console.warn("Invalid from date after cleaning:", entry.dateFrom);
-      return;
-    }
-    if (!toDate.isValid()) {
-      console.warn("Invalid to date after cleaning:", entry.dateTo);
-      return;
-    }
 
     let duration = toDate.diff(fromDate, "month");
     if (duration <= 0) duration = 1;
