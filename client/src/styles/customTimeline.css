@@ -29,9 +29,3 @@
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
-
-@media screen and (max-width: 768px) {
-  .vertical-timeline-element-content {
-    margin-left: 0 !important;
-  }
-}

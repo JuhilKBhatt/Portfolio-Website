@@ -13,7 +13,6 @@ export function formatWorkData(workEntries) {
     <VerticalTimeline>
       {workEntries.map((entry, idx) => (
         <VerticalTimelineElement
-          /* 👇  unique per element */
           key={`${entry.name}-${idx}`}   
           date={`${entry.dateFrom || '?'} – ${entry.dateTo || 'Present'}`}
           contentStyle={{ background: 'white', color: '#333' }}
