@@ -10,19 +10,11 @@ import {
 } from "antd";
 import { extractWorkData } from "../scripts/extractWorkData";
 import { formatWorkData } from "../scripts/formatWorkData";
-import dayjs from "dayjs";
 import { DownOutlined } from "@ant-design/icons";
+import { groupWorkDurations } from "../scripts/utility";
 
 const { Title, Paragraph } = Typography;
 const { Panel } = Collapse;
-
-function getDurationInMonths(from, to) {
-  const fromDate = dayjs(from, "MM/YYYY");
-  const toDate = to ? dayjs(to, "MM/YYYY") : dayjs();
-
-  const months = toDate.diff(fromDate, "month");
-  return months === 0 ? 1 : months;
-}
 
 export default function Work() {
   const [workData, setWorkData] = useState(null);
@@ -50,22 +42,21 @@ export default function Work() {
 
         {workData ? (
           <>
-            {workData.map((entry, idx) => {
-              const months = getDurationInMonths(entry.dateFrom, entry.dateTo);
-              return (
+            {Object.entries(groupWorkDurations(workData)).map(
+              ([position, months]) => (
                 <Paragraph
-                  key={`${entry.name}-${idx}`}
+                  key={position}
                   style={{
                     marginBottom: 6,
                     fontSize: "clamp(16px, 1.1vw, 18px)",
                     color: "#333",
                   }}
                 >
-                  <strong style={{ color: "#F04B24" }}>{entry.name}:</strong>{" "}
+                  <strong style={{ color: "#F04B24" }}>{position}:</strong>{" "}
                   {months} month{months !== 1 ? "s" : ""}
                 </Paragraph>
-              );
-            })}
+              )
+            )}
 
             <Divider style={{ margin: "16px 0" }} />
 
@@ -74,12 +65,15 @@ export default function Work() {
               expandIcon={({ isActive }) => (
                 <DownOutlined rotate={isActive ? 180 : 0} />
               )}
+              items={[
+                {
+                  key: "1",
+                  label: "View Timeline Details",
+                  children: formatWorkData(workData),
+                },
+              ]}
               style={{ backgroundColor: "#fff", borderRadius: "8px" }}
-            >
-              <Panel header="View Timeline Details" key="1">
-                {formatWorkData(workData)}
-              </Panel>
-            </Collapse>
+            />
           </>
         ) : (
           <Spin />
