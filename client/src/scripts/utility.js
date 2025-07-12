@@ -2,11 +2,8 @@
 
 import dayjs from "dayjs";
 
-function cleanDate(str) {
-  return (str || "")
-    .replace(/["“”‘’'–—\-]+/g, "") // remove quotes and dashes (hyphen, en dash, em dash)
-    .replace(/[^\d\/]/g, "")       // remove all non-digit/non-slash leftovers
-    .trim();
+export function cleanDate(str) {
+  return (str || "").replace(/[^\d\/]/g, "").trim();
 }
 
 export function groupWorkDurations(entries) {
