@@ -1,7 +1,7 @@
 // ./client/src/pages/work.jsx
 
 import React, { useEffect, useState } from "react";
-import { Spin, Typography, Divider } from "antd";
+import { Spin, Typography, Divider, Card } from "antd";
 import { extractWorkData } from "../scripts/extractWorkData";
 import { formatWorkData } from "../scripts/formatWorkData";
 import dayjs from "dayjs";
@@ -13,7 +13,6 @@ function getDurationInMonths(from, to) {
   const toDate = to ? dayjs(to, "MM/YYYY") : dayjs();
 
   const months = toDate.diff(fromDate, "month");
-
   return months === 0 ? 1 : months;
 }
 
@@ -25,27 +24,49 @@ export default function Work() {
   }, []);
 
   return (
-    <div style={{ padding: "24px" }}>
-      <Title level={2}>Work Experience</Title>
+    <div>
+      <Card
+        style={{
+          borderLeft: "6px solid #F04B24",
+          borderRadius: "12px",
+          boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+          padding: "24px",
+          maxWidth: 1000,
+          margin: "0 auto",
+          backgroundColor: "#f5f5f5",
+        }}
+      >
+        <Title level={2} style={{ color: "#333" }}>
+          Work Experience
+        </Title>
 
-      {workData ? (
-        <>
-          {workData.map((entry, idx) => {
-            const months = getDurationInMonths(entry.dateFrom, entry.dateTo);
-            return (
-              <Paragraph key={`${entry.name}-${idx}`} style={{ marginBottom: 4 }}>
-                <strong>{entry.name}:</strong> {months} month{months !== 1 ? "s" : ""}
-              </Paragraph>
-            );
-          })}
+        {workData ? (
+          <>
+            {workData.map((entry, idx) => {
+              const months = getDurationInMonths(entry.dateFrom, entry.dateTo);
+              return (
+                <Paragraph
+                  key={`${entry.name}-${idx}`}
+                  style={{
+                    marginBottom: 6,
+                    fontSize: "clamp(18px, 1.1vw, 18px)",
+                    color: "#333",
+                  }}
+                >
+                  <strong style={{ color: "#F04B24" }}>{entry.name}:</strong>{" "}
+                  {months} month{months !== 1 ? "s" : ""}
+                </Paragraph>
+              );
+            })}
 
-          <Divider style={{ margin: "16px 0" }} />
+            <Divider style={{ margin: "16px 0" }} />
 
-          {formatWorkData(workData)}
-        </>
-      ) : (
-        <Spin />
-      )}
+            {formatWorkData(workData)}
+          </>
+        ) : (
+          <Spin />
+        )}
+      </Card>
     </div>
   );
 }
