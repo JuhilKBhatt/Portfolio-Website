@@ -4,6 +4,7 @@ import axios from "axios";
 import React from "react";
 import { Form, Input, Button, Card, message } from "antd";
 import { MailOutlined, UserOutlined, SendOutlined } from "@ant-design/icons";
+import "../styles/contactPage.css";
 
 export default function Contact() {
   const [form] = Form.useForm();
@@ -24,7 +25,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="contact-container">
+    <div>
       <Card
         title="Contact Me"
         variant="borderless"

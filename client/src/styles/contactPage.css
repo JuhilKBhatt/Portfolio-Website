@@ -1,0 +1,49 @@
+/* ./client/src/styles/contactPage.css */
+
+/* Card styling (use Ant Design props as well) */
+.ant-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Title */
+.ant-card-head-title {
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  font-family: 'Lexend', sans-serif;
+}
+
+/* Form label text */
+.ant-form-item-label > label {
+  font-weight: 600;
+  font-family: 'Lexend', sans-serif;
+  color: #333;
+}
+
+/* Input & TextArea styling */
+.ant-input,
+.ant-input-affix-wrapper,
+.ant-input-textarea {
+  font-family: 'Lexend', sans-serif;
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+/* Button */
+.ant-btn-primary {
+  background-color: #F04B24;
+  border-color: #F04B24;
+  font-family: 'Lexend', sans-serif;
+  font-size: 16px;
+  height: 44px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background-color: #d73e1f;
+  border-color: #d73e1f;
+}
