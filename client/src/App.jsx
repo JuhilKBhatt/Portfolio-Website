@@ -39,9 +39,11 @@ const AppLayout = () => {
       <div className="grid-background" />
       <Flex gap="middle" wrap>
         <Layout className="layoutStyle">
-          {/* Header */}
-          <Header className="headerStyle">
-            <Navbar />
+          {/* Header */}          
+          <Header>
+            <div className="headerStyle">
+              <Navbar />
+            </div>
           </Header>
 
           {/* Content */}
