@@ -167,8 +167,14 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (document.readyState === "complete") {
+      setLoading(false);
+      return;
+    }
+    
     const handleLoad = () => setLoading(false);
     window.addEventListener("load", handleLoad);
+
     return () => window.removeEventListener("load", handleLoad);
   }, []);
 
