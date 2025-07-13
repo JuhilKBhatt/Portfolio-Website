@@ -20,6 +20,7 @@ const AppLayout = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 770);
   const [collapsed, setCollapsed] = useState(false);
   const navItems = getNavList();
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -40,10 +41,8 @@ const AppLayout = () => {
       <Flex gap="middle" wrap>
         <Layout className="layoutStyle">
           {/* Header */}          
-          <Header>
-            <div className="headerStyle">
+          <Header className="headerStyle">
               <Navbar />
-            </div>
           </Header>
 
           {/* Content */}

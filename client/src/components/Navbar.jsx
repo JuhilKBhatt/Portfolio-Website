@@ -38,7 +38,7 @@ export default function Navbar() {
 
   return (
     <div className="header-name">
-      <a href="/" className="header-link">
+      <a href="/Portfolio-Website/#/" className="header-link">
         <span>Juhil</span>
         <span className="k-letter">K.</span>
         <span className="k-spacer">....</span>

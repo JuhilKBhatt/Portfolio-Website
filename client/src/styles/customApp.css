@@ -5,7 +5,7 @@ body{
 }
 
 .ant-layout, .ant-layout-content, .ant-layout-header, .ant-layout-sider {
-  background: transparent !important;
+  background: transparent;
 }
 
 .grid-background {
@@ -22,10 +22,4 @@ body{
     border:0;
     background-size: 64px auto;
     opacity: 0.1;
-}
-
-.layoutStyle {
-    min-height: 100vh;
-    flex: "1 1 100%";
-    background: "transparent";
 }
