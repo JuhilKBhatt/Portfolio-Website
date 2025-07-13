@@ -17,23 +17,7 @@ import "./styles/customFooter.css";
 const { Header, Content, Footer } = Layout;
 
 const AppLayout = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 770);
-  const [collapsed, setCollapsed] = useState(false);
   const navItems = getNavList();
-
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      setIsMobile(width < 770);
-      setCollapsed(width < 968 && width >= 770);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <>
