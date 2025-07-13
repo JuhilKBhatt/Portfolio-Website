@@ -19,7 +19,7 @@ export default function FooterComponent() {
             <span>GitHub</span>
           </a>
           <a
-            href="https://linkedin.com/in/juhil"
+            href="https://www.linkedin.com/in/juhil-bhatt-746b08374?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BNBUHUyNDRPiu8Yek3kTkgA%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-linkedin-link"
