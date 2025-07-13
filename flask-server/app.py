@@ -8,6 +8,7 @@ import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_mail import Mail, Message
+from flask_caching import Cache
 from dotenv import load_dotenv
 from os import environ
 
@@ -25,6 +26,7 @@ app.config['MAIL_USERNAME'] = environ.get('MAIL_USERNAME')  # your email
 app.config['MAIL_PASSWORD'] = environ.get('MAIL_PASSWORD')  # app password
 app.config['MAIL_DEFAULT_SENDER'] = environ.get('MAIL_DEFAULT_SENDER')  # usually same as username
 
+cache = Cache(app, config={"CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT": 300})  # 300 sec = 5 minutes
 mail = Mail(app)
 
 @app.route('/api/ping')
@@ -66,9 +68,9 @@ def github_request(url, params=None):
     return resp.json()
 
 @app.route("/api/github/<username>/repos")
+@cache.cached(timeout=300)  # Cache result for 5 minutes
 def get_repos_with_portfolio_info(username):
     try:
-        # 1. Get all public repos (first 100 for now)
         repos = github_request(
             f"https://api.github.com/users/{username}/repos",
             params={"per_page": 100, "sort": "updated"}

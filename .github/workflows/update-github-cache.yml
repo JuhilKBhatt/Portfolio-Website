@@ -1,0 +1,15 @@
+# .github/workflows/update-github-cache.yml
+
+name: Update GitHub JSON Cache
+
+on:
+  schedule:
+    - cron: "*/4 * * * *"  # Runs every 4 minutes
+  workflow_dispatch:       # Allows manual run
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send ping to Render Flask server
+        run: curl -s ${{ secrets.FLASK_API_URL_GITHUB_CACHE }}
