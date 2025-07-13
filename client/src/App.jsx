@@ -9,6 +9,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { getNavList } from "./scripts/getNavList";
+import LoadingScreen from "./components/LoadingScreen";
 import { GithubOutlined, LinkedinOutlined, MailOutlined } from "@ant-design/icons";
 import "./styles/customApp.css";
 import "./styles/customHeader.css";
@@ -162,10 +163,23 @@ const AppLayout = () => {
   );
 };
 
-const App = () => (
-  <Router>
-    <AppLayout />
-  </Router>
-);
+const App = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const handleLoad = () => setLoading(false);
+    window.addEventListener("load", handleLoad);
+    return () => window.removeEventListener("load", handleLoad);
+  }, []);
+
+  if (loading) return <LoadingScreen />;
+
+  return (
+    <Router>
+      <AppLayout />
+    </Router>
+  );
+};
+
 
 export default App;

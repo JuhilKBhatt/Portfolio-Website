@@ -1,0 +1,11 @@
+/* ./client/src/styles/loadingScreen.css */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5eded;      /* matches your site bg */
+}
