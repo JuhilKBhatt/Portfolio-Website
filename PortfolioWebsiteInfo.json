@@ -1,0 +1,16 @@
+{
+  "title": "Portofolio Website",
+  "description": "A personal portfolio website showcasing my projects, skills, and experiences.",
+  "language": ["Python", "JavaScript", "HTML", "CSS"],
+  "liveDemo": "https://example.com/terrain-demo",
+  "images": [
+    "https://example.com/images/terrain1.jpg",
+    "https://example.com/images/terrain2.jpg",
+    "https://example.com/images/terrain3.jpg"
+  ],
+  "videoDemo": "https://example.com/videos/terrain-demo.mp4",
+  "Priority": 1,
+  "type": "Solo",
+  "version": "Beta",
+  "Visibilty": true
+}
