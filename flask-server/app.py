@@ -1,7 +1,5 @@
 # ./flask-server/app.py
 
-#https://api.github.com/users/juhilkbhatt/repos
-
 import base64
 import requests
 import json
@@ -11,6 +9,8 @@ from flask_mail import Mail, Message
 from flask_caching import Cache
 from dotenv import load_dotenv
 from os import environ
+import cloudinary
+import cloudinary.utils
 
 load_dotenv()
 app = Flask(__name__)
@@ -28,6 +28,13 @@ app.config['MAIL_DEFAULT_SENDER'] = environ.get('MAIL_DEFAULT_SENDER')  # usuall
 
 cache = Cache(app, config={"CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT": 300})  # 300 sec = 5 minutes
 mail = Mail(app)
+
+cloudinary.config(
+    cloud_name=environ.get("CLOUDINARY_CLOUD_NAME"),
+    api_key=environ.get("CLOUDINARY_API_KEY"),
+    api_secret=environ.get("CLOUDINARY_API_SECRET"),
+    secure=True
+)
 
 @app.route('/api/ping')
 def ping():
@@ -59,7 +66,6 @@ def contact():
 GITHUB_TOKEN = environ.get("GITHUB_TOKEN")
 
 def github_request(url, params=None):
-    """Wrapper that adds auth header if GITHUB_TOKEN exists."""
     headers = {"Accept": "application/vnd.github+json"}
     if GITHUB_TOKEN:
         headers["Authorization"] = f"token {GITHUB_TOKEN}"
@@ -67,8 +73,24 @@ def github_request(url, params=None):
     resp.raise_for_status()
     return resp.json()
 
+def sign_cloudinary_url(url, resource_type="image"):
+    try:
+        public_id = url.split("/upload/")[-1].split(".")[0].split("?")[0]
+        signed_url, _ = cloudinary.utils.cloudinary_url(
+            public_id,
+            sign_url=True,
+            resource_type=resource_type,
+            type="upload",
+            secure=True,
+            transformation=[],
+            expiration=300  # URL valid for 5 minutes
+        )
+        return signed_url
+    except Exception:
+        return url  # Fallback
+
 @app.route("/api/github/<username>/repos")
-@cache.cached(timeout=300)  # Cache result for 5 minutes
+@cache.cached(timeout=300)
 def get_repos_with_portfolio_info(username):
     try:
         repos = github_request(
@@ -95,7 +117,21 @@ def get_repos_with_portfolio_info(username):
                 if file_resp.get("encoding") == "base64":
                     content = base64.b64decode(file_resp["content"]).decode("utf-8")
                     try:
-                        repo_data["portfolio_info"] = json.loads(content)
+                        portfolio_info = json.loads(content)
+
+                        # Sign Cloudinary URLs
+                        if "images" in portfolio_info and isinstance(portfolio_info["images"], list):
+                            portfolio_info["images"] = [
+                                sign_cloudinary_url(url) for url in portfolio_info["images"]
+                            ]
+                        if "videoDemo" in portfolio_info and "cloudinary.com" in portfolio_info["videoDemo"]:
+                            portfolio_info["videoDemo"] = sign_cloudinary_url(
+                                portfolio_info["videoDemo"],
+                                resource_type="video"
+                            )
+
+                        repo_data["portfolio_info"] = portfolio_info
+
                     except Exception:
                         repo_data["portfolio_info"] = {
                             "error": "Invalid JSON",
@@ -116,6 +152,5 @@ def get_repos_with_portfolio_info(username):
         return jsonify({"error": str(err)}), 500
 
 # gunicorn app:app --bind 0.0.0.0:$PORT
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(environ.get("PORT", 5000)))
