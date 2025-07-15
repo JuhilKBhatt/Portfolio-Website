@@ -1,68 +1,36 @@
 # ./flask-server/app.py
-
 import base64
-import requests
 import json
+import requests
+from os import environ
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_mail import Mail, Message
 from flask_caching import Cache
 from dotenv import load_dotenv
-from os import environ
-import cloudinary
-import cloudinary.utils
 
+# ────────────────────────────────────────────────────────────────────────────────
 load_dotenv()
+
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-app.config['DEBUG'] = environ.get('FLASK_DEBUG')
+app.config["DEBUG"] = environ.get("FLASK_DEBUG")
 
-# Flask-Mail Config
-app.config['MAIL_SERVER'] = environ.get('MAIL_SERVER', 'smtp.gmail.com')
-app.config['MAIL_PORT'] = int(environ.get('MAIL_PORT', 587))
-app.config['MAIL_USE_TLS'] = environ.get('MAIL_USE_TLS', 'true') == 'true'
-app.config['MAIL_USERNAME'] = environ.get('MAIL_USERNAME')  # your email
-app.config['MAIL_PASSWORD'] = environ.get('MAIL_PASSWORD')  # app password
-app.config['MAIL_DEFAULT_SENDER'] = environ.get('MAIL_DEFAULT_SENDER')  # usually same as username
+# ---------- Flask‑Mail ----------
+app.config["MAIL_SERVER"] = environ.get("MAIL_SERVER", "smtp.gmail.com")
+app.config["MAIL_PORT"] = int(environ.get("MAIL_PORT", 587))
+app.config["MAIL_USE_TLS"] = environ.get("MAIL_USE_TLS", "true") == "true"
+app.config["MAIL_USERNAME"] = environ.get("MAIL_USERNAME")
+app.config["MAIL_PASSWORD"] = environ.get("MAIL_PASSWORD")
+app.config["MAIL_DEFAULT_SENDER"] = environ.get("MAIL_DEFAULT_SENDER")
 
-cache = Cache(app, config={"CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT": 300})  # 300 sec = 5 minutes
 mail = Mail(app)
 
-cloudinary.config(
-    cloud_name=environ.get("CLOUDINARY_CLOUD_NAME"),
-    api_key=environ.get("CLOUDINARY_API_KEY"),
-    api_secret=environ.get("CLOUDINARY_API_SECRET"),
-    secure=True
-)
+# ---------- Simple in‑memory cache (5 min) ----------
+cache = Cache(app, config={"CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT": 300})
 
-@app.route('/api/ping')
-def ping():
-    return jsonify({'message': 'pong'})
-
-@app.route('/api/contact', methods=['POST'])
-def contact():
-    data = request.get_json()
-    name = data.get("name")
-    email = data.get("email")
-    message = data.get("message")
-
-    if not name or not email or not message:
-        return jsonify({'error': 'Missing fields'}), 400
-
-    try:
-        msg = Message(
-            subject=f"Portfolio Contact from {name}",
-            sender=app.config['MAIL_DEFAULT_SENDER'],
-            recipients=[app.config['MAIL_USERNAME']],
-            body=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
-        )
-        mail.send(msg)
-        return jsonify({'message': 'Email sent successfully!'})
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-# GitHub helper
+# ---------- GitHub helper ----------
 GITHUB_TOKEN = environ.get("GITHUB_TOKEN")
 
 def github_request(url, params=None):
@@ -73,84 +41,81 @@ def github_request(url, params=None):
     resp.raise_for_status()
     return resp.json()
 
-def sign_cloudinary_url(url, resource_type="image"):
-    try:
-        public_id = url.split("/upload/")[-1].split(".")[0].split("?")[0]
-        signed_url, _ = cloudinary.utils.cloudinary_url(
-            public_id,
-            sign_url=True,
-            resource_type=resource_type,
-            type="upload",
-            secure=True,
-            transformation=[],
-            expiration=300  # URL valid for 5 minutes
-        )
-        return signed_url
-    except Exception:
-        return url  # Fallback
+# ────────────────────────────────────────────────────────────────────────────────
+@app.route("/api/ping")
+def ping():
+    return jsonify({"message": "pong"})
 
+@app.route("/api/contact", methods=["POST"])
+def contact():
+    data = request.get_json()
+    name, email, message = data.get("name"), data.get("email"), data.get("message")
+
+    if not all([name, email, message]):
+        return jsonify({"error": "Missing fields"}), 400
+
+    try:
+        msg = Message(
+            subject=f"Portfolio Contact from {name}",
+            sender=app.config["MAIL_DEFAULT_SENDER"],
+            recipients=[app.config["MAIL_USERNAME"]],
+            body=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
+        )
+        mail.send(msg)
+        return jsonify({"message": "Email sent successfully!"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# ────────────────────────────────────────────────────────────────────────────────
 @app.route("/api/github/<username>/repos")
-@cache.cached(timeout=300)
+@cache.cached(timeout=300)  # 5‑minute cache
 def get_repos_with_portfolio_info(username):
     try:
         repos = github_request(
             f"https://api.github.com/users/{username}/repos",
-            params={"per_page": 100, "sort": "updated"}
+            params={"per_page": 100, "sort": "updated"},
         )
 
-        enriched_repos = []
-
+        enriched = []
         for repo in repos:
             repo_data = {
                 "name": repo["name"],
                 "html_url": repo["html_url"],
                 "description": repo["description"],
-                "portfolio_info": None
+                "portfolio_info": None,
             }
 
+            # Try to pull PortfolioWebsiteInfo.json (optional)
             try:
                 file_resp = github_request(
                     f"https://api.github.com/repos/{username}/{repo['name']}/contents/PortfolioWebsiteInfo.json",
-                    params={"ref": "main"}
+                    params={"ref": "main"},
                 )
-
                 if file_resp.get("encoding") == "base64":
-                    content = base64.b64decode(file_resp["content"]).decode("utf-8")
+                    raw = base64.b64decode(file_resp["content"]).decode("utf-8")
                     try:
-                        portfolio_info = json.loads(content)
-
-                        # Sign Cloudinary URLs
-                        if "images" in portfolio_info and isinstance(portfolio_info["images"], list):
-                            portfolio_info["images"] = [
-                                sign_cloudinary_url(url) for url in portfolio_info["images"]
-                            ]
-                        if "videoDemo" in portfolio_info and "cloudinary.com" in portfolio_info["videoDemo"]:
-                            portfolio_info["videoDemo"] = sign_cloudinary_url(
-                                portfolio_info["videoDemo"],
-                                resource_type="video"
-                            )
-
-                        repo_data["portfolio_info"] = portfolio_info
-
+                        repo_data["portfolio_info"] = json.loads(raw)
                     except Exception:
-                        repo_data["portfolio_info"] = {
-                            "error": "Invalid JSON",
-                            "raw": content
-                        }
-
+                        repo_data["portfolio_info"] = {"error": "Invalid JSON", "raw": raw}
             except requests.HTTPError as e:
                 if e.response.status_code != 404:
-                    raise
+                    raise  # re‑raise unexpected GitHub errors
 
-            enriched_repos.append(repo_data)
+            enriched.append(repo_data)
 
-        return jsonify(enriched_repos)
+        return jsonify(enriched)
 
     except requests.HTTPError as err:
-        return jsonify({"error": f"GitHub API error {err.response.status_code}: {err.response.text}"}), err.response.status_code
+        return (
+            jsonify(
+                {"error": f"GitHub API error {err.response.status_code}: {err.response.text}"}
+            ),
+            err.response.status_code,
+        )
     except Exception as err:
         return jsonify({"error": str(err)}), 500
 
-# gunicorn app:app --bind 0.0.0.0:$PORT
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(environ.get("PORT", 5000)))
+# ────────────────────────────────────────────────────────────────────────────────
+# If you deploy with gunicorn:   gunicorn app:app --bind 0.0.0.0:$PORT
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(environ.get("PORT", 5000)))

@@ -9,14 +9,18 @@ export default function Projects() {
 
   return (
     <Layout.Content className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Projects</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Projects</h1>
 
       {loading ? (
-        <Spin size="large" />
+        <div className="flex justify-center items-center h-64">
+          <Spin size="large" />
+        </div>
+      ) : projects.length === 0 ? (
+        <p className="text-center">No visible projects to show.</p>
       ) : (
-        <Row gutter={[16, 16]}>
+        <Row gutter={[24, 24]} justify="center">
           {projects.map((project, index) => (
-            <Col xs={24} sm={12} md={8} lg={6} key={index}>
+            <Col key={index} xs={24} sm={12} md={8} lg={6}>
               <ProjectCard project={project} />
             </Col>
           ))}

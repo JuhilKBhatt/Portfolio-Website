@@ -1,28 +1,33 @@
 // ./client/src/components/ProjectCard.jsx
-
 import { Card, Tag, Typography, Carousel } from "antd";
 
-const { Title, Paragraph } = Typography;
+const { Paragraph } = Typography;
 
 export default function ProjectCard({ project }) {
   const info = project.portfolio_info;
 
   if (!info || info.Visibilty === false) return null;
 
+  const filteredImages = (info.images || []).filter(Boolean);
+
   return (
     <Card
       title={info.title || project.name}
-      extra={<a href={project.html_url} target="_blank" rel="noreferrer">GitHub</a>}
-      style={{ width: 400, margin: "16px auto" }}
+      extra={
+        <a href={project.html_url} target="_blank" rel="noreferrer">
+          GitHub
+        </a>
+      }
+      style={{ width: "100%", maxWidth: 400, margin: "0 auto" }}
       cover={
-        info.images?.length > 0 && (
+        filteredImages.length > 0 && (
           <Carousel autoplay>
-            {info.images.map((url, i) => (
+            {filteredImages.map((url, i) => (
               <img
                 key={i}
                 src={url}
                 alt={`Screenshot ${i}`}
-                style={{ maxHeight: 200, objectFit: "cover" }}
+                style={{ maxHeight: 200, objectFit: "cover", borderRadius: "8px 8px 0 0" }}
               />
             ))}
           </Carousel>
@@ -48,6 +53,14 @@ export default function ProjectCard({ project }) {
         >
           Live Demo
         </a>
+      )}
+
+      {info.videoDemo && (
+        <video
+          src={info.videoDemo}
+          controls
+          style={{ width: "100%", marginTop: 12, borderRadius: 8 }}
+        />
       )}
     </Card>
   );

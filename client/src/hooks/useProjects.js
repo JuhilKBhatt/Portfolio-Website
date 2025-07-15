@@ -10,14 +10,24 @@ export function useProjects(username) {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await axios.get(import.meta.env.VITE_FLASK_API_URL+"/api/github/"+username+"/repos");
-        setProjects(res.data || []);
+        const res = await axios.get(
+          `${import.meta.env.VITE_FLASK_API_URL}/api/github/${username}/repos`
+        );
+
+        const sorted = (res.data || []).sort((a, b) => {
+          const pA = a.portfolio_info?.Priority ?? Infinity;
+          const pB = b.portfolio_info?.Priority ?? Infinity;
+          return pA - pB;
+        });
+
+        setProjects(sorted);
       } catch (err) {
         console.error("Error fetching projects", err);
       } finally {
         setLoading(false);
       }
     };
+
     fetchProjects();
   }, [username]);
 
