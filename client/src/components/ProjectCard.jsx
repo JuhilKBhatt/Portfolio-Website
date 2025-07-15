@@ -1,6 +1,6 @@
 // ./client/src/components/ProjectCard.jsx
 
-import { Card, Avatar, Carousel, Tag, Tooltip } from "antd";
+import { Card, Carousel, Tag, Tooltip, Row, Col } from "antd";
 import {
   GlobalOutlined,
   GithubOutlined,
@@ -111,7 +111,18 @@ export default function ProjectCard({ project }) {
       ]}
     >
       <Meta
-        title={info.title || project.name}
+        title={
+          <Row justify="space-between" align="middle">
+            <Col>{info.title || project.name}</Col>
+            {info.version && (
+              <Col>
+                <Tag color="blue" style={{ marginLeft: 8 }}>
+                  v{info.version}
+                </Tag>
+              </Col>
+            )}
+          </Row>
+        }
         description={
           <div>
             <div style={{ marginBottom: 8 }}>
@@ -121,8 +132,6 @@ export default function ProjectCard({ project }) {
               {info.language?.map((lang) => (
                 <Tag key={lang}>{lang}</Tag>
               ))}
-              {info.version && <Tag color="blue">v{info.version}</Tag>}
-              {info.type && <Tag color="geekblue">{info.type}</Tag>}
             </div>
           </div>
         }
