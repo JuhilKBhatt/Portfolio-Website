@@ -26,6 +26,7 @@
   box-shadow: var(--box-shadow);
   box-sizing: border-box;
   padding: 0; /* Ant Card has internal padding */
+  transition: transform 0.2s ease;
 }
 
 .project-card:hover {

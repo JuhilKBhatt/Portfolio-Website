@@ -4,6 +4,7 @@ import { Layout, Spin } from "antd";
 import { useProjects } from "../hooks/useProjects";
 import ProjectCard from "../components/ProjectCard";
 import "../styles/projects.css";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function Projects() {
   const { projects, loading } = useProjects("juhilkbhatt");
@@ -14,21 +15,20 @@ export default function Projects() {
 
   let content;
   if (loading) {
-    content = (
-      <div className="projects-spinner">
-        <Spin size="large" />
-      </div>
-    );
+    content = <LoadingScreen />;
   } else if (visibleProjects.length === 0) {
     content = <p style={{ textAlign: "center" }}>No visible projects to show.</p>;
   } else {
     content = (
       <div className="projects-grid">
-        {visibleProjects.map((project) => (
-          <div className="projects-grid-item" key={project.id}>
-            <ProjectCard project={project} />
-          </div>
-        ))}
+        {visibleProjects.map((project, index) => {
+          const key = project.id || project.name || index; // fallback in case `id` is missing
+          return (
+            <div className="projects-grid-item" key={key}>
+              <ProjectCard project={project} />
+            </div>
+          );
+        })}
       </div>
     );
   }
