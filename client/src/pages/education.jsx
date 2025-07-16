@@ -9,8 +9,10 @@ import {
   Image,
   Row,
   Col,
+  Modal,
+  Tooltip,
 } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { DownOutlined, FileImageOutlined } from "@ant-design/icons";
 import { extractEducationData } from "../scripts/extractEducationData.js";
 import { formatEducationData } from "../scripts/formatEducationData.jsx";
 import LoadingScreen from "../components/LoadingScreen";
@@ -20,12 +22,19 @@ const { Title, Paragraph, Text } = Typography;
 
 export default function Education() {
   const [educationData, setEducationData] = useState(null);
+  const [previewImages, setPreviewImages] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     extractEducationData().then((data) => {
       setEducationData(data);
     });
   }, []);
+
+  const openImagePreview = (images) => {
+    setPreviewImages(images);
+    setIsModalVisible(true);
+  };
 
   return (
     <div className="card-section-container">
@@ -43,33 +52,28 @@ export default function Education() {
             <Row gutter={[24, 24]}>
               {educationData.map((entry) => (
                 <Col xs={24} sm={24} md={12} key={entry.id || entry.name}>
-                  <Card hoverable bordered={false} style={{ borderRadius: 12 }}>
+                  <Card hoverable variant="borderless" style={{ borderRadius: 12 }}>
                     <Title level={4}>{entry.name}</Title>
                     <Paragraph type="secondary">{entry.degree}</Paragraph>
 
                     {entry.description?.length > 0 && (
                       <ul style={{ paddingLeft: 20 }}>
-                        {entry.description.map((desc) => (
-                          <li key={desc}>
+                        {entry.description.map((desc, idx) => (
+                          <li key={`${desc}-${idx}`}>
                             <Text>{desc}</Text>
                           </li>
                         ))}
                       </ul>
                     )}
 
-                    {entry.certificate && (
+                    {entry.certificate && entry.certificate.length > 0 && (
                       <div style={{ marginTop: 12 }}>
-                        <Text strong>Certificate Preview:</Text>
-                        <div style={{ marginTop: 8 }}>
-                          <Image
-                            src={entry.certificate}
-                            alt={`${entry.name} Certificate`}
-                            width={240}
-                            height={160}
-                            style={{ objectFit: "cover", borderRadius: 8 }}
-                            placeholder
+                        <Tooltip title="View Certificates">
+                          <FileImageOutlined
+                            style={{ fontSize: 24, cursor: "pointer", color: "#F04B24" }}
+                            onClick={() => openImagePreview(entry.certificate)}
                           />
-                        </div>
+                        </Tooltip>
                       </div>
                     )}
                   </Card>
@@ -93,6 +97,27 @@ export default function Education() {
                 },
               ]}
             />
+
+            <Modal
+              title="Certificate Gallery"
+              open={isModalVisible}
+              footer={null}
+              onCancel={() => setIsModalVisible(false)}
+              width={800}
+            >
+              <Row gutter={[16, 16]}>
+                {previewImages.map((img, index) => (
+                  <Col span={12} key={typeof img === "string" ? img : `${img}-${index}`}>
+                    <Image
+                      src={img}
+                      alt={`Certificate ${index + 1}`}
+                      width="100%"
+                      style={{ borderRadius: 8 }}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            </Modal>
           </>
         ) : (
           <LoadingScreen />

@@ -2,46 +2,8 @@
 
 export async function extractEducationData() {
   try {
-    const response = await fetch("./data/educationPage.txt");
-    const text = await response.text();
-
-    const lines = text.split("\n").map(line => line.trim()).filter(Boolean);
-    const educationEntriesMap = {};
-
-    for (let line of lines) {
-      const [key, ...rest] = line.split(":");
-      const value = rest.join(":").trim();
-      const [entryIdRaw, fieldKey] = key.split("-");
-      const entryId = entryIdRaw.split(".")[0];
-
-      if (!educationEntriesMap[entryId]) {
-        educationEntriesMap[entryId] = { entry: entryIdRaw };
-      }
-
-      switch (fieldKey) {
-        case "Name":
-          educationEntriesMap[entryId].name = value;
-          break;
-        case "DateFrom":
-          educationEntriesMap[entryId].dateFrom = value;
-          break;
-        case "DateTo":
-          educationEntriesMap[entryId].dateTo = value;
-          break;
-        case "Degree":
-          educationEntriesMap[entryId].degree = value;
-          break;
-        case "Description": {
-          const items = value.split("\\n").map(desc => desc.trim()).filter(Boolean);
-          if (items.length > 0) {
-            educationEntriesMap[entryId].description = items;
-          }
-          break;
-        }
-      }
-    }
-
-    const entries = Object.values(educationEntriesMap);
+    const response = await fetch("data/educationData.json");  // use absolute path
+    const data = await response.json();
 
     const parseDate = (str) => {
       if (!str) return null;
@@ -49,7 +11,7 @@ export async function extractEducationData() {
       return new Date(parseInt(year), parseInt(month) - 1);
     };
 
-    entries.sort((a, b) => {
+    data.sort((a, b) => {
       const aHasNoEnd = !a.dateTo;
       const bHasNoEnd = !b.dateTo;
 
@@ -62,7 +24,7 @@ export async function extractEducationData() {
       return dateB - dateA; // most recent first
     });
 
-    return entries;
+    return data;
   } catch (error) {
     console.error("Failed to extract education data:", error);
     return [];

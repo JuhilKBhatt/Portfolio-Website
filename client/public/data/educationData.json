@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "name": "Arthur Phillip High School",
+    "dateFrom": "02/2015",
+    "dateTo": "12/2021",
+    "degree": "Higher School Certificate",
+    "description": [
+      "School Service Award (Year 8)",
+      "Certificate of Commendation (Year 9)",
+      "1st in Industrial Technology - Multimedia (Year 9)",
+      "1st in Information Technology - Electronics (Year 9)",
+      "Recognition of Student Excellence (Year 10)",
+      "Certification of Participation - Work Experience (Year 10)",
+      "1st in Idustrial Technology - Electronics (Year 10)",
+      "Recognition of Student Excellence (Year 11)",
+      "Recognition of Student Excellence (Year 11)",
+      "1st in Software Design and Development & Information Process and Technology (Year 11)"
+    ],
+    "certificate": [
+        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657182/SSAYear8_nsfxo8.png",
+        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657158/CofCYear9_nbg7bb.png",
+        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657187/1stITMYear9_uwtkef.png",
+        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657173/1stITEYear9_fzmhk2.png",
+        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657203/RofSEYear10_eeg30i.png",
+        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657192/CofPYear10_oxnfyi.png",
+        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657177/1stITEYear10_gkzcqy.png",
+        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657167/EofSEYear11_edvfu9.png",
+        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657198/RofSEYear11_idebuy.png",
+        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657161/1stSDDIPTYear11_lmboxi.png"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "University of Technology Sydney",
+    "dateFrom": "02/2022",
+    "dateTo": "",
+    "degree": "Bachelor of Science in Information Technology + International Studies",
+    "description": ["Not Finished"],
+    "certificate": ""
+  }
+]
