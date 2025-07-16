@@ -1,24 +1,14 @@
 // ./client/src/pages/Contact.jsx
 
-import axios from "axios";
 import React from "react";
 import { Form, Input, Button, Card, message } from "antd";
 import { MailOutlined, UserOutlined, SendOutlined } from "@ant-design/icons";
 import "../styles/contactPage.css";
+import { useContactForm } from "../hooks/useContactForm";
 
 export default function Contact() {
   const [form] = Form.useForm();
-
-  const onFinish = async (values) => {
-    try {
-      message.success("Message sent successfully!");
-      await axios.post(import.meta.env.VITE_FLASK_API_URL + "/api/contact", values);
-      form.resetFields();
-    } catch (error) {
-      console.error("Error sending message:", error);
-      message.error("Failed to send message. Please try again later.");
-    }
-  };
+  const { onFinish } = useContactForm(form);
 
   const onFinishFailed = () => {
     message.error("Please check your input and try again.");
@@ -26,11 +16,7 @@ export default function Contact() {
 
   return (
     <div className="contact-page">
-      <Card
-        title="Contact Me"
-        className="contact-card"
-        variant="borderless"
-      >
+      <Card title="Contact Me" className="contact-card" variant="borderless">
         <Form
           form={form}
           layout="vertical"
