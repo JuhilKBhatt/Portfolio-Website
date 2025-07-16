@@ -1,9 +1,35 @@
 /* ./client/src/styles/cardSection.css */
 
 .card-section-container {
-  padding: 24px;
+  padding: 48px 16px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  font-family: 'Lexend', sans-serif;
 }
 
+.work-header {
+  font-family: 'Lexend', sans-serif;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.card-section-title {
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 36px);
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.work-subtitle {
+  color: #555;
+  font-size: 1rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-family: 'Lexend', sans-serif;
+}
+
+/* Card itself */
 .card-section {
   border-left: 6px solid #F04B24;
   border-radius: 12px;
@@ -12,42 +38,77 @@
   max-width: 800px;
   margin: 0 auto;
   background-color: #f5f5f5;
-}
-
-.card-section-title {
-  color: #333;
-}
-
-.card-section-paragraph {
-  margin-bottom: 6px;
-  font-size: clamp(16px, 1.1vw, 18px);
-  color: #333;
-}
-
-.card-section-paragraph strong {
-  color: #F04B24;
+  font-family: 'Lexend', sans-serif;
 }
 
 .card-section-divider {
-  margin: 16px 0;
+  width: 80px;
+  height: 4px;
+  background-color: #F04B24;
+  margin: 24px auto;
+  border-radius: 4px;
 }
 
+/* Role + duration tag layout */
+.duration-tag-grid {
+  margin-top: 8px;
+}
+
+.duration-tag {
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 16px;
+  background-color: #fff3e6;
+  color: #d35400;
+  border: 1px solid #ffa94d;
+  font-family: 'Lexend', sans-serif;
+}
+
+/* Collapse styling */
 .card-section-collapse {
   background-color: #fff;
   border-radius: 8px;
+  margin-top: 16px;
+  font-family: 'Lexend', sans-serif;
+}
+
+.card-section-collapse .ant-collapse-header-text {
+  font-weight: 600;
+  font-family: 'Lexend', sans-serif;
+}
+
+/* Fade-in animation */
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-in-out both;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* --- Mobile Styles --- */
 @media (max-width: 768px) {
-  .card-section-container {
-    padding: 0; /* Remove padding to allow card to be full-width */
-  }
-
   .card-section {
     max-width: 100%;
     width: 100%;
-    border-radius: 0; /* Remove rounded corners for a flush look */
-    box-shadow: none; /* Optional: remove shadow for a flatter mobile look */
-    padding: 24px 20px; /* Adjust padding to keep content off the edges */
+    border-radius: 0;
+    box-shadow: none;
+    padding: 24px 20px;
+  }
+
+  .duration-tag-grid {
+    flex-direction: column;
+  }
+
+  .work-header {
+    padding: 0 8px;
   }
 }
