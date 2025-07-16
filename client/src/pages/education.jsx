@@ -2,15 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  Spin,
   Typography,
   Divider,
   Card,
-  Collapse
+  Collapse,
+  Image,
+  Row,
+  Col,
 } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import { extractEducationData } from "../scripts/extractEducationData.js";
 import { formatEducationData } from "../scripts/formatEducationData.jsx";
-import { DownOutlined } from "@ant-design/icons";
+import LoadingScreen from "../components/LoadingScreen";
 import "../styles/cardSection.css";
 
 const { Title, Paragraph, Text } = Typography;
@@ -26,34 +29,53 @@ export default function Education() {
 
   return (
     <div className="card-section-container">
-      <Card className="card-section" style={{ maxWidth: 800, margin: "0 auto" }}>
-        <Title level={2} className="card-section-title">
-          Education
-        </Title>
+      <div className="work-header">
+        <Title level={2}>Education</Title>
+        <Paragraph className="work-subtitle">
+          A summary of my academic background, qualifications, and certifications that shaped my journey.
+        </Paragraph>
+        <div className="card-section-divider" />
+      </div>
 
+      <Card className="card-section fade-in-up" variant="borderless">
         {educationData ? (
           <>
-            {educationData.map((entry) => (
-              <div className="card-section-paragraph" key={entry.id || entry.name} style={{ marginBottom: "24px" }}>
-                <Paragraph strong>{entry.name}</Paragraph>
+            <Row gutter={[24, 24]}>
+              {educationData.map((entry) => (
+                <Col xs={24} sm={24} md={12} key={entry.id || entry.name}>
+                  <Card hoverable bordered={false} style={{ borderRadius: 12 }}>
+                    <Title level={4}>{entry.name}</Title>
+                    <Paragraph type="secondary">{entry.degree}</Paragraph>
 
-                {entry.degree && (
-                  <Paragraph>
-                    <Text strong>Degree:</Text> {entry.degree}
-                  </Paragraph>
-                )}
+                    {entry.description?.length > 0 && (
+                      <ul style={{ paddingLeft: 20 }}>
+                        {entry.description.map((desc) => (
+                          <li key={desc}>
+                            <Text>{desc}</Text>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
 
-                {entry.description?.length > 0 && (
-                  <ul style={{ paddingLeft: "20px", marginBottom: "8px" }}>
-                    {entry.description.map((desc) => (
-                      <li key={desc}>
-                        <Paragraph style={{ marginBottom: 4 }}>{desc}</Paragraph>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
+                    {entry.certificate && (
+                      <div style={{ marginTop: 12 }}>
+                        <Text strong>Certificate Preview:</Text>
+                        <div style={{ marginTop: 8 }}>
+                          <Image
+                            src={entry.certificate}
+                            alt={`${entry.name} Certificate`}
+                            width={240}
+                            height={160}
+                            style={{ objectFit: "cover", borderRadius: 8 }}
+                            placeholder
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </Card>
+                </Col>
+              ))}
+            </Row>
 
             <Divider className="card-section-divider" />
 
@@ -73,7 +95,7 @@ export default function Education() {
             />
           </>
         ) : (
-          <Spin />
+          <LoadingScreen />
         )}
       </Card>
     </div>
