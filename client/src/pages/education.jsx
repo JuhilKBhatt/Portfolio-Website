@@ -60,7 +60,10 @@ export default function Education() {
                       <ul style={{ paddingLeft: 20 }}>
                         {entry.description.map((desc, idx) => (
                           <li key={`${desc}-${idx}`}>
-                            <Text>{desc}</Text>
+                            <Text>
+                              <span style={{ color: "#F04B24", fontWeight: "bold", marginRight: 6 }}>•</span>
+                              {desc}
+                            </Text>
                           </li>
                         ))}
                       </ul>
@@ -99,7 +102,7 @@ export default function Education() {
             />
 
             <Modal
-              title="Certificate Gallery"
+              title="High School Certificate Gallery"
               open={isModalVisible}
               footer={null}
               onCancel={() => setIsModalVisible(false)}

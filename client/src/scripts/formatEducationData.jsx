@@ -31,9 +31,12 @@ export function formatEducationData(educationEntries) {
               </h4>
 
               {entry.description?.length > 0 && (
-                <ul>
-                  {entry.description.map((item) => (
-                    <li key={item}>{item}</li>
+                <ul style={{ paddingLeft: 20 }}>
+                  {entry.description.map((item, i) => (
+                    <li key={`${item}-${i}`}>
+                      <span style={{ color: '#F04B24', fontWeight: 'bold', marginRight: 6 }}>•</span>
+                      {item}
+                    </li>
                   ))}
                 </ul>
               )}
