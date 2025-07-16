@@ -59,22 +59,25 @@ export default function Home() {
           </div>
 
           <Carousel autoplay dots>
-            {groupedProjects.map((group, index) => (
-              <div className="featured-carousel-slide" key={index}>
-                <Row gutter={[24, 24]} justify="center">
-                  {group.map((project) => (
-                    <Col
-                      key={project.id || project.name}
-                      xs={24}
-                      sm={24}
-                      md={8}
-                    >
-                      <ProjectCard project={project} />
-                    </Col>
-                  ))}
-                </Row>
-              </div>
-            ))}
+            {groupedProjects.map((group) => {
+              const groupKey = group.map((project) => project.id || project.name).join("-");
+              return (
+                <div className="featured-carousel-slide" key={groupKey}>
+                  <Row gutter={[24, 24]} justify="center">
+                    {group.map((project) => (
+                      <Col
+                        key={project.id || project.name}
+                        xs={24}
+                        sm={24}
+                        md={8}
+                      >
+                        <ProjectCard project={project} />
+                      </Col>
+                    ))}
+                  </Row>
+                </div>
+              );
+            })}
           </Carousel>
         </section>
       )}
