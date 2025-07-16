@@ -1,7 +1,11 @@
 /* ./client/src/styles/customHeader.css */
 
 .headerStyle {
-  background: rgba(245,245,245, 0.85) !important;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(245,245,245,0.85) !important;
+  backdrop-filter: blur(8px);
   color: #333;
   border-radius: 15px;
   padding: 8px 20px;
