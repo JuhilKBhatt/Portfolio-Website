@@ -123,6 +123,22 @@
   box-sizing: border-box;
 }
 
+.ant-btn-primary {
+  background-color: #F04B24;
+  border-color: #F04B24;
+  font-family: 'Lexend', sans-serif;
+  font-size: 16px;
+  height: 44px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background-color: #d73e1f !important;
+  border-color: #d73e1f !important;
+}
+
 /* Ensure spacing is good on smaller screens */
 @media (max-width: 768px) {
   .featured-carousel-slide {
