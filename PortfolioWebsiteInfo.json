@@ -1,10 +1,11 @@
 {
   "title": "Portofolio Website",
   "description": "A personal portfolio website showcasing my projects, skills, and experiences.",
-  "language": ["Python", "JavaScript"],
+  "language": ["Python", "JavaScript", "Cloudinary", "Flask", "Render", "Github Actions"],
   "liveDemo": "",
   "images": [
-    ""
+    "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752666027/Portfolio-Website-1_s2nwym.png",
+    "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752666028/Portfolio-Website-2_v1os65.png"
   ],
   "videoDemo": "",
   "Priority": 1,
