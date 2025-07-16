@@ -1,37 +1,55 @@
 /* ./client/src/styles/projects.css */
 
-.projects-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px;
+/* Background & layout */
+.projects-container.with-bg {
+  padding: 48px 16px;
   box-sizing: border-box;
+  min-height: 100vh;
+}
+
+/* Header section */
+.projects-header {
+  text-align: center;
+  margin-bottom: 32px;
 }
 
 .projects-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #222;
+  font-family: 'Lexend', sans-serif;
 }
 
-/* Spinner centering */
-.projects-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 256px;
+.projects-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-/* Flex grid wrapper */
-.projects-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
+/* Divider */
+.projects-divider {
+  width: 80px;
+  height: 4px;
+  background-color: #F04B24;
+  border-radius: 4px;
+  margin: 16px auto 0;
 }
 
-/* Individual item (card wrapper) */
-.projects-grid-item {
-  flex: 1 1 300px;
-  max-width: 360px;
+/* Fade-in animation */
+.fade-in {
+  animation: fadeInUp 0.5s ease-in-out both;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
