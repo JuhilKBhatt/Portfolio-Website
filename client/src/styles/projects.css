@@ -1,10 +1,11 @@
 /* ./client/src/styles/projects.css */
 
 /* Background & layout */
-.projects-container.with-bg {
-  padding: 48px 16px;
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
   box-sizing: border-box;
-  min-height: 100vh;
 }
 
 /* Header section */
@@ -29,6 +30,20 @@
   line-height: 1.6;
 }
 
+/* Flex grid wrapper */
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* Individual item (card wrapper) */
+.projects-grid-item {
+  flex: 1 1 300px;
+  max-width: 340px;
+}
+
 /* Divider */
 .projects-divider {
   width: 80px;
@@ -36,20 +51,4 @@
   background-color: #F04B24;
   border-radius: 4px;
   margin: 16px auto 0;
-}
-
-/* Fade-in animation */
-.fade-in {
-  animation: fadeInUp 0.5s ease-in-out both;
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
