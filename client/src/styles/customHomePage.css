@@ -80,6 +80,56 @@
   margin-bottom: 1.5rem;
 }
 
+/* Featured Projects Section */
+
+.featured-projects {
+  padding: 64px 16px;
+}
+
+.featured-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.featured-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.featured-header p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Grid Layout */
+.featured-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featured-item {
+  flex: 1 1 300px;
+  max-width: 360px;
+}
+
+/* Carousel layout for featured projects */
+.featured-carousel-slide {
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Ensure spacing is good on smaller screens */
+@media (max-width: 768px) {
+  .featured-carousel-slide {
+    padding: 16px;
+  }
+}
+
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
