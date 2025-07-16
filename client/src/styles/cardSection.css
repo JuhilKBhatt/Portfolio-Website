@@ -14,19 +14,29 @@
 }
 
 .card-section-title {
-  font-weight: 700;
-  font-size: clamp(28px, 4vw, 36px);
-  margin-bottom: 8px;
-  color: #222;
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 8px !important;
+  color: #222 !important;
+  font-family: 'Lexend', sans-serif !important;
 }
 
 .work-subtitle {
-  color: #555;
-  font-size: 1rem;
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
-  font-family: 'Lexend', sans-serif;
+  font-size: 1.1rem !important;
+  color: #666 !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  line-height: 1.6 !important;
+  font-family: 'Lexend', sans-serif !important;
+}
+
+.education-subtitle {
+  font-size: 1.1rem !important;
+  color: #666 !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  line-height: 1.6 !important;
+  font-family: 'Lexend', sans-serif !important;
 }
 
 /* Card itself */

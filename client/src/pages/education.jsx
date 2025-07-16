@@ -39,8 +39,8 @@ export default function Education() {
   return (
     <div className="card-section-container">
       <div className="work-header">
-        <Title level={2}>Education</Title>
-        <Paragraph className="work-subtitle">
+        <Title level={2} className="card-section-title" >Education</Title>
+        <Paragraph className="education-subtitle">
           A summary of my academic background, qualifications, and certifications that shaped my journey.
         </Paragraph>
         <div className="card-section-divider" />

@@ -20,9 +20,12 @@
 }
 
 .contact-intro p {
-  font-size: 1rem;
-  color: #666;
-  line-height: 1.6;
+  font-size: 1.1rem !important;
+  color: #666 !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  line-height: 1.6 !important;
+  font-family: 'Lexend', sans-serif !important;
 }
 
 .contact-divider {
