@@ -26,8 +26,10 @@ const AppLayout = () => {
       <Flex gap="middle" wrap>
         <Layout className="layoutStyle">
           {/* Header */}          
-          <Header className="headerStyle">
+          <Header className="header-wrapper">
+            <div className="headerStyle">
               <Navbar />
+            </div>
           </Header>
 
           {/* Content */}

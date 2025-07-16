@@ -1,18 +1,27 @@
 /* ./client/src/styles/customHeader.css */
 
-.headerStyle {
-  position: sticky;
+.header-wrapper {
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: transparent;
   z-index: 1000;
-  background: rgba(245,245,245,0.85) !important;
+  pointer-events: none;
+}
+
+.headerStyle {
+  position: static;
   backdrop-filter: blur(8px);
-  color: #333;
+  background: rgba(245,245,245,0.85) !important;
   border-radius: 15px;
-  padding: 8px 20px;
-  margin: 20px;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
+  color: #333;
 }
 
 /* Header container */

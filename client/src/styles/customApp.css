@@ -27,3 +27,7 @@ body{
 *, *::before, *::after {
   box-sizing: border-box;
 }
+
+.layoutStyle {
+  padding-top: 100px;
+}
