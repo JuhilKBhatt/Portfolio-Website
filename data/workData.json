@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Strandbags",
+    "dateFrom": "10/2019",
+    "dateTo": "10/2019",
+    "position": "Causal IT Assistant",
+    "description": ["Assisting the IT Department"]
+  },
+  {
+    "name": "Strandbags",
+    "dateFrom": "01/2020",
+    "dateTo": "01/2020",
+    "position": "Causal IT Assistant",
+    "description": ["Assisting the IT Department in Label Printers"]
+  },
+  {
+    "name": "Newtown Fast-Mart",
+    "dateFrom": "03/2022",
+    "dateTo": "05/2023",
+    "position": "Store Clerk",
+    "description": ["Handled Customers", "Managed Inventory", "Handled Transactions"]
+  },
+  {
+    "name": "Yennora Copper Recycling",
+    "dateFrom": "06/2023",
+    "dateTo": "05/2024",
+    "position": "Front Desk + IT Support",
+    "description": ["Handled Customers", "External Communication", "IT Support"]
+  },
+  {
+    "name": "Safari Copper Recycling",
+    "dateFrom": "05/2024",
+    "dateTo": "",
+    "position": "Manager + IT Support",
+    "description": ["Handled Customers", "External Communication", "IT Support"]
+  }
+]
