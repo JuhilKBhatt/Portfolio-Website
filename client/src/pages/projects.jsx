@@ -20,7 +20,7 @@ export default function Projects() {
     content = (
       <Row gutter={[24, 24]} justify="center">
         {projects.map((project) => (
-          <Col key={project.id || project._id || project.name} xs={24} sm={12} md={8} lg={6}>
+          <Col key={project.id || project._id || project.name} xs={24} md={12} lg={8}>
             <ProjectCard project={project} />
           </Col>
         ))}

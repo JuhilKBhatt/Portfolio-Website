@@ -11,7 +11,10 @@ const { Meta } = Card;
 
 export default function ProjectCard({ project }) {
   const info = project.portfolio_info;
-  if (!info || info.Visibilty === false) return null;
+  
+  if (!info || info.Visibilty !== true) {
+    return null;
+  }
 
   const filteredImages = (info.images || []).filter(Boolean);
   const mainImage =
@@ -20,7 +23,8 @@ export default function ProjectCard({ project }) {
 
   return (
     <Card
-      style={{ width: 360, margin: "0 auto" }}
+      // Style is updated to be responsive within its grid container
+      style={{ width: '100%', maxWidth: 360, margin: "0 auto" }}
       cover={
         filteredImages.length > 1 ? (
           <Carousel autoplay>
@@ -30,10 +34,9 @@ export default function ProjectCard({ project }) {
                 src={url}
                 alt={`Screenshot ${i}`}
                 style={{
-                  maxHeight: 200,
+                  height: 200, // Changed maxHeight to height for consistency
                   objectFit: "cover",
                   width: "100%",
-                  borderRadius: "8px 8px 0 0",
                 }}
               />
             ))}
@@ -43,10 +46,9 @@ export default function ProjectCard({ project }) {
             alt="Project Cover"
             src={mainImage}
             style={{
-              maxHeight: 200,
+              height: 200, // Changed maxHeight to height for consistency
               objectFit: "cover",
               width: "100%",
-              borderRadius: "8px 8px 0 0",
             }}
           />
         )
@@ -54,12 +56,7 @@ export default function ProjectCard({ project }) {
       actions={[
         info.liveDemo ? (
           <Tooltip title="Live Demo">
-            <a
-              href={info.liveDemo}
-              target="_blank"
-              rel="noreferrer"
-              style={{ pointerEvents: "auto" }}
-            >
+            <a href={info.liveDemo} target="_blank" rel="noreferrer">
               <GlobalOutlined />
             </a>
           </Tooltip>
@@ -73,12 +70,7 @@ export default function ProjectCard({ project }) {
 
         project.html_url ? (
           <Tooltip title="GitHub Repo">
-            <a
-              href={project.html_url}
-              target="_blank"
-              rel="noreferrer"
-              style={{ pointerEvents: "auto" }}
-            >
+            <a href={project.html_url} target="_blank" rel="noreferrer">
               <GithubOutlined />
             </a>
           </Tooltip>
@@ -92,12 +84,7 @@ export default function ProjectCard({ project }) {
 
         info.videoDemo ? (
           <Tooltip title="Video Demo">
-            <a
-              href={info.videoDemo}
-              target="_blank"
-              rel="noreferrer"
-              style={{ pointerEvents: "auto" }}
-            >
+            <a href={info.videoDemo} target="_blank" rel="noreferrer">
               <VideoCameraOutlined />
             </a>
           </Tooltip>
@@ -125,10 +112,10 @@ export default function ProjectCard({ project }) {
         }
         description={
           <div>
-            <div style={{ marginBottom: 8 }}>
+            <div style={{ marginBottom: 8, minHeight: 66 }}> {/* Added minHeight for consistency */}
               {info.description || project.description}
             </div>
-            <div>
+            <div style={{minHeight: 30}}> {/* Added minHeight for consistency */}
               {info.language?.map((lang) => (
                 <Tag key={lang}>{lang}</Tag>
               ))}
