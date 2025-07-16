@@ -2,7 +2,7 @@
 
 export async function extractWorkData() {
   try {
-    const response = await fetch("/data/workData.json");
+    const response = await fetch("data/workData.json");
     const data = await response.json();
 
     const parseDate = (str) => {
