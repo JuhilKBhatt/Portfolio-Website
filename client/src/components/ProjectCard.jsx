@@ -7,44 +7,47 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import "../styles/projectCard.css";
+import { useMemo } from "react";
 
 const { Meta } = Card;
 
 export default function ProjectCard({ project }) {
   const info = project.portfolio_info;
 
-  if (!info || info.Visibilty !== true) {
-    return null;
-  }
+  if (!info || info.Visibilty !== true) return null;
 
   const filteredImages = (info.images || []).filter(Boolean);
-  const mainImage =
-    filteredImages[0] ||
-    "https://via.placeholder.com/400x200?text=No+Preview";
+  const mainImage = filteredImages[0] || "https://via.placeholder.com/400x200?text=No+Preview";
+
+  const imageContent = useMemo(() => {
+    if (filteredImages.length > 1) {
+      return (
+        <Carousel autoplay className="project-carousel">
+          {filteredImages.map((url, i) => (
+            <img
+              key={url || i}
+              src={url}
+              alt={`Screenshot ${i}`}
+              className="project-image"
+            />
+          ))}
+        </Carousel>
+      );
+    } else {
+      return (
+        <img
+          alt="Project Cover"
+          src={mainImage}
+          className="project-image"
+        />
+      );
+    }
+  }, [filteredImages]);
 
   return (
     <Card
       className="project-card"
-      cover={
-        filteredImages.length > 1 ? (
-          <Carousel autoplay className="project-carousel">
-            {filteredImages.map((url, i) => (
-              <img
-                key={i}
-                src={url}
-                alt={`Screenshot ${i}`}
-                className="project-image"
-              />
-            ))}
-          </Carousel>
-        ) : (
-          <img
-            alt="Project Cover"
-            src={mainImage}
-            className="project-image"
-          />
-        )
-      }
+      cover={imageContent}
       actions={[
         info.liveDemo ? (
           <Tooltip title="Live Demo">
