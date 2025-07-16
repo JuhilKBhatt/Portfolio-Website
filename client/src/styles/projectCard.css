@@ -1,0 +1,74 @@
+/* ./client/src/styles/projectCard.css */
+
+:root {
+  --primary-color: #F04B24;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.project-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Main Card Styling */
+.project-card {
+  width: 100%;
+  max-width: 360px;
+  margin: 16px auto;
+  border-radius: 12px;
+  background-color: var(--card-bg);
+  box-shadow: var(--box-shadow);
+  box-sizing: border-box;
+  padding: 0; /* Ant Card has internal padding */
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Carousel/Image Styling */
+.project-image {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Description Styling */
+.project-description {
+  margin-bottom: 8px;
+  min-height: 66px;
+  color: var(--text-color);
+}
+
+/* Tag Container */
+.project-tags {
+  min-height: 30px;
+}
+
+/* Disabled Icon Styling */
+.disabled-icon {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .project-card {
+    max-width: 100%;
+    width: calc(100% - 32px);
+    margin: 16px auto;
+    border-radius: 8px;
+  }
+
+  .project-image {
+    height: 160px;
+  }
+}

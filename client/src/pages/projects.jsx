@@ -1,36 +1,41 @@
-// ./client/src/pages/project.jsx
+// ./client/src/pages/Projects.jsx
 
-import { Layout, Spin, Row, Col } from "antd";
+import { Layout, Spin } from "antd";
 import { useProjects } from "../hooks/useProjects";
 import ProjectCard from "../components/ProjectCard";
+import "../styles/projects.css";
 
 export default function Projects() {
   const { projects, loading } = useProjects("juhilkbhatt");
 
+  const visibleProjects = projects.filter(
+    (p) => p.portfolio_info && p.portfolio_info.Visibilty === true
+  );
+
   let content;
   if (loading) {
     content = (
-      <div className="flex justify-center items-center h-64">
+      <div className="projects-spinner">
         <Spin size="large" />
       </div>
     );
-  } else if (projects.length === 0) {
-    content = <p className="text-center">No visible projects to show.</p>;
+  } else if (visibleProjects.length === 0) {
+    content = <p style={{ textAlign: "center" }}>No visible projects to show.</p>;
   } else {
     content = (
-      <Row gutter={[24, 24]} justify="center">
-        {projects.map((project) => (
-          <Col key={project.id || project._id || project.name} xs={24} md={12} lg={8}>
+      <div className="projects-grid">
+        {visibleProjects.map((project) => (
+          <div className="projects-grid-item" key={project.id}>
             <ProjectCard project={project} />
-          </Col>
+          </div>
         ))}
-      </Row>
+      </div>
     );
   }
 
   return (
-    <Layout.Content className="p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center">Projects</h1>
+    <Layout.Content className="projects-container">
+      <h1 className="projects-title">Projects</h1>
       {content}
     </Layout.Content>
   );

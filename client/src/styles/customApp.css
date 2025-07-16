@@ -23,3 +23,7 @@ body{
     background-size: 64px auto;
     opacity: 0.1;
 }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}

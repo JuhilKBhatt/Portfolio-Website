@@ -6,12 +6,13 @@ import {
   GithubOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
+import "../styles/projectCard.css";
 
 const { Meta } = Card;
 
 export default function ProjectCard({ project }) {
   const info = project.portfolio_info;
-  
+
   if (!info || info.Visibilty !== true) {
     return null;
   }
@@ -23,21 +24,16 @@ export default function ProjectCard({ project }) {
 
   return (
     <Card
-      // Style is updated to be responsive within its grid container
-      style={{ width: '100%', maxWidth: 360, margin: "0 auto" }}
+      className="project-card"
       cover={
         filteredImages.length > 1 ? (
-          <Carousel autoplay>
+          <Carousel autoplay className="project-carousel">
             {filteredImages.map((url, i) => (
               <img
                 key={i}
                 src={url}
                 alt={`Screenshot ${i}`}
-                style={{
-                  height: 200, // Changed maxHeight to height for consistency
-                  objectFit: "cover",
-                  width: "100%",
-                }}
+                className="project-image"
               />
             ))}
           </Carousel>
@@ -45,11 +41,7 @@ export default function ProjectCard({ project }) {
           <img
             alt="Project Cover"
             src={mainImage}
-            style={{
-              height: 200, // Changed maxHeight to height for consistency
-              objectFit: "cover",
-              width: "100%",
-            }}
+            className="project-image"
           />
         )
       }
@@ -62,12 +54,11 @@ export default function ProjectCard({ project }) {
           </Tooltip>
         ) : (
           <Tooltip title="No Live Demo">
-            <span style={{ opacity: 0.3, cursor: "not-allowed" }}>
+            <span className="disabled-icon">
               <GlobalOutlined />
             </span>
           </Tooltip>
         ),
-
         project.html_url ? (
           <Tooltip title="GitHub Repo">
             <a href={project.html_url} target="_blank" rel="noreferrer">
@@ -76,12 +67,11 @@ export default function ProjectCard({ project }) {
           </Tooltip>
         ) : (
           <Tooltip title="No GitHub URL">
-            <span style={{ opacity: 0.3, cursor: "not-allowed" }}>
+            <span className="disabled-icon">
               <GithubOutlined />
             </span>
           </Tooltip>
         ),
-
         info.videoDemo ? (
           <Tooltip title="Video Demo">
             <a href={info.videoDemo} target="_blank" rel="noreferrer">
@@ -90,7 +80,7 @@ export default function ProjectCard({ project }) {
           </Tooltip>
         ) : (
           <Tooltip title="No Video Demo">
-            <span style={{ opacity: 0.3, cursor: "not-allowed" }}>
+            <span className="disabled-icon">
               <VideoCameraOutlined />
             </span>
           </Tooltip>
@@ -112,10 +102,10 @@ export default function ProjectCard({ project }) {
         }
         description={
           <div>
-            <div style={{ marginBottom: 8, minHeight: 66 }}> {/* Added minHeight for consistency */}
+            <div className="project-description">
               {info.description || project.description}
             </div>
-            <div style={{minHeight: 30}}> {/* Added minHeight for consistency */}
+            <div className="project-tags">
               {info.language?.map((lang) => (
                 <Tag key={lang}>{lang}</Tag>
               ))}

@@ -12,7 +12,7 @@ export default function Contact() {
   const onFinish = async (values) => {
     try {
       message.success("Message sent successfully!");
-      await axios.post(import.meta.env.VITE_FLASK_API_URL+"/api/contact", values)
+      await axios.post(import.meta.env.VITE_FLASK_API_URL + "/api/contact", values);
       form.resetFields();
     } catch (error) {
       console.error("Error sending message:", error);
@@ -20,22 +20,16 @@ export default function Contact() {
     }
   };
 
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = () => {
     message.error("Please check your input and try again.");
   };
 
   return (
-    <div>
+    <div className="contact-page">
       <Card
         title="Contact Me"
+        className="contact-card"
         variant="borderless"
-        style={{
-          maxWidth: 600,
-          margin: "auto",
-          marginTop: 50,
-          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)",
-          borderRadius: 12,
-        }}
       >
         <Form
           form={form}
@@ -43,6 +37,7 @@ export default function Contact() {
           name="contact-form"
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
+          className="contact-form"
         >
           <Form.Item
             label="Name"
@@ -68,15 +63,12 @@ export default function Contact() {
             name="message"
             rules={[{ required: true, message: "Please enter a message." }]}
           >
-            <Input.TextArea
-              rows={4}
-              placeholder="Type your message here..."
-            />
+            <Input.TextArea rows={4} placeholder="Type your message here..." />
           </Form.Item>
 
           <Form.Item>
             <Button type="primary" htmlType="submit" block>
-              Send Message <SendOutlined/>
+              Send Message <SendOutlined />
             </Button>
           </Form.Item>
         </Form>

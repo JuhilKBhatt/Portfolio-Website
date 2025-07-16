@@ -1,0 +1,37 @@
+/* ./client/src/styles/projects.css */
+
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.projects-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Spinner centering */
+.projects-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 256px;
+}
+
+/* Flex grid wrapper */
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* Individual item (card wrapper) */
+.projects-grid-item {
+  flex: 1 1 300px;
+  max-width: 360px;
+}

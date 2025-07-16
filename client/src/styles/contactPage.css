@@ -1,42 +1,47 @@
 /* ./client/src/styles/contactPage.css */
 
-/* Card styling (use Ant Design props as well) */
-.ant-card {
+/* Page container */
+.contact-page {
+  padding: 0 16px;
+}
+
+/* Custom Card styling */
+.contact-card {
   border-left: 6px solid #F04B24;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   padding: 24px;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 50px auto 0;
   background-color: #f5f5f5;
 }
 
-/* Title */
-.ant-card-head-title {
+/* Custom Title inside the Card */
+.contact-card .ant-card-head-title {
   font-size: clamp(22px, 2vw, 28px);
   font-weight: 700;
   font-family: 'Lexend', sans-serif;
 }
 
 /* Form label text */
-.ant-form-item-label > label {
+.contact-form .ant-form-item-label > label {
   font-weight: 600;
   font-family: 'Lexend', sans-serif;
   color: #333;
 }
 
 /* Input & TextArea styling */
-.ant-input,
-.ant-input-affix-wrapper,
-.ant-input-textarea {
+.contact-form .ant-input,
+.contact-form .ant-input-affix-wrapper,
+.contact-form .ant-input-textarea {
   font-family: 'Lexend', sans-serif;
   font-size: 16px;
   padding: 10px 12px;
   border-radius: 8px;
 }
 
-/* Button */
-.ant-btn-primary {
+/* Submit Button */
+.contact-form .ant-btn-primary {
   background-color: #F04B24;
   border-color: #F04B24;
   font-family: 'Lexend', sans-serif;
@@ -46,23 +51,19 @@
   font-weight: 600;
 }
 
-.ant-btn-primary:hover,
-.ant-btn-primary:focus {
+.contact-form .ant-btn-primary:hover,
+.contact-form .ant-btn-primary:focus {
   background-color: #d73e1f;
   border-color: #d73e1f;
 }
 
 /* --- Mobile Styles --- */
 @media (max-width: 768px) {
-  .card-section-container {
-    padding: 0; /* Remove padding to allow card to be full-width */
-  }
-
-  .ant-card {
+  .contact-card {
     max-width: 100% !important;
     width: 100% !important;
-    border-radius: 0 !important; /* Remove rounded corners for a flush look */
-    box-shadow: none; /* Optional: remove shadow for a flatter mobile look */
-    padding: 24px 20px; /* Adjust padding to keep content off the edges */
+    border-radius: 0 !important;
+    box-shadow: none;
+    padding: 24px 20px;
   }
 }
