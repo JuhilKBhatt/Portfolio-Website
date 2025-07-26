@@ -52,12 +52,11 @@ export default function Home() {
       </section>
 
       {/* Featured Projects */}
-      {groupedProjects.length > 0 && (
-        <section className="featured-projects">
-          <div className="featured-header">
-            <h2>Featured Projects</h2>
-            <p>Some highlights from my portfolio</p>
-          </div>
+      <section className="featured-projects">
+        <div className="featured-header">
+          <h2>Featured Projects</h2>
+          <p>Some highlights from my portfolio</p>
+        </div>
 
         {projects.length === 0 ? (
           <LoadingScreen />
