@@ -10,7 +10,20 @@ import { ConfigProvider } from 'antd';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ConfigProvider>
+    <ConfigProvider
+      theme={{
+        components: {
+          Carousel: {
+            dotHeight: 24,
+            dotWidth: 24,
+            dotActiveWidth: 42,
+            dotGap: 12,
+            dotOffset: 24,
+            colorBgContainer: '#F04B24',
+          },
+        },
+      }}
+    >
       <App />
     </ConfigProvider>
   </StrictMode>,
