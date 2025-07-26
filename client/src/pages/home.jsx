@@ -61,7 +61,7 @@ export default function Home() {
         {projects.length === 0 ? (
           <LoadingScreen />
         ) : (
-          <Carousel arrows dots={false} autoplay={false}>
+          <Carousel dots autoplay={false}>
             {groupedProjects.map((group) => {
               const groupKey = group.map((project) => project.id || project.name).join("-");
               return (
