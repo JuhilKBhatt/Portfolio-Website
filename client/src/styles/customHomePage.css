@@ -1,5 +1,13 @@
 /* ./client/src/styles/customHomePage.css */
 
+.divider {
+  width: 60px;
+  height: 4px;
+  background-color: #F04B24;
+  margin: 16px auto;
+  border-radius: 4px;
+}
+
 .hero {
   display: flex;
   align-items: center;

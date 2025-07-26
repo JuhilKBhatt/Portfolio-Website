@@ -48,6 +48,11 @@
   animation: fadeSlideIn 0.6s ease forwards;
 }
 
+.header-link:hover {
+  color: #F04B24 !important;
+  transition: color 0.3s ease;
+}
+
 /* "K." styling */
 .k-letter {
   position: absolute;
@@ -58,6 +63,11 @@
   font-size: clamp(20px, 2.5vw, 32px);
   line-height: 1;
   color: #737373;
+}
+
+.header-link:hover .k-letter {
+  color: #F04B24;
+  transition: color 0.3s ease;
 }
 
 /* Invisible spacer to align caret */
@@ -78,6 +88,11 @@
   font-size: clamp(20px, 2.5vw, 32px);
   line-height: 1;
   color: #6a6767;
+}
+
+.header-link:hover .k-caret {
+  color: #F04B24;
+  transition: color 0.3s ease;
 }
 
 /* AntD menu items */

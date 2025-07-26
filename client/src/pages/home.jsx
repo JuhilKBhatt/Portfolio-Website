@@ -56,6 +56,7 @@ export default function Home() {
         <div className="featured-header">
           <h2>Featured Projects</h2>
           <p>Some highlights from my portfolio</p>
+          <div className="divider"></div>
         </div>
 
         {projects.length === 0 ? (
