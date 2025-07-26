@@ -58,7 +58,7 @@ export default function Home() {
             <p>Some highlights from my portfolio</p>
           </div>
 
-          <Carousel autoplay dots>
+          <Carousel dots autoplay={false}>
             {groupedProjects.map((group) => {
               const groupKey = group.map((project) => project.id || project.name).join("-");
               return (

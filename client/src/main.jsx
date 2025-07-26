@@ -1,7 +1,5 @@
 /// ./client/src/main.jsx
 
-// ./client/src/main.jsx
-
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
@@ -20,6 +18,7 @@ createRoot(document.getElementById('root')).render(
             dotGap: 12,
             dotOffset: 24,
             colorBgContainer: '#F04B24',
+            arrowSize: 32,
           },
         },
       }}
