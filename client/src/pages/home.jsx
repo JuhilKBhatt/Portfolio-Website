@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useProjects } from "../hooks/useProjects";
 import ProjectCard from "../components/ProjectCard";
 import "../styles/customHomePage.css";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function Home() {
   const { projects } = useProjects("juhilkbhatt");
@@ -58,7 +59,10 @@ export default function Home() {
             <p>Some highlights from my portfolio</p>
           </div>
 
-          <Carousel dots autoplay={false}>
+        {projects.length === 0 ? (
+          <LoadingScreen />
+        ) : (
+          <Carousel arrows dots={false} autoplay={false}>
             {groupedProjects.map((group) => {
               const groupKey = group.map((project) => project.id || project.name).join("-");
               return (
@@ -79,8 +83,8 @@ export default function Home() {
               );
             })}
           </Carousel>
-        </section>
-      )}
+        )}
+      </section>
     </>
   );
 }
