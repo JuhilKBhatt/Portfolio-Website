@@ -42,6 +42,55 @@
   border-top-right-radius: 12px;
 }
 
+/* Placeholder styling when no image is provided or image fails to load */
+.project-placeholder {
+  height: 200px;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  background: linear-gradient(135deg, #1e2024 0%, #2b2e36 100%);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-placeholder-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image: radial-gradient(#F04B24 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+}
+
+.project-placeholder-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.project-placeholder-icon {
+  font-size: 38px;
+  color: #F04B24;
+}
+
+.project-placeholder-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e5e7eb;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Description Styling */
 .project-description {
   margin-bottom: 8px;

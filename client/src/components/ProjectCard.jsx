@@ -5,9 +5,10 @@ import {
   GlobalOutlined,
   GithubOutlined,
   VideoCameraOutlined,
+  CodeOutlined,
 } from "@ant-design/icons";
 import "../styles/projectCard.css";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 const { Meta } = Card;
 
@@ -21,18 +22,35 @@ function optimizeImageUrl(url, width = 800) {
   return url;
 }
 
+function ProjectPlaceholder({ title }) {
+  return (
+    <div className="project-placeholder">
+      <div className="project-placeholder-pattern" />
+      <div className="project-placeholder-content">
+        <CodeOutlined className="project-placeholder-icon" />
+        <span className="project-placeholder-title">{title || "Project Preview"}</span>
+      </div>
+    </div>
+  );
+}
+
 export default function ProjectCard({ project }) {
   const info = project?.portfolio_info;
   const isVisible = Boolean(info && info.Visibilty === true);
+  const [imageFailed, setImageFailed] = useState(false);
 
   const filteredImages = useMemo(() => {
     return isVisible ? (info?.images || []).filter(Boolean) : [];
   }, [isVisible, info?.images]);
 
-  const mainImage = filteredImages[0] || "https://via.placeholder.com/400x200?text=No+Preview";
-
   const imageContent = useMemo(() => {
     if (!isVisible) return null;
+
+    // Fallback to elegant native placeholder if no images exist or image fails to load
+    if (imageFailed || filteredImages.length === 0) {
+      return <ProjectPlaceholder title={info?.title || project.name} />;
+    }
+
     if (filteredImages.length > 1) {
       return (
         <Carousel autoplay className="project-carousel">
@@ -40,32 +58,34 @@ export default function ProjectCard({ project }) {
             <img
               key={url || i}
               src={optimizeImageUrl(url, 800)}
-              alt={`Screenshot ${i}`}
+              alt={`${info?.title || project.name} Screenshot ${i + 1}`}
               className="project-image"
               width={400}
               height={200}
               loading="lazy"
               decoding="async"
+              onError={() => setImageFailed(true)}
               style={{ objectFit: 'cover', width: '100%', height: 'auto', aspectRatio: '2/1' }}
             />
           ))}
         </Carousel>
       );
-    } else {
-      return (
-        <img
-          alt="Project Cover"
-          src={optimizeImageUrl(mainImage, 800)}
-          className="project-image"
-          width={400}
-          height={200}
-          loading="lazy"
-          decoding="async"
-          style={{ objectFit: 'cover', width: '100%', height: 'auto', aspectRatio: '2/1' }}
-        />
-      );
     }
-  }, [isVisible, filteredImages, mainImage]);
+
+    return (
+      <img
+        alt={`${info?.title || project.name} Cover`}
+        src={optimizeImageUrl(filteredImages[0], 800)}
+        className="project-image"
+        width={400}
+        height={200}
+        loading="lazy"
+        decoding="async"
+        onError={() => setImageFailed(true)}
+        style={{ objectFit: 'cover', width: '100%', height: 'auto', aspectRatio: '2/1' }}
+      />
+    );
+  }, [isVisible, imageFailed, filteredImages, info?.title, project.name]);
 
   if (!isVisible) return null;
 
