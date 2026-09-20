@@ -5,8 +5,9 @@ A full-stack portfolio website built with a React + Vite frontend and a Python F
 ## Tech Stack
 
 - **Frontend:** React, Vite, React Router, Ant Design
-- **Backend:** Python, Flask, Flask-Mail (for contact forms), Flask-Caching
+- **Backend:** Python, Flask, Flask-Mail (for contact forms), Flask-Caching, Flask-Limiter
 - **Deployment:** Docker, Docker Compose, Nginx, Gunicorn
+- **Security:** In-memory rate limiting (Flask-Limiter), authenticated cache invalidation, input sanitization, HTTP security headers (CSP, HSTS, X-Content-Type-Options, X-Frame-Options), URL scheme validation against stored XSS, and unprivileged non-root containers.
 - **Performance:** Optimized WebP hero assets (>99% compression), Cloudinary dynamic resizing (`f_auto,q_auto`), lazy loading, Google Fonts non-blocking swap, Gzip compression, and HTTP caching headers.
 
 ---

@@ -34,6 +34,16 @@ function ProjectPlaceholder({ title }) {
   );
 }
 
+function isSafeUrl(url) {
+  if (!url || typeof url !== "string") return false;
+  try {
+    const parsed = new URL(url.trim());
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 export default function ProjectCard({ project }) {
   const info = project?.portfolio_info;
   const isVisible = Boolean(info && info.Visibilty === true);
@@ -94,9 +104,9 @@ export default function ProjectCard({ project }) {
       className="project-card"
       cover={imageContent}
       actions={[
-        info.liveDemo ? (
+        isSafeUrl(info.liveDemo) ? (
           <Tooltip title="Live Demo">
-            <a href={info.liveDemo} target="_blank" rel="noreferrer">
+            <a href={info.liveDemo} target="_blank" rel="noopener noreferrer">
               <GlobalOutlined />
             </a>
           </Tooltip>
@@ -107,9 +117,9 @@ export default function ProjectCard({ project }) {
             </span>
           </Tooltip>
         ),
-        project.html_url ? (
+        isSafeUrl(project.html_url) ? (
           <Tooltip title="GitHub Repo">
-            <a href={project.html_url} target="_blank" rel="noreferrer">
+            <a href={project.html_url} target="_blank" rel="noopener noreferrer">
               <GithubOutlined />
             </a>
           </Tooltip>
@@ -120,9 +130,9 @@ export default function ProjectCard({ project }) {
             </span>
           </Tooltip>
         ),
-        info.videoDemo ? (
+        isSafeUrl(info.videoDemo) ? (
           <Tooltip title="Video Demo">
-            <a href={info.videoDemo} target="_blank" rel="noreferrer">
+            <a href={info.videoDemo} target="_blank" rel="noopener noreferrer">
               <VideoCameraOutlined />
             </a>
           </Tooltip>

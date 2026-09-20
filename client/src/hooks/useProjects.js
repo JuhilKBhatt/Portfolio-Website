@@ -29,8 +29,9 @@ export function useProjects(username) {
 
     const fetchProjects = async () => {
       try {
+        const apiUrl = import.meta.env.VITE_FLASK_API_URL || "";
         const res = await axios.get(
-          `${import.meta.env.VITE_FLASK_API_URL}/api/github/${username}/repos`
+          `${apiUrl}/api/github/${username}/repos`
         );
 
         const sorted = (res.data || []).sort((a, b) => {

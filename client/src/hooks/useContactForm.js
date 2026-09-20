@@ -6,10 +6,8 @@ import axios from "axios";
 export function useContactForm(form) {
   const onFinish = async (values) => {
     try {
-      await axios.post(
-        import.meta.env.VITE_FLASK_API_URL + "/api/contact",
-        values
-      );
+      const apiUrl = import.meta.env.VITE_FLASK_API_URL || "";
+      await axios.post(`${apiUrl}/api/contact`, values);
       message.success("Message sent successfully!");
       form.resetFields();
     } catch (error) {

@@ -1,2 +1,25 @@
+# Environments & Secrets
+.env
+*.env
+secrets/
+
+# Dependencies & Build
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Custom IDE / Agent
 /.agent
 AGENTS.md
+
