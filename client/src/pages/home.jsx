@@ -35,7 +35,10 @@ export default function Home() {
       <section className="hero">
         <div className="hero-img-wrapper">
           <div className="hero-img-lines">
-            <picture>
+            <div className="vertical-line left-line" />
+            <div className="vertical-line right-line" />
+            <div className="horizontal-line" />
+            <picture className="hero-img-picture">
               <source srcSet="img/AvatarImg.webp" type="image/webp" />
               <img
                 className="AvatarImg"
@@ -47,9 +50,6 @@ export default function Home() {
                 decoding="async"
               />
             </picture>
-            <div className="vertical-line left-line" />
-            <div className="vertical-line right-line" />
-            <div className="horizontal-line" />
           </div>
         </div>
         <div className="hero-text">

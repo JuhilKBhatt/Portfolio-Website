@@ -31,10 +31,19 @@
   align-items: center;
 }
 
+.hero-img-picture {
+  position: relative;
+  z-index: 10;
+  display: block;
+  width: 100%;
+}
+
 .AvatarImg {
   width: 100%;
   height: auto;
-  z-index: 1;
+  display: block;
+  position: relative;
+  z-index: 10;
 }
 
 /* Vertical Lines */
