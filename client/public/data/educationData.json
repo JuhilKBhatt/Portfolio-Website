@@ -37,7 +37,9 @@
     "dateTo": "",
     "degree": "Bachelor of Science in Information Technology + International Studies (Japan)",
     "description": ["Not Finished"],
-    "certificate": ""
+    "certificate": [
+      "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1789909270/LDT_certificate_2022_SPRING_31265_24577013_pdrsx1.jpg"
+    ]
   },{
     "id": "3",
     "name": "Yokohama National University",
