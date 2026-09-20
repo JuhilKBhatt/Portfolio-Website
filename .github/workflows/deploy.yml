@@ -1,0 +1,16 @@
+name: Auto Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Pull and Restart Docker
+        run: |
+          cd /var/www/portfolio/Portfolio-Website/
+          git pull origin main
+          sudo docker compose down
+          sudo docker compose up -d --build
