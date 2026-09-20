@@ -35,7 +35,18 @@ export default function Home() {
       <section className="hero">
         <div className="hero-img-wrapper">
           <div className="hero-img-lines">
-            <img className="AvatarImg" src="img/AvatarImg.png" alt="img" />
+            <picture>
+              <source srcSet="img/AvatarImg.webp" type="image/webp" />
+              <img
+                className="AvatarImg"
+                src="img/AvatarImg.png"
+                alt="Juhil Bhatt Avatar"
+                width="300"
+                height="306"
+                fetchPriority="high"
+                decoding="async"
+              />
+            </picture>
             <div className="vertical-line left-line" />
             <div className="vertical-line right-line" />
             <div className="horizontal-line" />
@@ -60,7 +71,7 @@ export default function Home() {
         </div>
 
         {projects.length === 0 ? (
-          <LoadingScreen />
+          <LoadingScreen inline />
         ) : (
           <Carousel dots autoplay={false}>
             {groupedProjects.map((group) => {

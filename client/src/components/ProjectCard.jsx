@@ -11,26 +11,41 @@ import { useMemo } from "react";
 
 const { Meta } = Card;
 
+function optimizeImageUrl(url, width = 800) {
+  if (!url || typeof url !== "string") return url;
+  if (url.includes("res.cloudinary.com") && url.includes("/upload/")) {
+    if (!url.includes("/upload/f_auto") && !url.includes("/upload/q_auto")) {
+      return url.replace("/upload/", `/upload/f_auto,q_auto,w_${width},c_limit/`);
+    }
+  }
+  return url;
+}
+
 export default function ProjectCard({ project }) {
-  const info = project.portfolio_info;
+  const info = project?.portfolio_info;
+  const isVisible = Boolean(info && info.Visibilty === true);
 
-  if (!info || info.Visibilty !== true) return null;
+  const filteredImages = useMemo(() => {
+    return isVisible ? (info?.images || []).filter(Boolean) : [];
+  }, [isVisible, info?.images]);
 
-  const filteredImages = (info.images || []).filter(Boolean);
   const mainImage = filteredImages[0] || "https://via.placeholder.com/400x200?text=No+Preview";
 
   const imageContent = useMemo(() => {
+    if (!isVisible) return null;
     if (filteredImages.length > 1) {
       return (
         <Carousel autoplay className="project-carousel">
           {filteredImages.map((url, i) => (
             <img
               key={url || i}
-              src={url}
+              src={optimizeImageUrl(url, 800)}
               alt={`Screenshot ${i}`}
               className="project-image"
               width={400}
               height={200}
+              loading="lazy"
+              decoding="async"
               style={{ objectFit: 'cover', width: '100%', height: 'auto', aspectRatio: '2/1' }}
             />
           ))}
@@ -40,15 +55,19 @@ export default function ProjectCard({ project }) {
       return (
         <img
           alt="Project Cover"
-          src={mainImage}
+          src={optimizeImageUrl(mainImage, 800)}
           className="project-image"
           width={400}
           height={200}
+          loading="lazy"
+          decoding="async"
           style={{ objectFit: 'cover', width: '100%', height: 'auto', aspectRatio: '2/1' }}
         />
       );
     }
-  }, [filteredImages]);
+  }, [isVisible, filteredImages, mainImage]);
+
+  if (!isVisible) return null;
 
   return (
     <Card

@@ -1,6 +1,6 @@
 // ./client/App.jsx
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Layout, Flex } from "antd";
 import {
   HashRouter as Router,

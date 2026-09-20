@@ -15,7 +15,7 @@ export default function Projects() {
 
   let content;
   if (loading) {
-    content = <LoadingScreen />;
+    content = <LoadingScreen inline />;
   } else if (visibleProjects.length === 0) {
     content = <p style={{ textAlign: "center" }}>No visible projects to show.</p>;
   } else {

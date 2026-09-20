@@ -2,25 +2,40 @@
 // This uses Vite's glob import to get all files in pages
 
 import { lazy } from "react";
+import Home from "../pages/home.jsx";
 import { setNavIcon } from "./setNavIcon.js";
 
 export const getNavList = () => {
-  const pages = import.meta.glob("../pages/*.jsx");
+  const pages = import.meta.glob([
+    "../pages/*.jsx",
+    "!../pages/home.jsx"
+  ]);
 
-  // Convert the pages object into an array of objects with label, key, element, and icon
-  const pageList = Object.keys(pages).map((path) => {
+  // Convert the lazy pages object into an array
+  const lazyPages = Object.keys(pages).map((path) => {
     const fileName = path.split("/").pop().replace(".jsx", "");
     const label = fileName.charAt(0).toUpperCase() + fileName.slice(1);
     const fileKey = fileName.toLowerCase();
 
     return {
       label,
-      key: fileKey === "home" ? "/" : `/${fileKey}`,
+      key: `/${fileKey}`,
       element: lazy(pages[path]),
       icon: setNavIcon[fileKey],
       fileKey,
     };
   });
+
+  // Eagerly load Home for instant first paint
+  const homePage = {
+    label: "Home",
+    key: "/",
+    element: Home,
+    icon: setNavIcon["home"],
+    fileKey: "home",
+  };
+
+  const pageList = [homePage, ...lazyPages];
 
     // Sort with Home first, then Projects, then rest alphabetically
     const priority = { home: 0, projects: 1 };

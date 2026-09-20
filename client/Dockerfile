@@ -20,17 +20,8 @@ RUN npm run build
 FROM nginxinc/nginx-unprivileged:alpine
 COPY --from=builder --chown=nginx:nginx /app/dist /usr/share/nginx/html
 
-# Add nginx config for React Router fallback
-USER root
-RUN echo 'server { \
-    listen 8080; \
-    location / { \
-        root   /usr/share/nginx/html; \
-        index  index.html index.htm; \
-        try_files $uri $uri/ /index.html; \
-    } \
-}' > /etc/nginx/conf.d/default.conf
-USER nginx
+# Copy custom nginx configuration with gzip compression and caching
+COPY --chown=nginx:nginx nginx.conf /etc/nginx/conf.d/default.conf
 
 # Unprivileged nginx listens on 8080
 EXPOSE 8080

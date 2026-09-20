@@ -11,6 +11,15 @@
   gap: 20px;
 }
 
+.loading-screen-wrapper.loading-screen-inline {
+  position: relative;
+  inset: auto;
+  min-height: 240px;
+  z-index: 1;
+  padding: 48px 16px;
+  width: 100%;
+}
+
 /* Spinner animation */
 .loader-spinner {
   width: 65px;

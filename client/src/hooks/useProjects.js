@@ -4,10 +4,29 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export function useProjects(username) {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const cacheKey = `portfolio_projects_${username}`;
+
+  // Initialize from sessionStorage if available for instant 0ms rendering
+  const [projects, setProjects] = useState(() => {
+    try {
+      const cached = sessionStorage.getItem(cacheKey);
+      return cached ? JSON.parse(cached) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [loading, setLoading] = useState(() => {
+    try {
+      return !sessionStorage.getItem(cacheKey);
+    } catch {
+      return true;
+    }
+  });
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchProjects = async () => {
       try {
         const res = await axios.get(
@@ -20,16 +39,29 @@ export function useProjects(username) {
           return pA - pB;
         });
 
-        setProjects(sorted);
+        if (isMounted) {
+          setProjects(sorted);
+          try {
+            sessionStorage.setItem(cacheKey, JSON.stringify(sorted));
+          } catch {
+            // ignore storage quota errors
+          }
+        }
       } catch (err) {
         console.error("Error fetching projects", err);
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchProjects();
-  }, [username]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [username, cacheKey]);
 
   return { projects, loading };
 }

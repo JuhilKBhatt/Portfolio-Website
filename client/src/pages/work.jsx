@@ -74,7 +74,7 @@ export default function Work() {
             />
           </>
         ) : (
-          <LoadingScreen />
+          <LoadingScreen inline />
         )}
       </Card>
     </div>

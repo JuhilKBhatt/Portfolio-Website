@@ -31,8 +31,8 @@ app.config["MAIL_DEFAULT_SENDER"] = environ.get("MAIL_DEFAULT_SENDER")
 
 mail = Mail(app)
 
-# ---------- Simple in‑memory cache (5 min) ----------
-cache = Cache(app, config={"CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT": 300})
+# ---------- Cache (2 hours to balance freshness with low bandwidth usage) ----------
+cache = Cache(app, config={"CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT": 7200})
 
 # ---------- GitHub helper ----------
 GITHUB_TOKEN = environ.get("GITHUB_TOKEN")
@@ -72,7 +72,7 @@ def contact():
 
 # ────────────────────────────────────────────────────────────────────────────────
 @app.route("/api/github/<username>/repos")
-@cache.cached(timeout=300)  # 5‑minute cache
+@cache.cached(timeout=7200, query_string=True)  # 2‑hour cache (7200 seconds)
 def get_repos_with_portfolio_info(username):
     try:
         repos = github_request(
@@ -118,7 +118,10 @@ def get_repos_with_portfolio_info(username):
                 except Exception:
                     pass
 
-        return jsonify(enriched)
+        resp = jsonify(enriched)
+        # Cloudflare edge caches for 2 hours (7200s), browser revalidates after 30 min
+        resp.headers["Cache-Control"] = "public, max-age=1800, s-maxage=7200, stale-while-revalidate=1800"
+        return resp
 
     except requests.HTTPError as err:
         return (
@@ -129,6 +132,15 @@ def get_repos_with_portfolio_info(username):
         )
     except Exception as err:
         return jsonify({"error": str(err)}), 500
+
+@app.route("/api/github/<username>/refresh", methods=["GET", "POST"])
+def refresh_github_cache(username):
+    """Manually invalidate cache on-demand so new repos appear immediately."""
+    cache.clear()
+    return jsonify({
+        "status": "success",
+        "message": f"Cache cleared for {username}. Fresh data will be fetched from GitHub on next request."
+    })
 
 # ────────────────────────────────────────────────────────────────────────────────
 # If you deploy with gunicorn:   gunicorn app:app --bind 0.0.0.0:$PORT

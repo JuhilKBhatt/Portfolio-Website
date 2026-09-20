@@ -20,6 +20,16 @@ import "../styles/cardSection.css";
 
 const { Title, Paragraph, Text } = Typography;
 
+function optimizeImageUrl(url, width = 800) {
+  if (!url || typeof url !== "string") return url;
+  if (url.includes("res.cloudinary.com") && url.includes("/upload/")) {
+    if (!url.includes("/upload/f_auto") && !url.includes("/upload/q_auto")) {
+      return url.replace("/upload/", `/upload/f_auto,q_auto,w_${width},c_limit/`);
+    }
+  }
+  return url;
+}
+
 export default function Education() {
   const [educationData, setEducationData] = useState(null);
   const [previewImages, setPreviewImages] = useState([]);
@@ -112,7 +122,7 @@ export default function Education() {
                 {previewImages.map((img, index) => (
                   <Col span={12} key={typeof img === "string" ? img : `${img}-${index}`}>
                     <Image
-                      src={img}
+                      src={optimizeImageUrl(img, 800)}
                       alt={`Certificate ${index + 1}`}
                       width="100%"
                       style={{ borderRadius: 8 }}
@@ -123,7 +133,7 @@ export default function Education() {
             </Modal>
           </>
         ) : (
-          <LoadingScreen />
+          <LoadingScreen inline />
         )}
       </Card>
     </div>
