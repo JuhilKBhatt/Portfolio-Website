@@ -4,47 +4,72 @@
     "dateFrom": "10/2019",
     "dateTo": "10/2019",
     "position": "Causal IT Assistant",
-    "description": ["Assisting the IT Department"]
+    "description": [
+      "Assisting the IT Department"
+    ]
   },
   {
     "name": "Strandbags",
     "dateFrom": "01/2020",
     "dateTo": "01/2020",
     "position": "Causal IT Assistant",
-    "description": ["Assisting the IT Department in Label Printers"]
+    "description": [
+      "Assisting the IT Department in Label Printers"
+    ]
   },
   {
     "name": "Newtown Fast-Mart",
     "dateFrom": "03/2022",
     "dateTo": "05/2023",
     "position": "Store Clerk",
-    "description": ["Handled Customers", "Managed Inventory", "Handled Transactions"]
+    "description": [
+      "Handled Customers",
+      "Managed Inventory",
+      "Handled Transactions"
+    ]
   },
   {
     "name": "Yennora Copper Recycling",
     "dateFrom": "06/2023",
     "dateTo": "05/2024",
     "position": "Front Desk + IT Support",
-    "description": ["Handled Customers", "External Communication", "IT Support"]
+    "description": [
+      "Handled Customers",
+      "External Communication",
+      "IT Support"
+    ]
   },
   {
     "name": "Safari Copper Recycling",
     "dateFrom": "05/2024",
     "dateTo": "03/2026",
     "position": "Manager + IT Support",
-    "description": ["Handled Customers", "External Communication", "IT Support"]
+    "description": [
+      "Handled Customers",
+      "External Communication",
+      "IT Support"
+    ]
   },
   {
     "name": "Yokohama Suiran High School",
     "dateFrom": "04/2026",
     "dateTo": "07/2026",
     "position": "Intern English ALT",
-    "description": ["~9 classes/week", "Assisting Teachers Run the Class", "Student English Speaking Practice"]
-  },{
+    "description": [
+      "~9 classes/week",
+      "Assisting Teachers Run the Class",
+      "Student English Speaking Practice"
+    ]
+  },
+  {
     "name": "AJBCC",
     "dateFrom": "08/2026",
-    "dateTo": "",
-    "position": "Internship",
-    "description": ["Assisting With Events", "Assisting With IT Support", "Assisting With External Communication"]
+    "dateTo": "09/2026",
+    "position": "IT Support & Events Management Internship",
+    "description": [
+      "Assisting With Events",
+      "Assisting With IT Support",
+      "Assisting With CRM Optimisation"
+    ]
   }
 ]
