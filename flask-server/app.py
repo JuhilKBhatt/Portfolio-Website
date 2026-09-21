@@ -52,7 +52,7 @@ cache = Cache(app, config={"CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT":
 # ---------- GitHub configuration & helpers ----------
 GITHUB_TOKEN = environ.get("GITHUB_TOKEN")
 ALLOWED_GITHUB_USERS = set(
-    user.strip() for user in environ.get("ALLOWED_GITHUB_USERS", "JuhilKBhatt").split(",") if user.strip()
+    user.strip().lower() for user in environ.get("ALLOWED_GITHUB_USERS", "JuhilKBhatt").split(",") if user.strip()
 )
 ADMIN_TOKEN = environ.get("ADMIN_TOKEN")
 
@@ -115,7 +115,7 @@ def get_repos_with_portfolio_info(username):
         return jsonify({"error": "Invalid username format"}), 400
 
     # Prevent using server as arbitrary proxy for third-party profiles
-    if username not in ALLOWED_GITHUB_USERS:
+    if username.lower() not in ALLOWED_GITHUB_USERS:
         logger.warning("Unauthorized GitHub user queried: %s", username)
         return jsonify({"error": "Profile query not permitted"}), 403
 
