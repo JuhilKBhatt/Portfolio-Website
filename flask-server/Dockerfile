@@ -16,5 +16,5 @@ COPY --chown=appuser:appuser . .
 USER appuser
 
 # Expose port and run gunicorn
-EXPOSE 5000
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000"]
+EXPOSE 5001
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5001"]

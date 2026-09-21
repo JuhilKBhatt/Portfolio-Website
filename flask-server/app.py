@@ -195,4 +195,4 @@ def refresh_github_cache(username):
 # ────────────────────────────────────────────────────────────────────────────────
 # If you deploy with gunicorn:   gunicorn app:app --bind 0.0.0.0:$PORT
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(environ.get("PORT", 5000)))
+    app.run(host="0.0.0.0", port=int(environ.get("PORT", 5001)))

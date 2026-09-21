@@ -25,7 +25,7 @@ The easiest way to run the entire application (frontend and backend) is using Do
    ```
 3. Access the application:
    - **Frontend:** [http://localhost:3000](http://localhost:3000)
-   - **Backend API:** [http://localhost:5000](http://localhost:5000)
+   - **Backend API:** [http://localhost:5001](http://localhost:5001)
 
 To stop the containers, use `Ctrl+C` or run:
 ```bash
@@ -77,7 +77,7 @@ GITHUB_TOKEN=your_github_personal_access_token
 
 Run the development server:
 ```bash
-flask run --port=5000
+flask run --port=5001
 ```
 
 ### 2. Frontend (React + Vite)
@@ -97,7 +97,7 @@ npm install
 Configure Environment Variables:
 The client uses `.env.local` for development. Ensure it has the correct API URL:
 ```env
-VITE_FLASK_API_URL=http://127.0.0.1:5000
+VITE_FLASK_API_URL=http://127.0.0.1:5001
 ```
 
 Start the Vite development server:

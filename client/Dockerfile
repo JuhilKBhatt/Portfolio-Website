@@ -10,7 +10,7 @@ RUN npm install
 COPY . .
 
 # Pass API URL as a build argument so Vite builds with the correct API endpoint
-ARG VITE_FLASK_API_URL=http://localhost:5000
+ARG VITE_FLASK_API_URL=http://localhost:5001
 ENV VITE_FLASK_API_URL=$VITE_FLASK_API_URL
 
 # Build the Vite application
