@@ -5,8 +5,8 @@ A full-stack portfolio website built with a React + Vite frontend and a Python F
 ## Tech Stack
 
 - **Frontend:** React, Vite, React Router, Ant Design
-- **Backend:** Python, Flask, Flask-Mail (for contact forms), Flask-Caching, Flask-Limiter
-- **Deployment:** Docker, Docker Compose, Nginx, Gunicorn
+- **Backend:** Python, Flask, Flask-Caching, Flask-Limiter
+- **Cloud & Serverless:** AWS (API Gateway & Lambda for contact form), Docker, Nginx, Gunicorn
 - **Security:** In-memory rate limiting (Flask-Limiter), authenticated cache invalidation, input sanitization, HTTP security headers (CSP, HSTS, X-Content-Type-Options, X-Frame-Options), URL scheme validation against stored XSS, and unprivileged non-root containers.
 - **Performance:** Optimized WebP hero assets (>99% compression), Cloudinary dynamic resizing (`f_auto,q_auto`), lazy loading, Google Fonts non-blocking swap, Gzip compression, and HTTP caching headers.
 
@@ -66,12 +66,6 @@ pip install -r requirements.txt
 Set up Environment Variables (create a `.env` file in the `flask-server` directory):
 ```env
 FLASK_DEBUG=1
-MAIL_SERVER=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USE_TLS=true
-MAIL_USERNAME=your_email@gmail.com
-MAIL_PASSWORD=your_app_password
-MAIL_DEFAULT_SENDER=your_email@gmail.com
 GITHUB_TOKEN=your_github_personal_access_token
 ```
 
@@ -95,9 +89,10 @@ npm install
 ```
 
 Configure Environment Variables:
-The client uses `.env.local` for development. Ensure it has the correct API URL:
+The client uses `.env.local` for development. Ensure it has the correct API URLs:
 ```env
 VITE_FLASK_API_URL=http://127.0.0.1:5001
+VITE_CONTACT_API_URL=https://your-api-id.execute-api.your-region.amazonaws.com/default/PortfolioWebsiteContactForm
 ```
 
 Start the Vite development server:

@@ -1,20 +1,54 @@
 // ./client/src/hooks/useContactForm.js
 
+import { useState } from "react";
 import { message } from "antd";
-import axios from "axios";
 
 export function useContactForm(form) {
-  const onFinish = async (values) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState(null);
+
+  const onFinish = async (formData) => {
+    setIsLoading(true);
+    setIsSuccess(false);
+    setError(null);
+
     try {
-      const apiUrl = import.meta.env.VITE_FLASK_API_URL || "";
-      await axios.post(`${apiUrl}/api/contact`, values);
+      const contactApiUrl = import.meta.env.VITE_CONTACT_API_URL;
+      if (!contactApiUrl) {
+        throw new Error("Contact API URL is not configured in environment variables.");
+      }
+
+      const response = await fetch(contactApiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          ...(formData.turnstileToken && { "cf-turnstile-response": formData.turnstileToken }),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      setIsSuccess(true);
       message.success("Message sent successfully!");
-      form.resetFields();
-    } catch (error) {
-      console.error("Error sending message:", error);
+      if (form && typeof form.resetFields === "function") {
+        form.resetFields();
+      }
+    } catch (err) {
+      console.error("Error sending message:", err);
+      setError(err.message || "Failed to send message");
       message.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return { onFinish };
+  return { onFinish, isLoading, isSuccess, error };
 }

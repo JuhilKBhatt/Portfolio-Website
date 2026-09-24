@@ -8,7 +8,7 @@ import { useContactForm } from "../hooks/useContactForm";
 
 export default function Contact() {
   const [form] = Form.useForm();
-  const { onFinish } = useContactForm(form);
+  const { onFinish, isLoading } = useContactForm(form);
 
   const onFinishFailed = () => {
     message.error("Please check your input and try again.");
@@ -58,7 +58,7 @@ export default function Contact() {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block>
+            <Button type="primary" htmlType="submit" loading={isLoading} block>
               Send Message <SendOutlined />
             </Button>
           </Form.Item>

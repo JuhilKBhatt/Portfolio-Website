@@ -8,7 +8,6 @@ import concurrent.futures
 from os import environ
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from flask_mail import Mail, Message
 from flask_caching import Cache
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -36,15 +35,6 @@ CORS(app, resources={r"/api/*": {"origins": cors_origins}})
 
 app.config["DEBUG"] = environ.get("FLASK_DEBUG", "0") == "1"
 
-# ---------- Flask‑Mail ----------
-app.config["MAIL_SERVER"] = environ.get("MAIL_SERVER", "smtp.gmail.com")
-app.config["MAIL_PORT"] = int(environ.get("MAIL_PORT", 587))
-app.config["MAIL_USE_TLS"] = environ.get("MAIL_USE_TLS", "true") == "true"
-app.config["MAIL_USERNAME"] = environ.get("MAIL_USERNAME")
-app.config["MAIL_PASSWORD"] = environ.get("MAIL_PASSWORD")
-app.config["MAIL_DEFAULT_SENDER"] = environ.get("MAIL_DEFAULT_SENDER")
-
-mail = Mail(app)
 
 # ---------- Cache (2 hours to balance freshness with low bandwidth usage) ----------
 cache = Cache(app, config={"CACHE_TYPE": "SimpleCache", "CACHE_DEFAULT_TIMEOUT": 7200})
@@ -73,37 +63,6 @@ def ratelimit_handler(e):
 def ping():
     return jsonify({"message": "pong"})
 
-@app.route("/api/contact", methods=["POST"])
-@limiter.limit("5 per hour")
-def contact():
-    data = request.get_json(silent=True) or {}
-    raw_name = data.get("name")
-    raw_email = data.get("email")
-    raw_message = data.get("message")
-
-    if not (raw_name and raw_email and raw_message):
-        return jsonify({"error": "Missing required fields"}), 400
-
-    # Sanitize and cap length to prevent SMTP header injection and memory exhaustion
-    name = re.sub(r"[\r\n]+", " ", str(raw_name)).strip()[:100]
-    email = re.sub(r"[\r\n]+", "", str(raw_email)).strip()[:120]
-    message = str(raw_message).strip()[:5000]
-
-    if not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email):
-        return jsonify({"error": "Invalid email address format"}), 400
-
-    try:
-        msg = Message(
-            subject=f"Portfolio Contact from {name}",
-            sender=app.config["MAIL_DEFAULT_SENDER"],
-            recipients=[app.config["MAIL_USERNAME"]],
-            body=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
-        )
-        mail.send(msg)
-        return jsonify({"message": "Email sent successfully!"})
-    except Exception as e:
-        logger.error("Failed to send contact email: %s", e, exc_info=True)
-        return jsonify({"error": "Unable to send email at this time. Please try again later."}), 500
 
 # ────────────────────────────────────────────────────────────────────────────────
 @app.route("/api/github/<username>/repos")
