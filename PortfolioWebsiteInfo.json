@@ -1,7 +1,7 @@
 {
-  "title": "Portofolio Website",
-  "description": "A personal portfolio website showcasing my projects, skills, and experiences.",
-  "language": ["Python", "JavaScript", "Cloudinary", "React+Vite", "Flask", "Render", "Github Actions"],
+  "title": "Portfolio Website",
+  "description": "A full-stack personal portfolio website showcasing my projects, skills, and experience, built with dynamic GitHub repo ingestion, AWS serverless contact pipeline, and Docker containerisation.",
+  "language": ["React", "Vite", "Python", "Flask", "Docker", "Nginx", "Cloudflare", "AWS", "Cloudinary", "GitHub Actions"],
   "liveDemo": "https://juhilkbhatt.github.io/Portfolio-Website/",
   "images": [
     "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752666027/Portfolio-Website-1_s2nwym.png",
