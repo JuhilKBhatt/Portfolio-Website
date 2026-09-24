@@ -12,7 +12,7 @@ import {
 } from "antd";
 import { extractWorkData } from "../scripts/extractWorkData";
 import { formatWorkData } from "../scripts/formatWorkData";
-import { groupWorkDurations } from "../scripts/utility";
+import { groupWorkDurations, formatDuration } from "../scripts/utility";
 import { DownOutlined } from "@ant-design/icons";
 import "../styles/cardSection.css";
 import LoadingScreen from "../components/LoadingScreen";
@@ -45,12 +45,12 @@ export default function Work() {
           <>
             <Row gutter={[16, 16]} className="duration-tag-grid">
               {Object.entries(durations).map(([role, months]) => (
-                <Col xs={24} sm={12} md={12} key={role}>
+                <Col xs={24} sm={12} md={12} key={role} className="duration-col">
                   <Tag className="duration-tag" color="orange">
                     {role}
                   </Tag>
-                  <Text type="secondary">
-                    {months} month{months !== 1 ? "s" : ""}
+                  <Text type="secondary" className="duration-text">
+                    {formatDuration(months)}
                   </Text>
                 </Col>
               ))}
@@ -60,6 +60,7 @@ export default function Work() {
 
             <Collapse
               accordion
+              defaultActiveKey={["1"]}
               className="card-section-collapse"
               expandIcon={({ isActive }) => (
                 <DownOutlined rotate={isActive ? 180 : 0} />

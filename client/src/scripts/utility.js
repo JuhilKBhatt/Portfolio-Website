@@ -5,9 +5,23 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 
 dayjs.extend(customParseFormat);
 
-// Ensure this function is exactly as follows
 function cleanDate(str) {
   return (str || "").replace(/[^\d/]/g, "").trim();
+}
+
+export function formatDuration(totalMonths) {
+  if (!totalMonths || totalMonths <= 0) return "0 mos";
+
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  if (years > 0 && months > 0) {
+    return `${years} yr${years > 1 ? "s" : ""}, ${months} mo${months > 1 ? "s" : ""}`;
+  }
+  if (years > 0) {
+    return `${years} yr${years > 1 ? "s" : ""}`;
+  }
+  return `${months} mo${months > 1 ? "s" : ""}`;
 }
 
 export function groupWorkDurations(entries) {
@@ -23,7 +37,8 @@ export function groupWorkDurations(entries) {
     let duration = toDate.diff(fromDate, "month");
     if (duration <= 0) duration = 1;
 
-    const roles = entry.position.split("+").map((r) => r.trim());
+    const cleanPosition = (entry.position || "").replace(/\s*\([^)]*\)/g, "").trim();
+    const roles = cleanPosition.split("+").map((r) => r.trim());
 
     roles.forEach((role) => {
       totals[role] = (totals[role] || 0) + duration;
