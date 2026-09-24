@@ -1,17 +1,47 @@
 // ./client/src/pages/Contact.jsx
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Form, Input, Button, Card, message } from "antd";
-import { MailOutlined, UserOutlined, SendOutlined } from "@ant-design/icons";
+import { MailOutlined, UserOutlined, SendOutlined, CheckCircleFilled } from "@ant-design/icons";
 import "../styles/contactPage.css";
 import { useContactForm } from "../hooks/useContactForm";
+import TurnstileWidget from "../components/TurnstileWidget";
+
+const TURNSTILE_SITE_KEY =
+  import.meta.env.VITE_CLOUDFLARE_TURNSTILE_SITE_KEY ||
+  import.meta.env.VITE_CLOUDFLARE_TRUNSTILE_SITE_KEY;
+
 
 export default function Contact() {
   const [form] = Form.useForm();
-  const { onFinish, isLoading } = useContactForm(form);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileRef = useRef(null);
+
+  const name = Form.useWatch("name", form);
+  const email = Form.useWatch("email", form);
+  const userMessage = Form.useWatch("message", form);
+
+  const isDataEntered = Boolean(name?.trim() && email?.trim() && userMessage?.trim());
+  const isSubmitDisabled = !isDataEntered || Boolean(TURNSTILE_SITE_KEY && !turnstileToken);
+
+  const { onFinish, isLoading, isSuccess } = useContactForm(form, {
+    turnstileRef,
+    setTurnstileToken,
+  });
 
   const onFinishFailed = () => {
     message.error("Please check your input and try again.");
+  };
+
+  const handleFormSubmit = (values) => {
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      message.error("Please complete the verification challenge before sending.");
+      return;
+    }
+    onFinish({
+      ...values,
+      turnstileToken,
+    });
   };
 
   return (
@@ -26,7 +56,7 @@ export default function Contact() {
           form={form}
           layout="vertical"
           name="contact-form"
-          onFinish={onFinish}
+          onFinish={handleFormSubmit}
           onFinishFailed={onFinishFailed}
           className="contact-form"
         >
@@ -57,10 +87,35 @@ export default function Contact() {
             <Input.TextArea rows={4} placeholder="Type your message here..." />
           </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={isLoading} block>
-              Send Message <SendOutlined />
-            </Button>
+          {TURNSTILE_SITE_KEY && (
+            <TurnstileWidget
+              ref={turnstileRef}
+              siteKey={TURNSTILE_SITE_KEY}
+              action="contact"
+              onVerify={(token) => setTurnstileToken(token)}
+              onExpire={() => setTurnstileToken("")}
+              onError={() => setTurnstileToken("")}
+            />
+          )}
+
+          <Form.Item className="contact-submit-item">
+            <div className="contact-submit-row">
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={isLoading}
+                disabled={isSubmitDisabled}
+                className="contact-submit-btn"
+              >
+                Send Message <SendOutlined />
+              </Button>
+              {isSuccess && (
+                <div className="contact-success-notification fade-in">
+                  <CheckCircleFilled className="success-icon" />
+                  <span>Message sent successfully! I will get in touch soon.</span>
+                </div>
+              )}
+            </div>
           </Form.Item>
         </Form>
       </Card>

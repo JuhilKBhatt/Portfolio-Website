@@ -3,10 +3,20 @@
 import { useState } from "react";
 import { message } from "antd";
 
-export function useContactForm(form) {
+export function useContactForm(form, options = {}) {
+  const { turnstileRef, setTurnstileToken } = options;
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState(null);
+
+  const resetTurnstile = () => {
+    if (turnstileRef?.current?.reset) {
+      turnstileRef.current.reset();
+    }
+    if (setTurnstileToken) {
+      setTurnstileToken("");
+    }
+  };
 
   const onFinish = async (formData) => {
     setIsLoading(true);
@@ -46,6 +56,7 @@ export function useContactForm(form) {
       setError(err.message || "Failed to send message");
       message.error("Failed to send message. Please try again later.");
     } finally {
+      resetTurnstile();
       setIsLoading(false);
     }
   };
