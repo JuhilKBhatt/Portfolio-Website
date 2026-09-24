@@ -3,7 +3,7 @@
     "name": "Strandbags",
     "dateFrom": "10/2019",
     "dateTo": "10/2019",
-    "position": "Causal IT Assistant",
+    "position": "IT Support Officer (Casual)",
     "description": [
       "Assisting the IT Department"
     ]
@@ -12,7 +12,7 @@
     "name": "Strandbags",
     "dateFrom": "01/2020",
     "dateTo": "01/2020",
-    "position": "Causal IT Assistant",
+    "position": "IT Support Officer (Casual)",
     "description": [
       "Assisting the IT Department in Label Printers"
     ]
@@ -21,7 +21,7 @@
     "name": "Newtown Fast-Mart",
     "dateFrom": "03/2022",
     "dateTo": "05/2023",
-    "position": "Store Clerk",
+    "position": "Store Clerk (Part-Time)",
     "description": [
       "Handled Customers",
       "Managed Inventory",
@@ -32,29 +32,31 @@
     "name": "Yennora Copper Recycling",
     "dateFrom": "06/2023",
     "dateTo": "05/2024",
-    "position": "Front Desk + IT Support",
+    "position": "Front Desk + Full-Stack Support Engineer (Part-Time)",
     "description": [
       "Handled Customers",
       "External Communication",
-      "IT Support"
+      "IT Support",
+      "Full Stack Development"
     ]
   },
   {
     "name": "Safari Copper Recycling",
     "dateFrom": "05/2024",
     "dateTo": "03/2026",
-    "position": "Manager + IT Support",
+    "position": "General Manager + Full-Stack Support Engineer (Part-Time)",
     "description": [
-      "Handled Customers",
+      "Handled day to day business",
       "External Communication",
-      "IT Support"
+      "IT Support",
+      "Full Stack Development"
     ]
   },
   {
     "name": "Yokohama Suiran High School",
     "dateFrom": "04/2026",
     "dateTo": "07/2026",
-    "position": "Intern English ALT",
+    "position": "Intern English ALT (Internship)",
     "description": [
       "~9 classes/week",
       "Assisting Teachers Run the Class",
@@ -65,11 +67,12 @@
     "name": "AJBCC",
     "dateFrom": "08/2026",
     "dateTo": "09/2026",
-    "position": "IT Support & Events Management Internship",
+    "position": "Full-Stack Support Engineer (Internship)",
     "description": [
       "Assisting With Events",
       "Assisting With IT Support",
-      "Assisting With CRM Optimisation"
+      "Assisting With CRM Optimisation",
+      "Full Stack Development"
     ]
   }
 ]
