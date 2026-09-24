@@ -139,7 +139,14 @@ def get_repos_with_portfolio_info(username):
 @limiter.limit("5 per minute")
 def refresh_github_cache(username):
     """Manually invalidate cache on-demand so new repos appear immediately."""
-    provided_token = request.headers.get("X-Admin-Token") or request.args.get("token")
+    auth_header = request.headers.get("Authorization", "")
+    bearer_token = (
+        auth_header.replace("Bearer ", "").strip()
+        if auth_header.startswith("Bearer ")
+        else None
+    )
+    provided_token = request.headers.get("X-Admin-Token") or bearer_token
+
     if not ADMIN_TOKEN or provided_token != ADMIN_TOKEN:
         logger.warning("Unauthorized cache refresh attempt for %s from IP %s", username, request.remote_addr)
         return jsonify({"error": "Unauthorized"}), 401

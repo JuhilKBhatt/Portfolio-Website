@@ -23,6 +23,17 @@ export function useContactForm(form, options = {}) {
     setIsSuccess(false);
     setError(null);
 
+    if (formData.website) {
+      console.warn("Spam bot detected via honeypot trap.");
+      setIsSuccess(true);
+      if (form && typeof form.resetFields === "function") {
+        form.resetFields();
+      }
+      setIsLoading(false);
+      resetTurnstile();
+      return;
+    }
+
     try {
       const contactApiUrl = import.meta.env.VITE_CONTACT_API_URL;
       if (!contactApiUrl) {
@@ -38,6 +49,7 @@ export function useContactForm(form, options = {}) {
           name: formData.name,
           email: formData.email,
           message: formData.message,
+          ...(formData.website && { website: formData.website }),
           ...(formData.turnstileToken && { "cf-turnstile-response": formData.turnstileToken }),
         }),
       });

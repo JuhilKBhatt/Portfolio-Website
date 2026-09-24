@@ -60,6 +60,23 @@ export default function Contact() {
           onFinishFailed={onFinishFailed}
           className="contact-form"
         >
+          <div
+            style={{
+              opacity: 0,
+              position: "absolute",
+              top: 0,
+              left: 0,
+              height: 0,
+              width: 0,
+              zIndex: -1,
+              overflow: "hidden",
+            }}
+            aria-hidden="true"
+          >
+            <Form.Item name="website" tabIndex={-1}>
+              <Input tabIndex={-1} autoComplete="off" placeholder="Leave this field blank" />
+            </Form.Item>
+          </div>
           <Form.Item
             label="Name"
             name="name"
