@@ -104,20 +104,97 @@
   padding: 64px 16px;
 }
 
-.featured-header {
+.section-header {
   text-align: center;
   margin-bottom: 32px;
 }
 
-.featured-header h2 {
+.section-header h2 {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
-.featured-header p {
+.section-header p {
   font-size: 1rem;
   color: #666;
+}
+
+/* Hero Actions & Socials */
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.hero-socials {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.social-icon {
+  font-size: 24px;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.social-icon:hover {
+  color: #F04B24;
+}
+
+/* Skills Section */
+.skills-section {
+  padding: 40px 16px;
+  background-color: #f9f9f9;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skill-tag {
+  font-size: 14px;
+  padding: 4px 12px;
+  border-radius: 16px;
+}
+
+/* Experience Snapshot */
+.experience-snapshot {
+  padding: 64px 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.snapshot-container {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.snapshot-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.snapshot-role {
+  font-size: 1.1rem;
+}
+
+.snapshot-company {
+  color: #666;
+  font-weight: 500;
+}
+
+.snapshot-dates {
+  font-size: 0.9rem;
+  color: #999;
 }
 
 /* Grid Layout */
@@ -162,16 +239,23 @@
   .featured-carousel-slide {
     padding: 16px;
   }
-}
-
-@media (max-width: 768px) {
+  
   .hero {
     flex-direction: column;
     text-align: center;
+    padding: 40px 20px;
   }
-
 
   .hero-img-wrapper {
     margin-bottom: 20px;
+  }
+  
+  .hero-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .hero-socials {
+    justify-content: center;
   }
 }
