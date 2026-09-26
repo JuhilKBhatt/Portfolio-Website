@@ -173,11 +173,14 @@ export default function ProjectCard({ project }) {
               {info.description || project.description}
             </div>
             {Array.isArray(info.Highlights) && info.Highlights.length > 0 && (
-              <ul className="project-highlights">
-                {info.Highlights.map((highlight, idx) => (
-                  <li key={idx}>{highlight}</li>
-                ))}
-              </ul>
+              <div className="project-highlights-container">
+                <strong style={{ fontSize: '0.9em' }}>Highlights:</strong>
+                <ul className="project-highlights">
+                  {info.Highlights.map((highlight, idx) => (
+                    <li key={idx}>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
             )}
             <div className="project-tags">
               {info.language?.filter(lang => lang && lang.trim() !== "").map((lang) => (

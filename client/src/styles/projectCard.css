@@ -99,11 +99,12 @@
 }
 
 .project-highlights {
-  margin-top: 0;
+  margin-top: 4px;
   margin-bottom: 12px;
   padding-left: 20px;
   color: var(--text-color);
   font-size: 0.9em;
+  list-style-type: disc;
 }
 
 .project-highlights li {
