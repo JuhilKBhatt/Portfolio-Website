@@ -10,11 +10,11 @@
   "videoDemo": "https://res.cloudinary.com/dmj4ggkjq/video/upload/v1752666408/Portfolio-Website-Video_hxsowi.mov",
   "Priority": 1,
   "type": "Solo",
-  "version": "Beta",
+  "version": "Prod",
   "Highlights": [
-    "Implemented dynamic GitHub repo ingestion",
-    "Configured AWS serverless contact pipeline",
-    "Utilised Docker containerisation for scalable deployment"
+    "Dynamic GitHub Repo Ingestion",
+    "AWS Serverless Contact Pipeline",
+    "Self Hosted on Ubuntu Server"
   ],
   "Visibilty": true
 }
