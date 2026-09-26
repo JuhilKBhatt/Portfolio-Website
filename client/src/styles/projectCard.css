@@ -98,6 +98,18 @@
   color: var(--text-color);
 }
 
+.project-highlights {
+  margin-top: 0;
+  margin-bottom: 12px;
+  padding-left: 20px;
+  color: var(--text-color);
+  font-size: 0.9em;
+}
+
+.project-highlights li {
+  margin-bottom: 4px;
+}
+
 /* Tag Container */
 .project-tags {
   min-height: 30px;

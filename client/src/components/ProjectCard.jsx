@@ -1,6 +1,6 @@
 // ./client/src/components/ProjectCard.jsx
 
-import { Card, Carousel, Tag, Tooltip, Row, Col } from "antd";
+import { Card, Carousel, Tag, Tooltip, Row, Col, Image } from "antd";
 import {
   GlobalOutlined,
   GithubOutlined,
@@ -65,15 +65,13 @@ export default function ProjectCard({ project }) {
       return (
         <Carousel autoplay className="project-carousel">
           {filteredImages.map((url, i) => (
-            <img
+            <Image
               key={url || i}
               src={optimizeImageUrl(url, 800)}
+              preview={{ src: optimizeImageUrl(url, 2560) }}
               alt={`${info?.title || project.name} Screenshot ${i + 1}`}
               className="project-image"
-              width={400}
-              height={200}
               loading="lazy"
-              decoding="async"
               onError={() => setImageFailed(true)}
               style={{ objectFit: 'cover', width: '100%', height: 'auto', aspectRatio: '2/1' }}
             />
@@ -83,14 +81,12 @@ export default function ProjectCard({ project }) {
     }
 
     return (
-      <img
+      <Image
         alt={`${info?.title || project.name} Cover`}
         src={optimizeImageUrl(filteredImages[0], 800)}
+        preview={{ src: optimizeImageUrl(filteredImages[0], 2560) }}
         className="project-image"
-        width={400}
-        height={200}
         loading="lazy"
-        decoding="async"
         onError={() => setImageFailed(true)}
         style={{ objectFit: 'cover', width: '100%', height: 'auto', aspectRatio: '2/1' }}
       />
@@ -163,8 +159,15 @@ export default function ProjectCard({ project }) {
             <div className="project-description">
               {info.description || project.description}
             </div>
+            {info.Highlights && info.Highlights.length > 0 && (
+              <ul className="project-highlights">
+                {info.Highlights.map((highlight, idx) => (
+                  <li key={idx}>{highlight}</li>
+                ))}
+              </ul>
+            )}
             <div className="project-tags">
-              {info.language?.map((lang) => (
+              {info.language?.filter(lang => lang && lang.trim() !== "").map((lang) => (
                 <Tag key={lang}>{lang}</Tag>
               ))}
             </div>
