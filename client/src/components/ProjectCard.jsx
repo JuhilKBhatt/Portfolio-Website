@@ -12,6 +12,19 @@ import { useMemo, useState } from "react";
 
 const { Meta } = Card;
 
+const colors = [
+  "magenta", "red", "volcano", "orange", "gold",
+  "lime", "green", "cyan", "blue", "geekblue", "purple"
+];
+
+function getColor(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return colors[Math.abs(hash) % colors.length];
+}
+
 function optimizeImageUrl(url, width = 800) {
   if (!url || typeof url !== "string") return url;
   if (url.includes("res.cloudinary.com") && url.includes("/upload/")) {
@@ -159,7 +172,7 @@ export default function ProjectCard({ project }) {
             <div className="project-description">
               {info.description || project.description}
             </div>
-            {info.Highlights && info.Highlights.length > 0 && (
+            {Array.isArray(info.Highlights) && info.Highlights.length > 0 && (
               <ul className="project-highlights">
                 {info.Highlights.map((highlight, idx) => (
                   <li key={idx}>{highlight}</li>
@@ -168,7 +181,7 @@ export default function ProjectCard({ project }) {
             )}
             <div className="project-tags">
               {info.language?.filter(lang => lang && lang.trim() !== "").map((lang) => (
-                <Tag key={lang}>{lang}</Tag>
+                <Tag key={lang} color={getColor(lang)}>{lang}</Tag>
               ))}
             </div>
           </div>
