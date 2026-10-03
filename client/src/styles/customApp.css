@@ -20,7 +20,7 @@ body{
     background-repeat:repeat;
     background-position:left top;
     border:0;
-    background-size: 180px auto;
+    background-size: 50px auto;
     opacity: 0.15;
     pointer-events: none;
 }
