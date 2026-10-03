@@ -1,6 +1,3 @@
-# Default Docker Compose (defaults to production stack)
-# For local development with live reload, use: docker compose -f compose.dev.yml up
-# For explicit production stack, use: docker compose -f compose.prod.yml up
 services:
   flask-server:
     build:

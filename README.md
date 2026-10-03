@@ -12,24 +12,36 @@ A full-stack portfolio website built with a React + Vite frontend and a Python F
 
 ---
 
-## 🐳 Quickstart (Docker)
+## 🐳 Docker Setup
 
-The easiest way to run the entire application (frontend and backend) is using Docker.
+The project provides dedicated Docker Compose configurations for development and production environments.
 
 **Prerequisites:** [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
 
-1. Clone the repository and navigate to the project root.
-2. Build and start the containers:
-   ```bash
-   docker compose up --build
-   ```
-3. Access the application:
-   - **Frontend:** [http://localhost:3000](http://localhost:3000)
-   - **Backend API:** [http://localhost:5001](http://localhost:5001)
+### Local Development (`compose.dev.yml`)
+Enables live file syncing and hot module reloading (HMR) without needing to rebuild containers on code changes.
+- **Frontend (Vite dev server):** [http://localhost:5173](http://localhost:5173)
+- **Backend API (Flask / Gunicorn with `--reload`):** [http://localhost:5001](http://localhost:5001)
 
-To stop the containers, use `Ctrl+C` or run:
 ```bash
-docker compose down
+# Start development environment
+docker compose -f compose.dev.yml up --build
+
+# Stop development environment
+docker compose -f compose.dev.yml down
+```
+
+### Production (`compose.prod.yml`)
+Builds optimized production assets, serves frontend statically via Nginx reverse proxy with gzip compression and Cloudflare caching headers, and runs production Gunicorn WSGI backend.
+- **Frontend & Proxied API (Nginx):** [http://localhost:3000](http://localhost:3000)
+- **Backend API (Direct loopback):** [http://127.0.0.1:5001](http://127.0.0.1:5001)
+
+```bash
+# Start production environment
+docker compose -f compose.prod.yml up -d --build
+
+# Stop production environment
+docker compose -f compose.prod.yml down
 ```
 
 ---

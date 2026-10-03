@@ -1,0 +1,42 @@
+services:
+  flask-server:
+    build:
+      context: ./flask-server
+      dockerfile: Dockerfile
+    ports:
+      # Bind to localhost loopback for security while allowing host browser access
+      - "127.0.0.1:5001:5001"
+    restart: unless-stopped
+    volumes:
+      # Live sync backend source for hot reloading without rebuilds
+      - ./flask-server:/app
+      # Anonymous volumes prevent host virtualenv and bytecode from overriding container files
+      - /app/venv
+      - /app/__pycache__
+    environment:
+      - FLASK_DEBUG=1
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,http://127.0.0.1:3000
+    env_file:
+      - ./flask-server/.env
+    command: ["gunicorn", "--reload", "app:app", "--bind", "0.0.0.0:5001"]
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    ports:
+      # Vite development server
+      - "5173:5173"
+    volumes:
+      # Live sync frontend source code for instant HMR
+      - ./client:/app
+      # Anonymous volume preserves container-built Linux node_modules
+      - /app/node_modules
+    environment:
+      - VITE_FLASK_API_URL=http://localhost:5001
+      - VITE_PROXY_TARGET=http://flask-server:5001
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    restart: unless-stopped
+    depends_on:
+      - flask-server

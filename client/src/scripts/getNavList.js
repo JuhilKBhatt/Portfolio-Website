@@ -14,7 +14,7 @@ export const getNavList = () => {
   // Convert the lazy pages object into an array
   const lazyPages = Object.keys(pages).map((path) => {
     const fileName = path.split("/").pop().replace(".jsx", "");
-    const label = fileName.charAt(0).toUpperCase() + fileName.slice(1);
+    const label = fileName.toUpperCase();
     const fileKey = fileName.toLowerCase();
 
     return {
@@ -28,7 +28,7 @@ export const getNavList = () => {
 
   // Eagerly load Home for instant first paint
   const homePage = {
-    label: "Home",
+    label: "HOME",
     key: "/",
     element: Home,
     icon: setNavIcon["home"],
