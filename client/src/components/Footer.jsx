@@ -8,6 +8,9 @@ export default function FooterComponent() {
   return (
     <footer className="footerStyle">
       <div className="footer-container">
+        <span className="footer-text">
+          © {new Date().getFullYear()} Juhil Kalpeshkumar Bhatt. Self Designed, Built & Homelab Deployed.
+        </span>
         <div style={{ display: "flex", gap: "12px" }}>
           <a
             href={import.meta.env.VITE_GITHUB_URL || "#"}
@@ -37,9 +40,6 @@ export default function FooterComponent() {
             <span>Email</span>
           </a>
         </div>
-        <span className="footer-text">
-          © {new Date().getFullYear()} Juhil Kalpeshkumar Bhatt. All Rights Reserved.
-        </span>
       </div>
     </footer>
   );
