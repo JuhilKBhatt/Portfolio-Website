@@ -36,32 +36,80 @@
   margin: 0 auto;
 }
 
-/* Pill Navigation Menu Container */
-.pill-nav-menu {
-  background: #141721 !important;
-  padding: 4px 6px !important;
-  border-radius: 14px !important;
-  border: 1px solid rgba(255, 255, 255, 0.09) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.09) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 2px !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
+/* Pill Navigation Wrapper & Sliding Indicator */
+.pill-nav-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #141721;
+  padding: 4px 6px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28), 0 1px 3px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   opacity: 0;
   transform: translateY(-10px);
   animation: fadeSlideIn 0.5s ease forwards;
   animation-delay: 0.15s;
   transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+/* Sliding active pill indicator (smooth 60fps hardware-accelerated movement) */
+.nav-sliding-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #1e232f;
+  border-radius: 8px 8px 3px 3px;
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.32s cubic-bezier(0.25, 1, 0.5, 1),
+              width 0.32s cubic-bezier(0.25, 1, 0.5, 1),
+              height 0.32s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.2s ease;
+  will-change: transform, width, height;
+}
+
+/* Bottom Coral Accent Bar on the sliding indicator */
+.nav-sliding-indicator::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 2.5px !important;
+  background-color: #fca37d !important;
+  border-radius: 2px 2px 0 0 !important;
+  border-bottom: none !important;
+  box-shadow: 0 0 8px rgba(252, 163, 125, 0.5) !important;
+}
+
+/* Pill Navigation Menu Container */
+.pill-nav-menu {
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   line-height: normal !important;
   flex-shrink: 0;
-  margin: 0 auto !important;
+  margin: 0 !important;
+  position: relative !important;
+  z-index: 2 !important;
 }
 
 .pill-nav-menu.ant-menu-horizontal {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.09) !important;
+  border-bottom: none !important;
   line-height: normal !important;
 }
 
@@ -160,9 +208,9 @@
   color: #dbe0ea !important;
 }
 
-/* Selected Active Item matching reference mock */
+/* Selected Active Item */
 .pill-nav-menu .ant-menu-item-selected {
-  background-color: #1e232f !important;
+  background-color: transparent !important;
   color: #fca37d !important;
   border-radius: 8px 8px 3px 3px !important;
 }
@@ -173,19 +221,9 @@
   font-weight: 600 !important;
 }
 
-/* Bottom Coral Accent Bar under active item */
+/* Static bottom bar removed in favor of sliding indicator */
 .pill-nav-menu .ant-menu-item-selected::after {
-  content: "" !important;
-  display: block !important;
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  height: 2.5px !important;
-  background-color: #fca37d !important;
-  border-radius: 2px 2px 0 0 !important;
-  border-bottom: none !important;
-  box-shadow: 0 0 8px rgba(252, 163, 125, 0.5) !important;
+  display: none !important;
 }
 
 /* Responsive for Mobile: Remove dropdown menu, show centered icons pill */
@@ -199,8 +237,19 @@
     padding: 0;
   }
 
+  .pill-nav-wrapper {
+    padding: 3px 6px;
+    border-radius: 12px;
+    gap: 2px;
+    max-width: 100%;
+  }
+
+  .nav-sliding-indicator {
+    border-radius: 7px 7px 2px 2px;
+  }
+
   .pill-nav-menu {
-    padding: 3px 6px !important;
+    padding: 0 !important;
     border-radius: 12px !important;
     gap: 2px !important;
     max-width: 100% !important;
