@@ -2,7 +2,7 @@
 
 import React, { useMemo, useEffect, useState } from "react";
 import { Button, Carousel, Row, Col, Tag, Typography, Timeline, Space, Tooltip } from "antd";
-import { GithubOutlined, LinkedinOutlined, MailOutlined } from "@ant-design/icons";
+import { FolderOpenFilled, MailFilled } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useProjects } from "../hooks/useProjects";
 import { extractWorkData } from "../scripts/extractWorkData";
@@ -78,30 +78,17 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-text">
-          <h1>Hello There I'm Juhil.</h1>
-          <h2>Full Stack Developer & Software Engineer</h2>
-          <p>I build scalable, interactive applications using modern web technologies.</p>
+          <h2 style={{color:"#CCCCCC"}}>FULL STACK & AI</h2>
+          <h2 style={{color:"#b06b16ff"}}>SOFTWARE ENGINEER</h2>
+          <p> Software engineer with professional experience building active production systems. Studied Enterprise System
+              Development with a sub major in Computer Graphics and Animation, Networking and Cybersecurity.</p>
           <div className="hero-actions">
-            <Button type="primary" size="large">
-              <Link to="/projects">View My Work</Link>
+            <Button icon={<MailFilled/>} type="primary" size="large">
+              <Link to="/contact">Get In Touch</Link>
             </Button>
-          </div>
-          <div className="hero-socials">
-            <Tooltip title="GitHub">
-              <a href={import.meta.env.VITE_GITHUB_URL || "#"} target="_blank" rel="noreferrer">
-                <GithubOutlined className="social-icon" />
-              </a>
-            </Tooltip>
-            <Tooltip title="LinkedIn">
-              <a href={import.meta.env.VITE_LINKEDIN_URL || "#"} target="_blank" rel="noreferrer">
-                <LinkedinOutlined className="social-icon" />
-              </a>
-            </Tooltip>
-            <Tooltip title="Email">
-              <a href={`mailto:${import.meta.env.VITE_EMAIL_ADDRESS || ""}`}>
-                <MailOutlined className="social-icon" />
-              </a>
-            </Tooltip>
+            <Button icon={ <FolderOpenFilled/> } size="large">
+              <Link to="/projects">Featured Works</Link>
+            </Button>
           </div>
         </div>
       </section>
