@@ -1,7 +1,7 @@
 /* ./client/src/styles/customBackground.css */
 
 body{
-    background-color: rgb(220, 221, 214) !important;
+    background-color: rgb(29, 31, 37) !important;
 }
 
 .ant-layout, .ant-layout-content, .ant-layout-header, .ant-layout-sider {
@@ -20,8 +20,8 @@ body{
     background-repeat:repeat;
     background-position:left top;
     border:0;
-    background-size: 50px auto;
-    opacity: 0.15;
+    background-size: 75px auto;
+    opacity: 0.20;
     pointer-events: none;
 }
 
