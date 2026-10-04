@@ -1,0 +1,135 @@
+/* ./client/src/styles/activeDot.css */
+
+/* Core Active Dot: Fast, native, GPU-accelerated CSS animation */
+.active-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 50%;
+  flex-shrink: 0;
+  vertical-align: middle;
+  pointer-events: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity, box-shadow;
+}
+
+/* Reusable Wrapper for Pairing Dot + Text */
+.active-dot-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: normal;
+  vertical-align: middle;
+}
+
+/* Preset Sizes */
+.active-dot--sm {
+  width: 6.5px;
+  height: 6.5px;
+}
+
+.active-dot--md {
+  width: 8.5px;
+  height: 8.5px;
+}
+
+.active-dot--lg {
+  width: 11px;
+  height: 11px;
+}
+
+/* Fading Blue Variant (Smooth breathing electric cyan-blue glow) */
+.active-dot--blue {
+  background-color: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+  animation: activeDotFadeBlue 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Expanding Radar Ping Ring */
+.active-dot--pulse::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: inherit;
+  pointer-events: none;
+  animation: activeDotPingBlue 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Green Variant (Ready for other modular uses, e.g. online/live status) */
+.active-dot--green {
+  background-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+  animation: activeDotFadeGreen 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.active-dot--green.active-dot--pulse::before {
+  background-color: #10b981;
+  animation: activeDotPingGreen 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Keyframes: Fading Blue Rhythmic Breathing & Glow */
+@keyframes activeDotFadeBlue {
+  0% {
+    background-color: #38bdf8;
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.8), 0 0 6px rgba(56, 189, 248, 0.8);
+    opacity: 0.8;
+    transform: scale(0.92);
+  }
+  50% {
+    background-color: #60a5fa;
+    box-shadow: 0 0 0 5px rgba(56, 189, 248, 0), 0 0 14px rgba(96, 165, 250, 0.95);
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  100% {
+    background-color: #38bdf8;
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0), 0 0 6px rgba(56, 189, 248, 0.8);
+    opacity: 0.8;
+    transform: scale(0.92);
+  }
+}
+
+/* Keyframes: Blue Radar Ping Wave */
+@keyframes activeDotPingBlue {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  65%, 100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+/* Keyframes: Green Breathing */
+@keyframes activeDotFadeGreen {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.8), 0 0 6px rgba(16, 185, 129, 0.8);
+    opacity: 0.8;
+    transform: scale(0.92);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(16, 185, 129, 0), 0 0 14px rgba(16, 185, 129, 0.95);
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0), 0 0 6px rgba(16, 185, 129, 0.8);
+    opacity: 0.8;
+    transform: scale(0.92);
+  }
+}
+
+@keyframes activeDotPingGreen {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  65%, 100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
