@@ -1,7 +1,7 @@
 /* ./client/src/styles/customFooter */
 
 .footerStyle {
-  background-color: #f5f5f5; /* lighter gray for contrast */
+  background-color: #0f131a; /* lighter gray for contrast */
   padding: 16px 24px;
   font-size: 14px;
   color: #333;
@@ -17,14 +17,14 @@
 
 .footer-text {
   font-size: 14px;
-  color: #444;
+  color: #CCCCCC;
 }
 
 .footer-github-link {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #24292e;
+  color: #CCCCCC;
   font-size: 16px;
   text-decoration: none;
   transition: color 0.3s;
@@ -38,7 +38,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #24292e;
+  color: #CCCCCC;
   font-size: 16px;
   text-decoration: none;
   transition: color 0.3s;
@@ -52,7 +52,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #24292e;
+  color: #CCCCCC;
   font-size: 16px;
   text-decoration: none;
   transition: color 0.3s;
