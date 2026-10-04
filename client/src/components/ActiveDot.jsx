@@ -8,7 +8,7 @@ import "../styles/activeDot.css";
  * ActiveDot - High-performance, GPU-accelerated CSS animated status dot.
  * Completely modular and callable across any component or layout.
  *
- * @param {string} [color="blue"] - Color variant ("blue" | "green") or custom color via style
+ * @param {string} [color="blue"] - Preset ("blue" | "green") or custom hex/rgb/hsl color (e.g. "#22D3EE")
  * @param {"sm"|"md"|"lg"|number} [size="sm"] - Size preset or exact pixel number
  * @param {boolean} [pulse=true] - Whether to show the breathing/radar ping wave
  * @param {string} [className=""] - Additional custom classes
@@ -26,11 +26,22 @@ export default function ActiveDot({
 }) {
   const isPresetSize = ["sm", "md", "lg"].includes(size);
   const sizeClass = isPresetSize ? `active-dot--${size}` : "";
-  const colorClass = `active-dot--${color}`;
+
+  const isCustomColor =
+    typeof color === "string" &&
+    (color.startsWith("#") || color.startsWith("rgb") || color.startsWith("hsl"));
+
+  const colorClass = isCustomColor ? "" : `active-dot--${color}`;
   const pulseClass = pulse ? "active-dot--pulse" : "";
 
   const customStyle = {
     ...style,
+    ...(isCustomColor
+      ? {
+          backgroundColor: color,
+          boxShadow: `0 0 8px ${color}`,
+        }
+      : {}),
     ...(typeof size === "number" || (!isPresetSize && size)
       ? {
           width: typeof size === "number" ? `${size}px` : size,

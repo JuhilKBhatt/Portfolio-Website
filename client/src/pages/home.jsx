@@ -2,12 +2,13 @@
 
 import React, { useMemo, useEffect, useState } from "react";
 import { Button, Carousel, Row, Col, Tag, Typography, Timeline, Space, Tooltip } from "antd";
-import { FolderOpenFilled, MailFilled } from "@ant-design/icons";
+import { FolderOpenFilled, MailFilled, EnvironmentOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useProjects } from "../hooks/useProjects";
 import { extractWorkData } from "../scripts/extractWorkData";
 import ProjectCard from "../components/ProjectCard";
 import "../styles/customHomePage.css";
+import ActiveDot from "../components/ActiveDot";
 import LoadingScreen from "../components/LoadingScreen";
 
 const { Title, Paragraph, Text } = Typography;
@@ -59,22 +60,26 @@ export default function Home() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-img-wrapper">
-          <div className="hero-img-lines">
-            <div className="vertical-line left-line" />
-            <div className="vertical-line right-line" />
-            <div className="horizontal-line" />
-            <picture className="hero-img-picture">
-              <source srcSet="img/AvatarImg.webp" type="image/webp" />
-              <img
-                className="AvatarImg"
-                src="img/AvatarImg.png"
-                alt="Juhil Bhatt Avatar"
-                width="300"
-                height="306"
-                fetchPriority="high"
-                decoding="async"
-              />
-            </picture>
+          <picture className="hero-img-picture">
+            <source srcSet="img/AvatarImg.webp" type="image/webp" />
+            <img
+              className="AvatarImg"
+              src="img/AvatarImg.png"
+              alt="Juhil Bhatt Avatar"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
+          <div className="hero-card-info">
+            <div className="hero-card-badge">
+              <ActiveDot color="#ee9c22ff" size={5} className="nav-active-dot-mobile" />
+              <span>AVAILABLE FOR WORK</span>
+            </div>
+            <h3 className="hero-card-name">Juhil K. Bhatt</h3>
+            <div className="hero-card-location">
+              <EnvironmentOutlined className="location-icon" />
+              <span> Sydney, Australia &amp; Remote</span>
+            </div>
           </div>
         </div>
         <div className="hero-text">
