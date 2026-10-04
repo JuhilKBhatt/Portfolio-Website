@@ -9,35 +9,29 @@ export default function FooterComponent() {
     <footer className="footerStyle">
       <div className="footer-container">
         <span className="footer-text">
-          © {new Date().getFullYear()} Juhil Kalpeshkumar Bhatt. Self Designed, Built & Homelab Deployed.
+          © {new Date().getFullYear()} JUHIL K BHATT. SELF DESIGNED, BUILT & HOMELAB DEPLOYED.
         </span>
         <div style={{ display: "flex", gap: "12px" }}>
           <a
             href={import.meta.env.VITE_GITHUB_URL || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
             className="footer-github-link"
           >
             <GithubOutlined />
-            <span>GitHub</span>
+            <span>GITHUB</span>
           </a>
           <a
             href={import.meta.env.VITE_LINKEDIN_URL || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
             className="footer-linkedin-link"
           >
             <LinkedinOutlined />
-            <span>LinkedIn</span>
+            <span>LINKEDIN</span>
           </a>
           <a
             href="/contact"
-            target="_blank"
-            rel="noopener noreferrer"
             className="footer-email-link"
           >
             <MailOutlined />
-            <span>Email</span>
+            <span>EMAIL</span>
           </a>
         </div>
       </div>
