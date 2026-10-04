@@ -23,7 +23,7 @@
   align-items: center;
   justify-content: center;
   pointer-events: auto;
-  color: #333;
+  color: #CCCCCC;
   width: 100%;
 }
 
@@ -77,7 +77,7 @@
   font-size: 13.5px !important;
   font-weight: 500 !important;
   letter-spacing: 0.02em !important;
-  color: #8c93a0 !important;
+  color: #CCCCCC !important;
   background: transparent !important;
   border: none !important;
   transition: color 0.2s ease, background-color 0.2s ease !important;
