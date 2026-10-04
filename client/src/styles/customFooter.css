@@ -31,7 +31,7 @@
 }
 
 .footer-github-link:hover {
-  color: #0366d6;
+  color: #e86b1c;
 }
 
 .footer-linkedin-link {
@@ -45,7 +45,7 @@
 }
 
 .footer-linkedin-link:hover {
-  color: #005582;
+  color: #e86b1c;
 }
 
 .footer-email-link {
@@ -59,7 +59,7 @@
 }
 
 .footer-email-link:hover {
-  color: #0366d6;
+  color: #e86b1c;
 }
 
 @media (max-width: 600px) {
