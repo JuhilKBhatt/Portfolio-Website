@@ -7,13 +7,18 @@ import {
   MailOutlined,
   BookOutlined,
   IdcardOutlined,
+  CodeOutlined,
 } from "@ant-design/icons";
 
 // Export an object mapping navigation keys to their respective icons
 export const setNavIcon = {
   home: HomeOutlined,
   projects: FolderOpenOutlined,
-  contact: MailOutlined,
-  education: BookOutlined,
+  "tech stack": CodeOutlined,
+  "tech-stack": CodeOutlined,
+  techstack: CodeOutlined,
   work: IdcardOutlined,
+  experience: IdcardOutlined,
+  education: BookOutlined,
+  contact: MailOutlined,
 };

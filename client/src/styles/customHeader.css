@@ -5,278 +5,192 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px;
+  padding: 16px 20px;
   background: transparent;
   z-index: 1000;
   pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .headerStyle {
   position: static;
-  backdrop-filter: blur(8px);
-  background: rgba(245,245,245,0.85) !important;
+  background: transparent !important;
   border-radius: 15px;
-  margin: 0;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: auto;
   color: #333;
+  width: 100%;
 }
 
-/* Header container */
 .header-name {
   width: 100%;
-  font-size: clamp(20px, 2.5vw, 32px);
-  font-weight: bold;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
+  justify-content: center;
+  padding: 0;
+  margin: 0 auto;
 }
 
-/* Left: Name Link */
-.header-link {
-  color: #333;
-  text-decoration: none;
-  display: flex;
-  align-items: flex-end;
-  position: relative;
-  font-family: 'Lexend', sans-serif;
-  opacity: 0;
-  transform: translateY(-10px);
-  animation: fadeSlideIn 0.6s ease forwards;
-}
-
-.header-link:hover {
-  color: #F04B24 !important;
-  transition: color 0.3s ease;
-}
-
-/* "K." styling */
-.k-letter {
-  position: absolute;
-  top: 10%;
-  left: 48%;
-  transform: translateX(-50%);
-  font-family: 'Schoolbell', cursive;
-  font-size: clamp(20px, 2.5vw, 32px);
-  line-height: 1;
-  color: #737373;
-}
-
-.header-link:hover .k-letter {
-  color: #F04B24;
-  transition: color 0.3s ease;
-}
-
-/* Invisible spacer to align caret */
-.k-spacer {
-  margin: 0 8px;
-  position: relative;
-  display: inline-block;
-  opacity: 0;
-}
-
-/* "^" caret styling */
-.k-caret {
-  position: absolute;
-  top: 60%;
-  left: 48%;
-  transform: translateX(-50%);
-  font-family: 'Schoolbell', cursive;
-  font-size: clamp(20px, 2.5vw, 32px);
-  line-height: 1;
-  color: #6a6767;
-}
-
-.header-link:hover .k-caret {
-  color: #F04B24;
-  transition: color 0.3s ease;
-}
-
-/* AntD menu items */
-.desktop-nav-menu .ant-menu-item a,
-.desktop-nav-menu .ant-menu-title-content {
-  color: white !important;
-}
-
-/* Mobile hamburger */
-.menu-button {
-  color: #333;
-  font-size: 24px;
-  background: transparent;
-  border: none;
-}
-
+/* Pill Navigation Menu Container */
 .pill-nav-menu {
-  background: white;
-  padding: 4px 8px;
-  border-radius: 32px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  display: flex;
-  gap: 4px;
-  border: none;
+  background: #141721 !important;
+  padding: 4px 6px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28), 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
   opacity: 0;
   transform: translateY(-10px);
   animation: fadeSlideIn 0.5s ease forwards;
-  animation-delay: 0.3s;
+  animation-delay: 0.15s;
   transition: all 0.3s ease;
+  line-height: normal !important;
+  flex-shrink: 0;
+  margin: 0 auto !important;
+}
+
+.pill-nav-menu.ant-menu-horizontal {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09) !important;
+  line-height: normal !important;
 }
 
 /* Menu Items */
 .pill-nav-menu .ant-menu-item {
-  padding: 6px 18px;
-  border-radius: 24px;
-  font-weight: 500;
-  color: #333;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
+  position: relative !important;
+  padding: 7px 15px !important;
+  margin: 0 !important;
+  height: auto !important;
+  line-height: 1.4 !important;
+  border-radius: 8px !important;
+  font-family: 'Lexend', 'Fira Code', 'Roboto Mono', 'SF Mono', Consolas, Menlo, monospace !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+  color: #8c93a0 !important;
+  background: transparent !important;
+  border: none !important;
+  transition: color 0.2s ease, background-color 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  top: 0 !important;
 }
 
-/* Remove AntD blue underline on selected tab */
+.pill-nav-menu .ant-menu-item .ant-menu-title-content {
+  color: inherit !important;
+  transition: color 0.2s ease !important;
+}
+
+/* On Desktop: Show text labels, hide icons */
+@media screen and (min-width: 769px) {
+  .pill-nav-menu .ant-menu-item-icon {
+    display: none !important;
+  }
+
+  .pill-nav-menu .ant-menu-title-content {
+    display: inline-block !important;
+  }
+}
+
+/* AntD reset default underline */
 .pill-nav-menu .ant-menu-item::after {
   display: none !important;
 }
 
-/* Selected Item */
-.pill-nav-menu .ant-menu-item-selected {
-  background-color: #F04B24 !important;
-  color: white !important;
-  border-radius: 28px !important;
-}
-
-/* Hover (non-selected) */
+/* Inactive Hover */
 .pill-nav-menu .ant-menu-item:hover:not(.ant-menu-item-selected) {
-  background-color: #f0f0f0;
-  color: #333;
-  border-radius: 28px !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #dbe0ea !important;
+  border-radius: 8px !important;
 }
 
-/* Scoped version of the same styling */
-.mobile-dropdown-menu {
-  background-color: white !important;
-  border-radius: 16px;
-  padding: 8px 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+.pill-nav-menu .ant-menu-item:hover:not(.ant-menu-item-selected) .ant-menu-title-content,
+.pill-nav-menu .ant-menu-item:hover:not(.ant-menu-item-selected) .ant-menu-item-icon {
+  color: #dbe0ea !important;
 }
 
-.mobile-dropdown-menu .ant-dropdown-menu-item {
-  padding: 8px 16px;
-  color: #333 !important;
-  border-radius: 24px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  margin: 4px 12px;
-  text-align: center;
+/* Selected Active Item matching reference mock */
+.pill-nav-menu .ant-menu-item-selected {
+  background-color: #1e232f !important;
+  color: #fca37d !important;
+  border-radius: 8px 8px 3px 3px !important;
 }
 
-.mobile-dropdown-menu .ant-dropdown-menu-item-selected {
-  background-color: #F04B24 !important;
-  color: white !important;
+.pill-nav-menu .ant-menu-item-selected .ant-menu-title-content,
+.pill-nav-menu .ant-menu-item-selected .ant-menu-item-icon {
+  color: #fca37d !important;
+  font-weight: 600 !important;
 }
 
-.mobile-dropdown-menu .ant-dropdown-menu-item:hover {
-  background-color: #f0f0f0 !important;
-  color: #333 !important;
+/* Bottom Coral Accent Bar under active item */
+.pill-nav-menu .ant-menu-item-selected::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 2.5px !important;
+  background-color: #fca37d !important;
+  border-radius: 2px 2px 0 0 !important;
+  border-bottom: none !important;
+  box-shadow: 0 0 8px rgba(252, 163, 125, 0.5) !important;
 }
 
-.dropdown-animate {
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.dropdown-animate.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.dropdown-animate.fade-out {
-  opacity: 0;
-  transform: translateY(-10px);
-  pointer-events: none;
-}
-
-.menu-icon {
-  width: 28px;
-  height: 24px;
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.menu-icon span {
-  display: block;
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  background: #333;
-  border-radius: 2px;
-  opacity: 1;
-  left: 0;
-  transform: rotate(0deg);
-  transition: 0.3s ease;
-}
-
-.menu-icon span:nth-child(1) {
-  top: 0px;
-}
-
-.menu-icon span:nth-child(2) {
-  top: 10px;
-}
-
-.menu-icon span:nth-child(3) {
-  top: 20px;
-}
-
-.menu-icon.open span:nth-child(1) {
-  top: 10px;
-  transform: rotate(45deg);
-}
-
-.menu-icon.open span:nth-child(2) {
-  opacity: 0;
-  left: -60px;
-}
-
-.menu-icon.open span:nth-child(3) {
-  top: 10px;
-  transform: rotate(-45deg);
-}
-
-/* Responsive for small screens */
+/* Responsive for Mobile: Remove dropdown menu, show centered icons pill */
 @media screen and (max-width: 768px) {
+  .header-wrapper {
+    padding: 12px 10px;
+  }
+
   .header-name {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 0 16px;
+    justify-content: center;
+    padding: 0;
   }
 
-  .header-link {
-    font-size: 20px;
+  .pill-nav-menu {
+    padding: 3px 6px !important;
+    border-radius: 12px !important;
+    gap: 2px !important;
+    max-width: 100% !important;
   }
 
-  .k-letter {
-    font-size: 22px;
-    top: 8%;
-    left: 50%;
+  /* Hide text labels on mobile */
+  .pill-nav-menu .ant-menu-title-content {
+    display: none !important;
   }
 
-  .k-caret {
-    font-size: 26px;
-    top: 60%;
-    left: 50%;
+  /* Show icons on mobile */
+  .pill-nav-menu .ant-menu-item-icon {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 17px !important;
+    margin: 0 !important;
+    color: inherit !important;
   }
 
-  .menu-button {
-    font-size: 22px;
+  .pill-nav-menu .ant-menu-item {
+    padding: 7px 11px !important;
+    min-width: 38px !important;
+    height: 36px !important;
+    border-radius: 7px !important;
+  }
+
+  .pill-nav-menu .ant-menu-item-selected {
+    border-radius: 7px 7px 2px 2px !important;
   }
 }
 
