@@ -1,0 +1,66 @@
+/* ./client/src/styles/metricsBanner.css */
+
+.metrics-banner {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto clamp(40px, 5vw, 72px);
+  background: linear-gradient(180deg, #181b21 0%, #14171c 100%);
+  border: 1px solid #2a2e36;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  /* Clips the leading divider of each wrapped row */
+  overflow: hidden;
+}
+
+.metrics-banner-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin: 0 0 0 -1px;
+  padding: 0;
+}
+
+.metrics-banner-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: clamp(18px, 2vw, 26px) clamp(18px, 2.2vw, 30px);
+  border-left: 1px solid #2a2e36;
+  transition: background-color 0.25s ease;
+}
+
+.metrics-banner-item:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.metrics-banner-item dd {
+  margin: 0;
+}
+
+.metrics-banner-label {
+  color: #b9927a;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.metrics-banner-value {
+  color: #e6e8ec;
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(24px, 1.6vw + 14px, 32px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Alternate accent colour (overridable per item via `color`) */
+.metrics-banner-item:nth-child(odd) .metrics-banner-value {
+  color: #f6a77c;
+}
+
+.metrics-banner-desc {
+  color: #b8bcc8;
+  font-family: 'Lexend', sans-serif;
+  font-size: 12.5px;
+  line-height: 1.4;
+}

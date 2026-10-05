@@ -10,6 +10,15 @@ import ProjectCard from "../components/ProjectCard";
 import "../styles/customHomePage.css";
 import ActiveDot from "../components/ActiveDot";
 import LoadingScreen from "../components/LoadingScreen";
+import MetricsBanner from "../components/MetricsBanner";
+
+// TODO: replace with real figures
+const heroMetrics = [
+  { label: "Professional Tenure", value: "8+ Years", description: "Staff & Principal systems capacity" },
+  { label: "Community Impact", value: "1.4k+ Stars", description: "Distributed tools & Rust crates" },
+  { label: "Historic Availability", value: "99.99%", description: "Guaranteed mission-critical SLAs" },
+  { label: "Daily Pipeline Volume", value: "500M+ Evts", description: "Zero message drop persistence" },
+];
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -97,6 +106,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <MetricsBanner metrics={heroMetrics} />
     </>
   );
 }
