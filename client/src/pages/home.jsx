@@ -1,68 +1,80 @@
 // ./client/src/pages/home.jsx
 
 import React, { useMemo, useEffect, useState } from "react";
-import { Button, Carousel, Row, Col, Tag, Typography, Timeline, Space, Tooltip } from "antd";
+import { Button } from "antd";
 import { FolderOpenFilled, MailFilled, EnvironmentOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { useProjects } from "../hooks/useProjects";
 import { extractWorkData } from "../scripts/extractWorkData";
-import ProjectCard from "../components/ProjectCard";
 import "../styles/customHomePage.css";
 import ActiveDot from "../components/ActiveDot";
-import LoadingScreen from "../components/LoadingScreen";
 import MetricsBanner from "../components/MetricsBanner";
-
-const { Title, Paragraph, Text } = Typography;
+import { useGitHubStats } from "../hooks/useGitHubStats";
 
 export default function Home() {
-  const { projects } = useProjects("juhilkbhatt");
+  const { stats } = useGitHubStats("juhilkbhatt");
   const [recentWork, setRecentWork] = useState([]);
-
-
-  const heroMetrics = [
-    { label: "Professional Tenure", value: "8+ Years", description: "" },
-    { label: "github repositories", value: "1.4k+ Stars", description: "Distributed tools & Rust crates" },
-    { label: "github commits", value: "99.99%", description: "Guaranteed mission-critical SLAs" },
-    { label: "Community contributions", value: "500M+ Evts", description: "Zero message drop persistence" },
-  ];
 
   useEffect(() => {
     extractWorkData().then((data) => setRecentWork(data));
   }, []);
 
-  const skills = useMemo(() => {
-    const allSkills = projects
-      .flatMap((p) => p.portfolio_info?.language || [])
-      .filter((skill) => skill && skill.trim() !== "");
-    return Array.from(new Set(allSkills));
-  }, [projects]);
+  const tenureYears = useMemo(() => {
+    // Single source of truth: strictly derived from Software Engineer roles
+    const parseDate = (str) => {
+      if (!str) return null;
+      const [month, year] = str.split("/");
+      return new Date(parseInt(year, 10), parseInt(month, 10) - 1);
+    };
 
-  const tagColors = ["magenta", "red", "volcano", "orange", "gold", "lime", "green", "cyan", "blue", "geekblue", "purple"];
-  const getSkillColor = (skill) => {
-    let hash = 0;
-    for (let i = 0; i < skill.length; i++) {
-      hash = skill.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return tagColors[Math.abs(hash) % tagColors.length];
-  };
+    const sweStartDates = recentWork
+      .filter((w) => /software engineer/i.test(w.position || w.rawPosition || ""))
+      .map((w) => parseDate(w.dateFrom))
+      .filter(Boolean);
 
-  // Get up to 6 shuffled priority 1 projects
-  const featuredProjects = useMemo(() => {
-    const filtered = projects.filter(
-      (p) => p.portfolio_info?.Priority === 1
-    );
-    const shuffled = [...filtered].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 6);
-  }, [projects]);
+    if (!sweStartDates.length) return "";
 
-  // Group projects into arrays of 3
-  const groupedProjects = useMemo(() => {
-    const groups = [];
-    for (let i = 0; i < featuredProjects.length; i += 3) {
-      groups.push(featuredProjects.slice(i, i + 3));
-    }
-    return groups;
-  }, [featuredProjects]);
+    const earliest = new Date(Math.min(...sweStartDates));
+    const now = new Date();
+    const diffYears = (now - earliest) / (1000 * 60 * 60 * 24 * 365.25);
+    const years = Math.floor(diffYears);
+    return years > 0 ? `${years}+ Years` : "<1 Year";
+  }, [recentWork]);
+
+  const heroMetrics = useMemo(() => {
+    // Single source of truth: strictly derived from stats API response, no hardcoded fallbacks
+    const reposValue = stats?.total_projects != null ? `${stats.total_projects}+` : "";
+    const commitsValue = stats?.total_commits != null
+      ? (stats.total_commits >= 1000
+          ? `${(stats.total_commits / 1000).toFixed(1).replace(/\.0$/, "")}k+`
+          : `${stats.total_commits}+`)
+      : "";
+    const contributionsValue = stats?.community_contributions != null
+      ? `${stats.community_contributions}+`
+      : "";
+
+    return [
+      {
+        label: "Professional Tenure",
+        value: tenureYears,
+        description: "Software engineering capacity",
+      },
+      {
+        label: "github repositories",
+        value: reposValue,
+        description: "Public projects & architectures",
+      },
+      {
+        label: "github commits",
+        value: commitsValue,
+        description: "Production codebase revisions",
+      },
+      {
+        label: "Community contributions",
+        value: contributionsValue,
+        description: "Open source contributions & commits",
+      },
+    ];
+  }, [stats, tenureYears]);
 
   return (
     <>
