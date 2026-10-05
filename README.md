@@ -86,6 +86,29 @@ Run the development server:
 flask run --port=5001
 ```
 
+Run the backend tests:
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+**Backend layout:**
+```
+flask-server/
+├── app.py                  # Entrypoint (gunicorn app:app) → create_app()
+├── portfolio_api/
+│   ├── __init__.py         # App factory: config, extensions, blueprints, 429 handler
+│   ├── config.py           # All env-driven settings
+│   ├── extensions.py       # cache, cors, limiter singletons
+│   ├── routes/             # HTTP layer (Blueprints)
+│   │   ├── health.py       # /api/ping
+│   │   └── github.py       # /api/github/<user>/repos, /refresh
+│   └── services/
+│       └── github.py       # GitHub API calls (no Flask code)
+└── tests/                  # pytest suite (excluded from Docker image)
+```
+New endpoints: add a Blueprint in `routes/`, put external-API logic in `services/`, register it in `portfolio_api/__init__.py`.
+
 ### 2. Frontend (React + Vite)
 
 **Prerequisites:** Node.js 18+

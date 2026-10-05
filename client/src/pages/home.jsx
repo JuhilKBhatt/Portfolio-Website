@@ -12,19 +12,19 @@ import ActiveDot from "../components/ActiveDot";
 import LoadingScreen from "../components/LoadingScreen";
 import MetricsBanner from "../components/MetricsBanner";
 
-// TODO: replace with real figures
-const heroMetrics = [
-  { label: "Professional Tenure", value: "8+ Years", description: "Staff & Principal systems capacity" },
-  { label: "Community Impact", value: "1.4k+ Stars", description: "Distributed tools & Rust crates" },
-  { label: "Historic Availability", value: "99.99%", description: "Guaranteed mission-critical SLAs" },
-  { label: "Daily Pipeline Volume", value: "500M+ Evts", description: "Zero message drop persistence" },
-];
-
 const { Title, Paragraph, Text } = Typography;
 
 export default function Home() {
   const { projects } = useProjects("juhilkbhatt");
   const [recentWork, setRecentWork] = useState([]);
+
+
+  const heroMetrics = [
+    { label: "Professional Tenure", value: "8+ Years", description: "" },
+    { label: "github repositories", value: "1.4k+ Stars", description: "Distributed tools & Rust crates" },
+    { label: "github commits", value: "99.99%", description: "Guaranteed mission-critical SLAs" },
+    { label: "Community contributions", value: "500M+ Evts", description: "Zero message drop persistence" },
+  ];
 
   useEffect(() => {
     extractWorkData().then((data) => setRecentWork(data));
