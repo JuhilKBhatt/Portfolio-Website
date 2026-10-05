@@ -124,11 +124,31 @@ export default function Home() {
 
       <section style={{ width: "min(1200px, calc(100% - 32px))", margin: "0 auto clamp(40px, 5vw, 72px)" }}>
         <SectionTitle
-          tag="radar chart"
-          title="TECH STACK & HANDS ON EXPERIENCE"
+          tag="Radar Chart"
+          title="HANDS ON EXPERIENCE"
           meta=""
-          actionText="View Full Tech Stack ->"
+          actionText="View Full Tech Stack List ->"
           actionLink="/tech-stack"
+        />
+      </section>
+
+      <section style={{ width: "min(1200px, calc(100% - 32px))", margin: "0 auto clamp(40px, 5vw, 72px)" }}>
+        <SectionTitle
+          tag="Compact Cards"
+          title="RECENT PROJECTS"
+          meta="Showcase of my software . "
+          actionText="View Full Project List ->"
+          actionLink="/projects"
+        />
+      </section>
+
+      <section style={{ width: "min(1200px, calc(100% - 32px))", margin: "0 auto clamp(40px, 5vw, 72px)" }}>
+        <SectionTitle
+          tag="Form"
+          title="INTERESTED IN WORKING TOGETHER?"
+          meta="Have an opporunity for me?"
+          actionText="Let's start a conversation"
+          actionLink="/contact"
         />
       </section>
     </>
