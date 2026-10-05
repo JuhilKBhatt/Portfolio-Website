@@ -8,6 +8,7 @@ import { extractWorkData } from "../scripts/extractWorkData";
 import "../styles/customHomePage.css";
 import ActiveDot from "../components/ActiveDot";
 import MetricsBanner from "../components/MetricsBanner";
+import SectionTitle from "../components/SectionTitle";
 import { useGitHubStats } from "../hooks/useGitHubStats";
 
 export default function Home() {
@@ -120,6 +121,16 @@ export default function Home() {
       </section>
 
       <MetricsBanner metrics={heroMetrics} />
+
+      <section style={{ width: "min(1200px, calc(100% - 32px))", margin: "0 auto clamp(40px, 5vw, 72px)" }}>
+        <SectionTitle
+          tag="radar chart"
+          title="TECH STACK & HANDS ON EXPERIENCE"
+          meta=""
+          actionText="View Full Tech Stack ->"
+          actionLink="/tech-stack"
+        />
+      </section>
     </>
   );
 }
