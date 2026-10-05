@@ -72,7 +72,7 @@ export default function Home() {
           </picture>
           <div className="hero-card-info">
             <div className="hero-card-badge">
-              <ActiveDot color="#ee9c22ff" size={5} className="nav-active-dot-mobile" />
+              <ActiveDot color="#77ea41ff" size={5} className="nav-active-dot-mobile" />
               <span>AVAILABLE FOR WORK</span>
             </div>
             <h3 className="hero-card-name">Juhil K. Bhatt</h3>
