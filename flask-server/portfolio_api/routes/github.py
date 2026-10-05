@@ -6,7 +6,7 @@ import requests
 from flask import Blueprint, current_app, jsonify, request
 
 from ..extensions import cache, limiter
-from ..services.github import list_repos_with_portfolio_info
+from ..services.github import get_user_stats, list_repos_with_portfolio_info
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +40,35 @@ def get_repos_with_portfolio_info(username):
 
     resp = jsonify(repos)
     # Cloudflare edge caches for 2 hours, browser revalidates after 30 min
+    resp.headers["Cache-Control"] = "public, max-age=1800, s-maxage=7200, stale-while-revalidate=1800"
+    return resp
+
+
+@github_bp.route("/<username>/stats")
+@github_bp.route("/<username>/metrics")
+@limiter.limit("30 per minute")
+@cache.cached(timeout=7200, query_string=True)  # 2-hour cache
+def get_user_metrics(username):
+    # Validate GitHub username characters to prevent path manipulation
+    if not USERNAME_RE.match(username):
+        return jsonify({"error": "Invalid username format"}), 400
+
+    # Prevent using server as arbitrary proxy for third-party profiles
+    if username.lower() not in current_app.config["ALLOWED_GITHUB_USERS"]:
+        logger.warning("Unauthorized GitHub user queried for stats: %s", username)
+        return jsonify({"error": "Profile query not permitted"}), 403
+
+    try:
+        stats = get_user_stats(username, current_app.config["GITHUB_TOKEN"])
+    except requests.HTTPError as err:
+        logger.error("GitHub API error fetching stats: %s", err, exc_info=True)
+        status = err.response.status_code if err.response is not None else 502
+        return jsonify({"error": "Failed to retrieve GitHub stats."}), status
+    except Exception as err:
+        logger.error("Internal error fetching stats: %s", err, exc_info=True)
+        return jsonify({"error": "An internal error occurred."}), 500
+
+    resp = jsonify(stats)
     resp.headers["Cache-Control"] = "public, max-age=1800, s-maxage=7200, stale-while-revalidate=1800"
     return resp
 

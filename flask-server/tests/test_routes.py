@@ -91,3 +91,41 @@ def test_rate_limit_returns_json(client):
     resp = client.post("/api/github/juhilkbhatt/refresh")
     assert resp.status_code == 429
     assert "error" in resp.get_json()
+
+
+def test_stats_rejects_invalid_username(client):
+    # Given a malformed username, When requesting stats, Then 400
+    assert client.get("/api/github/bad_name!/stats").status_code == 400
+
+
+def test_stats_rejects_non_allowlisted_user(client):
+    # Given a valid but non-allowlisted user, Then 403
+    assert client.get("/api/github/someoneelse/stats").status_code == 403
+
+
+def test_stats_returns_metrics(client, monkeypatch):
+    # Given GitHub user and search endpoints, When requesting stats, Then total projects, commits, and community contributions are returned
+    def fake_get(url, params=None, **_):
+        if url.lower().endswith("/users/juhilkbhatt"):
+            return FakeResponse({"public_repos": 26})
+        if "search/commits" in url:
+            if params and "-user:" in params.get("q", ""):
+                return FakeResponse({"total_count": 5})
+            return FakeResponse({"total_count": 120})
+        return FakeResponse(status=404)
+
+    monkeypatch.setattr(github.requests, "get", fake_get)
+    resp = client.get("/api/github/juhilkbhatt/stats")
+    assert resp.status_code == 200
+    data = resp.get_json()
+    assert data["total_projects"] == 26
+    assert data["total_commits"] == 120
+    assert data["community_contributions"] == 5
+    assert data["community_commits"] == 5
+    assert "s-maxage=7200" in resp.headers["Cache-Control"]
+
+
+def test_stats_passes_through_github_error_status(client, monkeypatch):
+    # Given GitHub returns 503 on stats query, Then 503 status is returned
+    monkeypatch.setattr(github.requests, "get", lambda *a, **k: FakeResponse(status=503))
+    assert client.get("/api/github/juhilkbhatt/stats").status_code == 503

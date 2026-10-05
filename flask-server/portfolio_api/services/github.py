@@ -57,3 +57,40 @@ def list_repos_with_portfolio_info(username, token=None):
                 pass  # One broken repo shouldn't break the whole list
 
     return enriched
+
+
+def get_user_stats(username, token=None):
+    """
+    Fetch user metrics:
+    - total_projects (public repos count)
+    - total_commits (commits authored by user)
+    - community_contributions / community_commits (commits authored by user in external repos)
+    """
+    def fetch_user():
+        return github_request(f"{API}/users/{username}", token)
+
+    def fetch_commits():
+        return github_request(f"{API}/search/commits", token, params={"q": f"author:{username}"})
+
+    def fetch_community_commits():
+        return github_request(f"{API}/search/commits", token, params={"q": f"author:{username} -user:{username}"})
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+        user_future = executor.submit(fetch_user)
+        commits_future = executor.submit(fetch_commits)
+        community_future = executor.submit(fetch_community_commits)
+
+        user_data = user_future.result()
+        commits_data = commits_future.result()
+        community_data = community_future.result()
+
+    total_projects = user_data.get("public_repos", 0)
+    total_commits = commits_data.get("total_count", 0)
+    community_commits = community_data.get("total_count", 0)
+
+    return {
+        "total_projects": total_projects,
+        "total_commits": total_commits,
+        "community_contributions": community_commits,
+        "community_commits": community_commits,
+    }

@@ -102,7 +102,7 @@ flask-server/
 │   ├── extensions.py       # cache, cors, limiter singletons
 │   ├── routes/             # HTTP layer (Blueprints)
 │   │   ├── health.py       # /api/ping
-│   │   └── github.py       # /api/github/<user>/repos, /refresh
+│   │   └── github.py       # /api/github/<user>/repos, /stats, /refresh
 │   └── services/
 │       └── github.py       # GitHub API calls (no Flask code)
 └── tests/                  # pytest suite (excluded from Docker image)
