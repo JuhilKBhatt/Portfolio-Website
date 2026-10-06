@@ -56,7 +56,7 @@ export default function ProjectCard({ project, index }) {
     return isVisible ? (info?.images || []).filter(Boolean) : [];
   }, [isVisible, info?.images]);
 
-  // Derived top-left badge tag: e.g. "01 // REPO: 100percentguides"
+  // Derived top-left badge tag: shows category instead of repo name (e.g. "01 // FULL STACK")
   const topTag = useMemo(() => {
     const prefix =
       index != null
@@ -64,13 +64,13 @@ export default function ProjectCard({ project, index }) {
         : project?.id
         ? `PROJ-${project.id} // `
         : "";
-    const repoLabel = project?.name
-      ? `REPO: ${project.name}`
-      : info?.category
-      ? `REPO: ${info.category}`
-      : "REPO";
-    return `${prefix}${repoLabel}`;
-  }, [index, project?.id, project?.name, info?.category]);
+    const category = (
+      info?.category ||
+      info?.type ||
+      "General"
+    ).toUpperCase();
+    return `${prefix}${category}`;
+  }, [index, project?.id, info?.category, info?.type]);
 
   // Status badge on media overlay: e.g. "• vProd", "• vBeta", "• vAlpha"
   const rawStatus = info?.version || "Prod";

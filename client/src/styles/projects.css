@@ -31,6 +31,154 @@
   line-height: 1.6;
 }
 
+/* Category & Sorting Filter Bar */
+.projects-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: -6px;
+  margin-bottom: 32px;
+  padding: 12px 18px;
+  background: rgba(14, 17, 23, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.projects-category-tabs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-category-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.project-category-tab:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.project-category-tab.is-active {
+  background: rgba(234, 88, 12, 0.14);
+  border-color: rgba(234, 88, 12, 0.6);
+  color: #fb923c;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(234, 88, 12, 0.18);
+}
+
+.project-tab-count {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+}
+
+.project-category-tab.is-active .project-tab-count {
+  background: rgba(234, 88, 12, 0.25);
+  color: #fdba74;
+}
+
+/* Sort Controls */
+.projects-sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projects-sort-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.04em;
+}
+
+.projects-sort-buttons {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.projects-sort-btn {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: #94a3b8;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.projects-sort-btn:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.projects-sort-btn.is-active {
+  color: #fb923c;
+  background: rgba(234, 88, 12, 0.16);
+  border-color: rgba(234, 88, 12, 0.5);
+  font-weight: 600;
+}
+
+/* Empty Filter State */
+.projects-empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: #94a3b8;
+  font-family: 'Lexend', sans-serif;
+}
+
+.projects-reset-filter-btn {
+  margin-top: 12px;
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  padding: 8px 18px;
+  border-radius: 6px;
+  background: rgba(234, 88, 12, 0.15);
+  border: 1px solid #ea580c;
+  color: #fb923c;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.projects-reset-filter-btn:hover {
+  background: #ea580c;
+  color: #ffffff;
+}
+
 /* Responsive Grid wrapper */
 .projects-grid {
   display: grid;
