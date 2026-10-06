@@ -4,7 +4,7 @@ import { useState } from "react";
 import { message } from "antd";
 
 export function useContactForm(form, options = {}) {
-  const { turnstileRef, setTurnstileToken } = options;
+  const { turnstileRef, setTurnstileToken, onSuccess, onError } = options;
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState(null);
@@ -29,6 +29,22 @@ export function useContactForm(form, options = {}) {
         throw new Error("Contact API URL is not configured in environment variables.");
       }
 
+      // Compile rich transmission body if structured metadata is provided
+      let messagePayload = formData.message || "";
+      const metaLines = [
+        formData.company ? `Company / Organization: ${formData.company}` : null,
+        formData.opportunityType ? `Opportunity Type: ${formData.opportunityType}` : null,
+        formData.compensation ? `Compensation & Details: ${formData.compensation}` : null,
+      ].filter(Boolean);
+
+      if (metaLines.length > 0) {
+        messagePayload = [
+          ...metaLines,
+          "--------------------------------------------------",
+          formData.message || "",
+        ].join("\n");
+      }
+
       const response = await fetch(contactApiUrl, {
         method: "POST",
         headers: {
@@ -37,7 +53,11 @@ export function useContactForm(form, options = {}) {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          message: formData.message,
+          message: messagePayload,
+          company: formData.company || "",
+          opportunityType: formData.opportunityType || "",
+          compensation: formData.compensation || "",
+          rawMessage: formData.message || "",
           ...(formData.turnstileToken && { "cf-turnstile-response": formData.turnstileToken }),
         }),
       });
@@ -47,14 +67,23 @@ export function useContactForm(form, options = {}) {
       }
 
       setIsSuccess(true);
-      message.success("Message sent successfully!");
+      message.success("Transmission dispatched successfully!");
       if (form && typeof form.resetFields === "function") {
         form.resetFields();
       }
+      if (typeof onSuccess === "function") {
+        onSuccess();
+      }
+      return { success: true };
     } catch (err) {
       console.error("Error sending message:", err);
-      setError(err.message || "Failed to send message");
+      const errMsg = err.message || "Failed to send message";
+      setError(errMsg);
       message.error("Failed to send message. Please try again later.");
+      if (typeof onError === "function") {
+        onError(err);
+      }
+      return { success: false, error: errMsg };
     } finally {
       resetTurnstile();
       setIsLoading(false);

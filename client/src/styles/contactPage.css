@@ -17,11 +17,12 @@
   font-family: 'Lexend', sans-serif;
   font-weight: 800;
   margin-bottom: 8px;
+  color: #f8fafc;
 }
 
 .contact-intro p {
-  font-size: 1.1rem !important;
-  color: #666 !important;
+  font-size: 1.05rem !important;
+  color: #94a3b8 !important;
   max-width: 600px !important;
   margin: 0 auto !important;
   line-height: 1.6 !important;
@@ -31,9 +32,15 @@
 .contact-divider {
   width: 60px;
   height: 4px;
-  background-color: #F04B24;
-  margin: 16px auto;
+  background-color: #ea580c;
+  margin: 16px auto 36px;
   border-radius: 4px;
+}
+
+.contact-form-container {
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto 64px;
 }
 
 /* Custom Card styling */

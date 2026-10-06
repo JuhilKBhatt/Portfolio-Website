@@ -11,6 +11,7 @@ import MetricsBanner from "../components/MetricsBanner";
 import SectionTitle from "../components/SectionTitle";
 import RadarGraph from "../components/RadarGraph";
 import CompactCard from "../components/CompactCard";
+import DispatchContactForm from "../components/DispatchContactForm";
 import { useGitHubStats } from "../hooks/useGitHubStats";
 import { useTechStack } from "../hooks/useTechStack";
 
@@ -174,6 +175,7 @@ export default function Home() {
           actionText="Let's start a conversation"
           actionLink="/contact"
         />
+        <DispatchContactForm style={{ marginTop: "28px" }} />
       </section>
     </>
   );
