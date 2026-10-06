@@ -14,9 +14,6 @@ import {
 export const setNavIcon = {
   home: HomeOutlined,
   projects: FolderOpenOutlined,
-  "tech stack": CodeOutlined,
-  "tech-stack": CodeOutlined,
-  techstack: CodeOutlined,
   work: IdcardOutlined,
   experience: IdcardOutlined,
   education: BookOutlined,
