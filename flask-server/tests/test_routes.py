@@ -31,8 +31,8 @@ def fake_github(monkeypatch):
     def fake_get(url, **_):
         if url.lower().endswith("/users/juhilkbhatt/repos"):
             return FakeResponse([
-                {"name": "with-info", "html_url": "https://github.com/a", "description": "A"},
-                {"name": "no-info", "html_url": "https://github.com/b", "description": "B"},
+                {"id": 101, "name": "with-info", "html_url": "https://github.com/a", "description": "A"},
+                {"id": 102, "name": "no-info", "html_url": "https://github.com/b", "description": "B"},
             ])
         if "/with-info/contents/" in url:
             return FakeResponse(_encoded({"Priority": 1}))
@@ -61,6 +61,8 @@ def test_repos_merges_portfolio_info(client, fake_github):
     resp = client.get("/api/github/JuhilKBhatt/repos")
     assert resp.status_code == 200
     by_name = {r["name"]: r for r in resp.get_json()}
+    assert by_name["with-info"]["id"] == 101
+    assert by_name["no-info"]["id"] == 102
     assert by_name["with-info"]["portfolio_info"] == {"Priority": 1}
     assert by_name["no-info"]["portfolio_info"] is None
     assert "s-maxage=7200" in resp.headers["Cache-Control"]

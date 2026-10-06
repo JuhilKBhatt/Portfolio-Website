@@ -9,10 +9,14 @@ import "../styles/customHomePage.css";
 import ActiveDot from "../components/ActiveDot";
 import MetricsBanner from "../components/MetricsBanner";
 import SectionTitle from "../components/SectionTitle";
+import RadarGraph from "../components/RadarGraph";
+import CompactCard from "../components/CompactCard";
 import { useGitHubStats } from "../hooks/useGitHubStats";
+import { useTechStack } from "../hooks/useTechStack";
 
 export default function Home() {
   const { stats } = useGitHubStats("juhilkbhatt");
+  const { techStack, categoryData, projects, loading: projectsLoading } = useTechStack("juhilkbhatt");
   const [recentWork, setRecentWork] = useState([]);
 
   useEffect(() => {
@@ -77,6 +81,13 @@ export default function Home() {
     ];
   }, [stats, tenureYears]);
 
+  const featuredProjects = useMemo(() => {
+    if (!Array.isArray(projects)) return [];
+    return projects
+      .filter((p) => p.portfolio_info && p.portfolio_info.Visibilty === true)
+      .slice(0, 6);
+  }, [projects]);
+
   return (
     <>
       {/* Hero Section */}
@@ -130,6 +141,7 @@ export default function Home() {
           actionText="View Full Tech Stack List ->"
           actionLink="/tech-stack"
         />
+        <RadarGraph techStack={techStack} categoryData={categoryData} />
       </section>
 
       <section style={{ width: "min(1200px, calc(100% - 32px))", margin: "0 auto clamp(40px, 5vw, 72px)" }}>
@@ -140,6 +152,18 @@ export default function Home() {
           actionText="View Full Project List ->"
           actionLink="/projects"
         />
+        {projectsLoading && featuredProjects.length === 0 ? (
+          <CompactCard.Skeleton count={6} />
+        ) : (
+          <CompactCard.Grid>
+            {featuredProjects.map((project, idx) => (
+              <CompactCard
+                key={project.id || project.name || idx}
+                project={project}
+              />
+            ))}
+          </CompactCard.Grid>
+        )}
       </section>
 
       <section style={{ width: "min(1200px, calc(100% - 32px))", margin: "0 auto clamp(40px, 5vw, 72px)" }}>

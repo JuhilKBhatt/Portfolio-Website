@@ -44,7 +44,13 @@ def list_repos_with_portfolio_info(username, token=None):
     repos = github_request(f"{API}/users/{username}/repos", token, params={"per_page": 100, "sort": "updated"})
 
     enriched = [
-        {"name": r["name"], "html_url": r["html_url"], "description": r["description"], "portfolio_info": None}
+        {
+            "id": r.get("id"),
+            "name": r["name"],
+            "html_url": r["html_url"],
+            "description": r["description"],
+            "portfolio_info": None,
+        }
         for r in repos
     ]
 

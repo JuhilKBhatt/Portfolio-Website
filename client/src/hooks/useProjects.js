@@ -4,13 +4,23 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export function useProjects(username) {
-  const cacheKey = `portfolio_projects_${username}`;
+  const cacheKey = `portfolio_projects_v3_${username}`;
 
   // Initialize from sessionStorage if available for instant 0ms rendering
   const [projects, setProjects] = useState(() => {
     try {
       const cached = sessionStorage.getItem(cacheKey);
-      return cached ? JSON.parse(cached) : [];
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (
+          Array.isArray(parsed) &&
+          parsed.length > 0 &&
+          parsed.every((p) => p.id != null)
+        ) {
+          return parsed;
+        }
+      }
+      return [];
     } catch {
       return [];
     }
@@ -18,7 +28,16 @@ export function useProjects(username) {
 
   const [loading, setLoading] = useState(() => {
     try {
-      return !sessionStorage.getItem(cacheKey);
+      const cached = sessionStorage.getItem(cacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        return !(
+          Array.isArray(parsed) &&
+          parsed.length > 0 &&
+          parsed.every((p) => p.id != null)
+        );
+      }
+      return true;
     } catch {
       return true;
     }
@@ -34,7 +53,30 @@ export function useProjects(username) {
           `${apiUrl}/api/github/${username}/repos`
         );
 
-        const sorted = (res.data || []).sort((a, b) => {
+        let localPortfolioInfo = null;
+        try {
+          const localInfoRes = await fetch("/PortfolioWebsiteInfo.json");
+          if (localInfoRes.ok) {
+            localPortfolioInfo = await localInfoRes.json();
+          }
+        } catch {
+          // Ignore if local PortfolioWebsiteInfo.json cannot be fetched
+        }
+
+        const enriched = (res.data || []).map((repo) => {
+          if (repo.name === "Portfolio-Website" && localPortfolioInfo) {
+            return {
+              ...repo,
+              portfolio_info: {
+                ...repo.portfolio_info,
+                ...localPortfolioInfo,
+              },
+            };
+          }
+          return repo;
+        });
+
+        const sorted = enriched.sort((a, b) => {
           const pA = a.portfolio_info?.Priority ?? Infinity;
           const pB = b.portfolio_info?.Priority ?? Infinity;
           return pA - pB;

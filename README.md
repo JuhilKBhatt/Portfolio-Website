@@ -170,8 +170,11 @@ Repositories can define their technical capabilities using the categorized `tech
   },
   "liveDemo": "https://juhilkbhatt.github.io/Portfolio-Website/",
   "images": [ ... ],
-  "Highlights": [ ... ],
   "Priority": 1,
+  "category": "Full Stack",
+  "type": "Solo",
+  "version": "Prod",
+  "versionNumber": "1.0.0",
   "Visibilty": true
 }
 ```
@@ -180,4 +183,5 @@ Repositories can define their technical capabilities using the categorized `tech
 - **`RadarGraph.jsx`:** Modular SVG-based radar chart rendering an Overview of all 5 disciplines as well as dedicated per-category drill-down radar charts. Features dynamic axis recalculation, interactive category filter tabs, concentric grid levels, vertex glow effects, and a companion breakdown panel with project badges and tool associations.
 - **`useTechStack.js`:** React hook that aggregates categorized tools and projects across all ingested repositories, tracking which projects use each tool and discipline, with canonical naming and case-insensitive deduplication.
 - **`ProjectCard.jsx`:** Backward-compatible renderer supporting both new `techStack` category objects and legacy `language` arrays.
+- **`CompactCard.jsx`:** Callable, dynamically generated component showcasing projects and arbitrary technical data with terminal/cyberpunk styling, dynamic tag formatting (`PROJ-<repoId> // <CATEGORY>` using real GitHub repository IDs), status badge variants (`Prod`, `Beta`, `Alpha`) styled via `getBadgeClass`, adjacent version number pills (`vX.Y.Z` derived from `PortfolioWebsiteInfo.json`), tag pills, bottom baseline alignment, zero-CLS skeleton states (`CompactCard.Skeleton`), and responsive grid layout (`CompactCard.Grid`).
 
