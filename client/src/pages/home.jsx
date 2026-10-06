@@ -124,7 +124,7 @@ export default function Home() {
 
       <section style={{ width: "min(1200px, calc(100% - 32px))", margin: "0 auto clamp(40px, 5vw, 72px)" }}>
         <SectionTitle
-          tag="Radar Chart"
+          tag="Radar Graph"
           title="HANDS ON EXPERIENCE"
           meta="Tools and technologies I work with"
           actionText="View Full Tech Stack List ->"
