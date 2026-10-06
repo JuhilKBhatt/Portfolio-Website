@@ -5,12 +5,14 @@ import { Layout, Flex } from "antd";
 import {
   HashRouter as Router,
   Routes,
-  Route
+  Route,
+  useLocation
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import FooterComponent from "./components/Footer";
 import { getNavList } from "./scripts/getNavList";
 import LoadingScreen from "./components/LoadingScreen";
+import RouteProgressBar from "./components/RouteProgressBar";
 import "./styles/customApp.css";
 import "./styles/customHeader.css";
 import "./styles/customFooter.css";
@@ -19,9 +21,11 @@ const { Header, Content, Footer } = Layout;
 const navItems = getNavList();
 
 const AppLayout = () => {
+  const location = useLocation();
 
   return (
     <>
+      <RouteProgressBar />
       <div className="grid-background" />
       <Flex gap="middle" wrap>
         <Layout className="layoutStyle">
@@ -35,12 +39,14 @@ const AppLayout = () => {
           {/* Content */}
           <Content>
             <React.Suspense fallback={<LoadingScreen />}>
-              <Routes>
-                {navItems.map(({ key, element }) => (
-                  <Route key={key} path={key} element={React.createElement(element)} />
-                ))}
-                <Route path="*" element={<div>404: Page Not Found</div>} />
-              </Routes>
+              <div key={location.pathname} className="page-transition-wrapper">
+                <Routes location={location}>
+                  {navItems.map(({ key, element }) => (
+                    <Route key={key} path={key} element={React.createElement(element)} />
+                  ))}
+                  <Route path="*" element={<div>404: Page Not Found</div>} />
+                </Routes>
+              </div>
             </React.Suspense>
           </Content>
 
@@ -61,6 +67,5 @@ const App = () => {
     </Router>
   );
 };
-
 
 export default App;

@@ -26,7 +26,6 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * Connects directly to the existing AWS Lambda / API Gateway serverless contact pipeline.
  */
 export default function DispatchContactForm({
-  title = "sys/dispatch_outreach.sh",
   securityTag = "END-TO-END ENCRYPTED",
   defaultOpportunityType = "Full-time Staff / Principal Role",
   opportunityTypes = DEFAULT_OPPORTUNITY_TYPES,

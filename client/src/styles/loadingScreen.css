@@ -9,6 +9,9 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+  background: rgba(13, 16, 23, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .loading-screen-wrapper.loading-screen-inline {
@@ -18,6 +21,9 @@
   z-index: 1;
   padding: 48px 16px;
   width: 100%;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* Spinner animation */
@@ -32,7 +38,7 @@
   content: "";
   position: absolute;
   border-radius: 50px;
-  box-shadow: 0 0 0 5px inset #F04B24;
+  box-shadow: 0 0 0 5px inset #ea580c;
   animation: l5 2.5s infinite;
 }
 
@@ -56,12 +62,13 @@
 /* "Loading..." text typing effect */
 .loader-text {
   width: fit-content;
-  font-weight: bold;
-  font-family: monospace;
-  font-size: 30px;
+  font-weight: 600;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 22px;
   clip-path: inset(0 3ch 0 0);
   animation: l4 1s steps(4) infinite;
-  color: #333;
+  color: #f8fafc;
+  letter-spacing: 0.05em;
 }
 
 .loader-text:before {
