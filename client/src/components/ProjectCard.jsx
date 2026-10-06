@@ -183,9 +183,15 @@ export default function ProjectCard({ project }) {
               </div>
             )}
             <div className="project-tags">
-              {info.language?.filter(lang => lang && lang.trim() !== "").map((lang) => (
-                <Tag key={lang} color={getColor(lang)}>{lang}</Tag>
-              ))}
+              {(
+                (info.techStack && typeof info.techStack === "object"
+                  ? Object.values(info.techStack).flat()
+                  : info.language) || []
+              )
+                ?.filter((lang) => lang && typeof lang === "string" && lang.trim() !== "")
+                .map((lang) => (
+                  <Tag key={lang} color={getColor(lang)}>{lang}</Tag>
+                ))}
             </div>
           </div>
         }
