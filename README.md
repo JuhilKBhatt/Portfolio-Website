@@ -147,3 +147,37 @@ cd client
 npm run build
 ```
 This generates a `dist` folder which can be hosted on GitHub Pages, Vercel, Netlify, or served statically using Nginx.
+
+---
+
+## 📊 Tech Stack & Radar Graph Architecture
+
+The portfolio dynamically visualizes hands-on experience via an interactive SVG Radar Graph (`RadarGraph.jsx`).
+
+### `PortfolioWebsiteInfo.json` Schema
+Repositories can define their technical capabilities using the categorized `techStack` object:
+
+```json
+{
+  "title": "Portfolio Website",
+  "description": "A full-stack personal portfolio website showcasing my projects, skills, and experience...",
+  "techStack": {
+    "Frontend": ["React", "Vite", "CSS", "Ant Design"],
+    "Backend": ["Python", "Flask", "Gunicorn"],
+    "AI": ["Gemini API", "Claude API"],
+    "DevSecOps": ["Docker", "Nginx", "Cloudflare", "AWS", "Cloudinary", "GitHub Actions"],
+    "Test Automation": ["Pytest"]
+  },
+  "liveDemo": "https://juhilkbhatt.github.io/Portfolio-Website/",
+  "images": [ ... ],
+  "Highlights": [ ... ],
+  "Priority": 1,
+  "Visibilty": true
+}
+```
+
+### Components & Pipelines
+- **`RadarGraph.jsx`:** Modular SVG-based radar chart rendering an Overview of all 5 disciplines as well as dedicated per-category drill-down radar charts. Features dynamic axis recalculation, interactive category filter tabs, concentric grid levels, vertex glow effects, and a companion breakdown panel with project badges and tool associations.
+- **`useTechStack.js`:** React hook that aggregates categorized tools and projects across all ingested repositories, tracking which projects use each tool and discipline, with canonical naming and case-insensitive deduplication.
+- **`ProjectCard.jsx`:** Backward-compatible renderer supporting both new `techStack` category objects and legacy `language` arrays.
+
