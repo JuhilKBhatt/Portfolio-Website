@@ -126,7 +126,7 @@ export default function Home() {
         <SectionTitle
           tag="Radar Chart"
           title="HANDS ON EXPERIENCE"
-          meta=""
+          meta="Tools and technologies I work with"
           actionText="View Full Tech Stack List ->"
           actionLink="/tech-stack"
         />
@@ -136,7 +136,7 @@ export default function Home() {
         <SectionTitle
           tag="Compact Cards"
           title="RECENT PROJECTS"
-          meta="Showcase of my software . "
+          meta="Showcase of my software solutions"
           actionText="View Full Project List ->"
           actionLink="/projects"
         />
