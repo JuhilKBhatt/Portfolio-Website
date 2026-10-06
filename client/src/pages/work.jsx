@@ -79,7 +79,7 @@ export default function Work() {
       <PageTitle
         tag="CAREER LOG"
         title="Work Experience"
-        subtitle="Chronological career milestones, technical leadership, and engineering impact across industry roles."
+        subtitle="A breakdown of roles I've worked in and the time spent in each - from customer support to IT & management."
         meta={!loading && workData.length > 0 ? `${filteredData.length} MILESTONES RECORDED` : null}
       />
 

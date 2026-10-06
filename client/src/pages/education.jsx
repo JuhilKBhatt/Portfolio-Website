@@ -166,7 +166,7 @@ export default function Education() {
         <PageTitle
           category="ACADEMIC CREDENTIALS"
           title="Education"
-          subtitle="Scholastic chronology, institutional degrees, and verified credentials."
+          subtitle="A summary of my academic background, qualifications and certifications that shaped my journey."
         />
         <LoadingScreen inline />
       </div>
@@ -178,7 +178,7 @@ export default function Education() {
       <PageTitle
         category="ACADEMIC CREDENTIALS"
         title="Education"
-        subtitle="Scholastic chronology, institutional degrees, and verified credentials."
+        subtitle="A summary of my academic background, qualifications and certifications that shaped my journey."
       />
 
       <div className="education-grid">
@@ -416,7 +416,7 @@ export default function Education() {
             <div className="chronology-header">
               <div className="chronology-title">
                 <LineChartOutlined className="chronology-icon" />
-                <span>Scholastic Chronology</span>
+                <span>Education Timeline</span>
               </div>
               <span className="chronology-badge">
                 {educationData.length} NODES RECORDED
