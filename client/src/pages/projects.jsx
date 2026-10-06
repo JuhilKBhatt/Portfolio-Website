@@ -25,7 +25,7 @@ export default function Projects() {
           const key = project.id || project.name || index;
           return (
             <div className="projects-grid-item" key={key}>
-              <ProjectCard project={project} />
+              <ProjectCard project={project} index={index} />
             </div>
           );
         })}

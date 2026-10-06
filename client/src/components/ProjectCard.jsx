@@ -1,29 +1,15 @@
 // ./client/src/components/ProjectCard.jsx
 
-import { Card, Carousel, Tag, Tooltip, Row, Col, Image } from "antd";
+import PropTypes from "prop-types";
+import { Carousel, Image, Tooltip } from "antd";
 import {
   GlobalOutlined,
-  GithubOutlined,
-  VideoCameraOutlined,
   CodeOutlined,
+  PlayCircleOutlined,
+  FolderOpenOutlined,
 } from "@ant-design/icons";
-import "../styles/projectCard.css";
 import { useMemo, useState } from "react";
-
-const { Meta } = Card;
-
-const colors = [
-  "magenta", "red", "volcano", "orange", "gold",
-  "lime", "green", "cyan", "blue", "geekblue", "purple"
-];
-
-function getColor(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return colors[Math.abs(hash) % colors.length];
-}
+import "../styles/projectCard.css";
 
 function optimizeImageUrl(url, width = 800) {
   if (!url || typeof url !== "string") return url;
@@ -47,6 +33,10 @@ function ProjectPlaceholder({ title }) {
   );
 }
 
+ProjectPlaceholder.propTypes = {
+  title: PropTypes.string,
+};
+
 function isSafeUrl(url) {
   if (!url || typeof url !== "string") return false;
   try {
@@ -57,7 +47,7 @@ function isSafeUrl(url) {
   }
 }
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, index }) {
   const info = project?.portfolio_info;
   const isVisible = Boolean(info && info.Visibilty === true);
   const [imageFailed, setImageFailed] = useState(false);
@@ -66,136 +56,272 @@ export default function ProjectCard({ project }) {
     return isVisible ? (info?.images || []).filter(Boolean) : [];
   }, [isVisible, info?.images]);
 
-  const imageContent = useMemo(() => {
-    if (!isVisible) return null;
+  // Derived top-left badge tag: e.g. "01 // REPO: 100percentguides"
+  const topTag = useMemo(() => {
+    const prefix =
+      index != null
+        ? `${String(index + 1).padStart(2, "0")} // `
+        : project?.id
+        ? `PROJ-${project.id} // `
+        : "";
+    const repoLabel = project?.name
+      ? `REPO: ${project.name}`
+      : info?.category
+      ? `REPO: ${info.category}`
+      : "REPO";
+    return `${prefix}${repoLabel}`;
+  }, [index, project?.id, project?.name, info?.category]);
 
-    // Fallback to elegant native placeholder if no images exist or image fails to load
+  // Status badge on media overlay: e.g. "• vProd", "• vBeta", "• vAlpha"
+  const rawStatus = info?.version || "Prod";
+  const badgeKey = String(rawStatus).toLowerCase().trim();
+  const statusBadge = rawStatus
+    ? String(rawStatus).toLowerCase().startsWith("v")
+      ? rawStatus
+      : `v${rawStatus}`
+    : null;
+
+  // Version pill in title row: e.g. "v2.4", "v1.0.0"
+  const versionPill = useMemo(() => {
+    const raw = info?.versionNumber;
+    if (!raw) return null;
+    return String(raw).startsWith("v") ? raw : `v${raw}`;
+  }, [info?.versionNumber]);
+
+  // Aggregated tech tags with category classification
+  const allTags = useMemo(() => {
+    if (info?.techStack && typeof info.techStack === "object") {
+      const items = [];
+      for (const [category, list] of Object.entries(info.techStack)) {
+        if (Array.isArray(list)) {
+          const catLower = category.toLowerCase();
+          let categoryClass = "";
+          if (catLower.includes("ai")) categoryClass = "tag-ai";
+          else if (catLower.includes("devsecops") || catLower.includes("cloud")) categoryClass = "tag-devsecops";
+          else if (catLower.includes("backend")) categoryClass = "tag-backend";
+          else if (catLower.includes("frontend")) categoryClass = "tag-frontend";
+          else if (catLower.includes("test")) categoryClass = "tag-test";
+
+          for (const item of list) {
+            if (item && typeof item === "string" && item.trim()) {
+              items.push({ name: item.trim(), categoryClass });
+            }
+          }
+        }
+      }
+      return items;
+    }
+
+    if (Array.isArray(info?.language)) {
+      return info.language
+        .filter((item) => item && typeof item === "string" && item.trim())
+        .map((item) => ({ name: item.trim(), categoryClass: "" }));
+    }
+
+    return [];
+  }, [info?.techStack, info?.language]);
+
+  const mediaContent = useMemo(() => {
     if (imageFailed || filteredImages.length === 0) {
-      return <ProjectPlaceholder title={info?.title || project.name} />;
+      return <ProjectPlaceholder title={info?.title || project?.name} />;
     }
 
     if (filteredImages.length > 1) {
       return (
-        <Carousel autoplay className="project-carousel">
-          {filteredImages.map((url, i) => (
-            <Image
-              key={url || i}
-              src={optimizeImageUrl(url, 800)}
-              preview={{ src: optimizeImageUrl(url, 2560) }}
-              alt={`${info?.title || project.name} Screenshot ${i + 1}`}
-              className="project-image"
-              loading="lazy"
-              onError={() => setImageFailed(true)}
-              style={{ objectFit: 'cover', width: '100%', height: 'auto', aspectRatio: '2/1' }}
-            />
-          ))}
-        </Carousel>
+        <Image.PreviewGroup>
+          <Carousel autoplay dots className="project-carousel">
+            {filteredImages.map((url, i) => (
+              <div key={url || i} className="project-carousel-slide">
+                <Image
+                  src={optimizeImageUrl(url, 800)}
+                  preview={{ src: optimizeImageUrl(url, 2560) }}
+                  alt={`${info?.title || project?.name} Screenshot ${i + 1}`}
+                  className="project-image"
+                  loading="lazy"
+                  onError={() => setImageFailed(true)}
+                />
+              </div>
+            ))}
+          </Carousel>
+        </Image.PreviewGroup>
       );
     }
 
     return (
       <Image
-        alt={`${info?.title || project.name} Cover`}
+        alt={`${info?.title || project?.name} Cover`}
         src={optimizeImageUrl(filteredImages[0], 800)}
         preview={{ src: optimizeImageUrl(filteredImages[0], 2560) }}
         className="project-image"
         loading="lazy"
         onError={() => setImageFailed(true)}
-        style={{ objectFit: 'cover', width: '100%', height: 'auto', aspectRatio: '2/1' }}
       />
     );
-  }, [isVisible, imageFailed, filteredImages, info?.title, project.name]);
+  }, [imageFailed, filteredImages, info?.title, project?.name]);
 
   if (!isVisible) return null;
 
   return (
-    <Card
-      className="project-card"
-      cover={imageContent}
-      actions={[
-        isSafeUrl(info.liveDemo) ? (
-          <Tooltip title="Live Demo">
-            <a href={info.liveDemo} target="_blank" rel="noopener noreferrer">
-              <GlobalOutlined />
-            </a>
-          </Tooltip>
-        ) : (
-          <Tooltip title="No Live Demo">
-            <span className="disabled-icon">
-              <GlobalOutlined />
+    <article className="project-card">
+      {/* 1. Media Preview on Top with Overlaid Badges */}
+      <div className="project-card-media">
+        {mediaContent}
+        <div className="project-card-media-overlay">
+          <span className="project-card-repo-tag" title={topTag}>
+            {topTag}
+          </span>
+          {statusBadge && (
+            <span
+              className={`project-card-status-pill status-${badgeKey}`.trim()}
+              title={`Status: ${statusBadge}`}
+            >
+              <span className="status-dot">●</span>
+              <span>{statusBadge}</span>
             </span>
-          </Tooltip>
-        ),
-        isSafeUrl(project.html_url) ? (
-          <Tooltip title="GitHub Repo">
-            <a href={project.html_url} target="_blank" rel="noopener noreferrer">
-              <GithubOutlined />
-            </a>
-          </Tooltip>
-        ) : (
-          <Tooltip title="No GitHub URL">
-            <span className="disabled-icon">
-              <GithubOutlined />
-            </span>
-          </Tooltip>
-        ),
-        isSafeUrl(info.videoDemo) ? (
-          <Tooltip title="Video Demo">
-            <a href={info.videoDemo} target="_blank" rel="noopener noreferrer">
-              <VideoCameraOutlined />
-            </a>
-          </Tooltip>
-        ) : (
-          <Tooltip title="No Video Demo">
-            <span className="disabled-icon">
-              <VideoCameraOutlined />
-            </span>
-          </Tooltip>
-        ),
-      ]}
-    >
-      <Meta
-        title={
-          <Row justify="space-between" align="middle">
-            <Col>{info.title || project.name}</Col>
-            {info.version && (
-              <Col>
-                <Tag color="blue" style={{ marginLeft: 8 }}>
-                  v{info.version}
-                </Tag>
-              </Col>
-            )}
-          </Row>
-        }
-        description={
-          <div>
-            <div className="project-description">
-              {info.description || project.description}
+          )}
+        </div>
+      </div>
+
+      {/* 2. Main Card Body Content */}
+      <div className="project-card-body">
+        {/* Title Row with Version Pill */}
+        <div className="project-card-title-row">
+          <h2 className="project-card-title">{info?.title || project?.name}</h2>
+          {versionPill && (
+            <span className="project-card-version-pill">{versionPill}</span>
+          )}
+        </div>
+
+        {/* Description Paragraph */}
+        {(info?.description || project?.description) && (
+          <p className="project-card-description">
+            {info?.description || project?.description}
+          </p>
+        )}
+
+        {/* Engineered Highlights */}
+        {Array.isArray(info?.Highlights) && info.Highlights.length > 0 && (
+          <div className="project-card-highlights">
+            <div className="project-card-highlights-header">
+              <FolderOpenOutlined className="highlights-icon" />
+              <span>ENGINEERED HIGHLIGHTS</span>
             </div>
-            {Array.isArray(info.Highlights) && info.Highlights.length > 0 && (
-              <div className="project-highlights-container">
-                <strong style={{ fontSize: '0.9em' }}>Highlights:</strong>
-                <ul className="project-highlights">
-                  {info.Highlights.map((highlight, idx) => (
-                    <li key={idx}>{highlight}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <div className="project-tags">
-              {(
-                (info.techStack && typeof info.techStack === "object"
-                  ? Object.values(info.techStack).flat()
-                  : info.language) || []
-              )
-                ?.filter((lang) => lang && typeof lang === "string" && lang.trim() !== "")
-                .map((lang) => (
-                  <Tag key={lang} color={getColor(lang)}>{lang}</Tag>
-                ))}
-            </div>
+            <ul className="project-card-highlights-list">
+              {info.Highlights.map((highlight, idx) => (
+                <li key={idx} className="project-card-highlight-item">
+                  <span className="highlight-chevron">&gt;</span>
+                  <span className="highlight-text">{highlight}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        }
-      />
-    </Card>
+        )}
+
+        {/* Tech Stack Pills */}
+        {allTags.length > 0 && (
+          <div className="project-card-tags">
+            {allTags.map((tagItem, idx) => (
+              <span
+                key={`${tagItem.name}-${idx}`}
+                className={`project-tech-pill ${tagItem.categoryClass}`.trim()}
+              >
+                {tagItem.name}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* 3. Action Footer Links */}
+      <div className="project-card-footer">
+        {isSafeUrl(info?.liveDemo) ? (
+          <Tooltip title="Visit Live Website">
+            <a
+              href={info.liveDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card-action"
+            >
+              <GlobalOutlined className="action-icon" />
+              <span>Live Website</span>
+            </a>
+          </Tooltip>
+        ) : (
+          <Tooltip title="No Live Website available">
+            <span className="project-card-action is-disabled">
+              <GlobalOutlined className="action-icon" />
+              <span>Live Website</span>
+            </span>
+          </Tooltip>
+        )}
+
+        {isSafeUrl(project?.html_url) ? (
+          <Tooltip title="View Source Code on GitHub">
+            <a
+              href={project.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card-action"
+            >
+              <CodeOutlined className="action-icon" />
+              <span>Source Code</span>
+            </a>
+          </Tooltip>
+        ) : (
+          <Tooltip title="No Source Code available">
+            <span className="project-card-action is-disabled">
+              <CodeOutlined className="action-icon" />
+              <span>Source Code</span>
+            </span>
+          </Tooltip>
+        )}
+
+        {isSafeUrl(info?.videoDemo) ? (
+          <Tooltip title="Watch Video Demo">
+            <a
+              href={info.videoDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card-action"
+            >
+              <PlayCircleOutlined className="action-icon" />
+              <span>Video Demo</span>
+            </a>
+          </Tooltip>
+        ) : (
+          <Tooltip title="No Video Demo available">
+            <span className="project-card-action is-disabled">
+              <PlayCircleOutlined className="action-icon" />
+              <span>Video Demo</span>
+            </span>
+          </Tooltip>
+        )}
+      </div>
+    </article>
   );
 }
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    description: PropTypes.string,
+    html_url: PropTypes.string,
+    portfolio_info: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      Visibilty: PropTypes.bool,
+      version: PropTypes.string,
+      versionNumber: PropTypes.string,
+      category: PropTypes.string,
+      type: PropTypes.string,
+      liveDemo: PropTypes.string,
+      videoDemo: PropTypes.string,
+      images: PropTypes.arrayOf(PropTypes.string),
+      Highlights: PropTypes.arrayOf(PropTypes.string),
+      techStack: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+      language: PropTypes.arrayOf(PropTypes.string),
+    }),
+  }),
+  index: PropTypes.number,
+};

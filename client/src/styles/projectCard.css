@@ -1,55 +1,178 @@
 /* ./client/src/styles/projectCard.css */
 
-:root {
-  --primary-color: #F04B24;
-  --card-bg: #ffffff;
-  --text-color: #333;
-  --box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-}
-
-.project-card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-/* Main Card Styling */
+/* Main Vertical Project Card */
 .project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   width: 100%;
-  max-width: 360px;
-  margin: 16px auto;
-  border-radius: 12px;
-  background-color: var(--card-bg);
-  box-shadow: var(--box-shadow);
+  background: linear-gradient(180deg, #161922 0%, #11141c 100%);
+  border: 1px solid #232838;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+  overflow: hidden;
+  position: relative;
   box-sizing: border-box;
-  padding: 0; /* Ant Card has internal padding */
-  transition: transform 0.2s ease;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
+  border-color: rgba(240, 75, 36, 0.45);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.55), 0 0 24px rgba(240, 75, 36, 0.12);
 }
 
-/* Carousel/Image Styling */
+/* 1. Media Container on Top */
+.project-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0c0e14;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+.project-card-media .ant-image,
+.project-card-media .ant-image-img,
 .project-image {
-  height: 200px;
   width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  display: block;
+  transition: transform 0.35s ease;
 }
 
-/* Placeholder styling when no image is provided or image fails to load */
-.project-placeholder {
-  height: 200px;
+.project-card:hover .project-image {
+  transform: scale(1.02);
+}
+
+/* Carousel Inner Reset */
+.project-carousel,
+.project-carousel .slick-slider,
+.project-carousel .slick-list,
+.project-carousel .slick-track,
+.project-carousel .slick-slide > div,
+.project-carousel-slide {
   width: 100%;
-  aspect-ratio: 2 / 1;
-  background: linear-gradient(135deg, #1e2024 0%, #2b2e36 100%);
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  height: 100%;
+}
+
+.project-carousel .slick-dots {
+  bottom: 8px;
+  z-index: 6;
+}
+
+.project-carousel .slick-dots li button {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+  height: 4px;
+}
+
+.project-carousel .slick-dots li.slick-active button {
+  background: #f97316;
+  width: 18px;
+}
+
+/* Media Overlay Badges (Top Left & Top Right) */
+.project-card-media-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+/* Top Left Repo Tag */
+.project-card-repo-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #cbd5e1;
+  background: rgba(14, 17, 23, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  padding: 3px 9px;
+  letter-spacing: 0.04em;
+  pointer-events: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 68%;
+}
+
+/* Top Right Status Badge */
+.project-card-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  letter-spacing: 0.03em;
+  pointer-events: auto;
+  white-space: nowrap;
+  background: rgba(14, 17, 23, 0.88);
+  border: 1px solid rgba(234, 88, 12, 0.7);
+  color: #fdba74;
+}
+
+.project-card-status-pill .status-dot {
+  font-size: 8px;
+  line-height: 1;
+}
+
+.project-card-status-pill.status-prod {
+  border-color: rgba(234, 88, 12, 0.7);
+  background: rgba(234, 88, 12, 0.16);
+  color: #fdba74;
+}
+
+.project-card-status-pill.status-prod .status-dot {
+  color: #f97316;
+}
+
+.project-card-status-pill.status-beta {
+  border-color: rgba(56, 189, 248, 0.7);
+  background: rgba(56, 189, 248, 0.16);
+  color: #7dd3fc;
+}
+
+.project-card-status-pill.status-beta .status-dot {
+  color: #38bdf8;
+}
+
+.project-card-status-pill.status-alpha {
+  border-color: rgba(244, 63, 94, 0.7);
+  background: rgba(244, 63, 94, 0.16);
+  color: #fda4af;
+}
+
+.project-card-status-pill.status-alpha .status-dot {
+  color: #f43f5e;
+}
+
+/* Fallback Media Placeholder */
+.project-placeholder {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #11141c 0%, #1a1e29 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,7 +183,7 @@
 .project-placeholder-pattern {
   position: absolute;
   inset: 0;
-  opacity: 0.12;
+  opacity: 0.15;
   background-image: radial-gradient(#F04B24 1.5px, transparent 1.5px);
   background-size: 16px 16px;
 }
@@ -82,7 +205,8 @@
 }
 
 .project-placeholder-title {
-  font-size: 14px;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
   font-weight: 500;
   color: #e5e7eb;
   max-width: 260px;
@@ -91,49 +215,263 @@
   white-space: nowrap;
 }
 
-/* Description Styling */
-.project-description {
+/* 2. Main Card Body Content */
+.project-card-body {
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+/* Title Row with Version Pill */
+.project-card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.project-card-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.project-card:hover .project-card-title {
+  color: #ffffff;
+}
+
+.project-card-version-pill {
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+/* Description */
+.project-card-description {
+  font-family: 'Lexend', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #9ca3af;
+  margin: 0 0 18px 0;
+}
+
+/* Engineered Highlights */
+.project-card-highlights {
+  margin-bottom: 18px;
+  background-color: #0d0f16;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.project-card-highlights-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ea580c;
+  margin-bottom: 10px;
+}
+
+.project-card-highlights-header .highlights-icon {
+  font-size: 13px;
+  color: #ea580c;
+}
+
+.project-card-highlights-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-card-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.project-card-highlight-item .highlight-chevron {
+  color: #ea580c;
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+.project-card-highlight-item .highlight-text {
+  color: #cbd5e1;
+}
+
+/* Tech Stack Tags */
+.project-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: auto;
   margin-bottom: 8px;
-  min-height: 66px;
-  color: var(--text-color);
 }
 
-.project-highlights {
-  margin-top: 4px;
-  margin-bottom: 12px;
-  padding-left: 20px;
-  color: var(--text-color);
-  font-size: 0.9em;
-  list-style-type: disc;
+.project-tech-pill {
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  transition: all 0.2s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
 }
 
-.project-highlights li {
-  margin-bottom: 4px;
-  display: list-item;
-  list-style-type: disc !important;
+.project-card:hover .project-tech-pill {
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
-/* Tag Container */
-.project-tags {
-  min-height: 30px;
+.project-tech-pill:hover {
+  background: rgba(240, 75, 36, 0.1);
+  border-color: rgba(240, 75, 36, 0.4);
+  color: #fdba74;
 }
 
-/* Disabled Icon Styling */
-.disabled-icon {
-  opacity: 0.3;
+/* Category Specific Accents */
+.project-tech-pill.tag-ai {
+  color: #fb923c;
+  border-color: rgba(251, 146, 60, 0.25);
+  background: rgba(251, 146, 60, 0.05);
+}
+
+.project-tech-pill.tag-devsecops {
+  color: #ea580c;
+  border-color: rgba(234, 88, 12, 0.25);
+  background: rgba(234, 88, 12, 0.05);
+}
+
+.project-tech-pill.tag-backend {
+  color: #e2e8f0;
+}
+
+.project-tech-pill.tag-frontend {
+  color: #cbd5e1;
+}
+
+.project-tech-pill.tag-test {
+  color: #f472b6;
+  border-color: rgba(244, 114, 182, 0.25);
+  background: rgba(244, 114, 182, 0.05);
+}
+
+/* 3. Action Footer Links */
+.project-card-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid #232838;
+  background: rgba(14, 17, 23, 0.55);
+  margin-top: auto;
+}
+
+.project-card-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 13px 8px;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+.project-card-action:not(:last-child) {
+  border-right: 1px solid #232838;
+}
+
+.project-card-action:hover {
+  color: #ffffff;
+  background: rgba(240, 75, 36, 0.08);
+}
+
+.project-card-action:hover .action-icon {
+  color: #f97316;
+  transform: scale(1.1);
+}
+
+.project-card-action .action-icon {
+  font-size: 13px;
+  color: #94a3b8;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* Disabled Action State */
+.project-card-action.is-disabled {
+  color: #475569;
+  opacity: 0.45;
   cursor: not-allowed;
+  pointer-events: auto; /* Keep hoverable for AntD Tooltip */
 }
 
-/* Responsive Tweaks */
-@media (max-width: 768px) {
-  .project-card {
-    max-width: 100%;
-    width: calc(100% - 32px);
-    margin: 16px auto;
-    border-radius: 8px;
+.project-card-action.is-disabled:hover {
+  background: transparent;
+  color: #475569;
+}
+
+.project-card-action.is-disabled .action-icon {
+  color: #475569;
+  transform: none;
+}
+
+/* Mobile & Tablet Responsive Tweaks */
+@media (max-width: 640px) {
+  .project-card-body {
+    padding: 18px 20px;
   }
 
-  .project-image {
-    height: 160px;
+  .project-card-title {
+    font-size: 19px;
+  }
+
+  .project-card-description {
+    font-size: 12.5px;
+  }
+
+  .project-card-action {
+    font-size: 10.5px;
+    padding: 11px 4px;
+    gap: 5px;
+  }
+
+  .project-card-action .action-icon {
+    font-size: 12px;
   }
 }
