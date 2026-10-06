@@ -1,0 +1,917 @@
+/* ./client/src/styles/educationPage.css */
+
+.education-page-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+  box-sizing: border-box;
+  color: #f1f5f9;
+  font-family: 'Lexend', sans-serif;
+}
+
+/* Two-column layout grid */
+.education-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.education-grid-left,
+.education-grid-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* Common Cyberpunk Window Panel */
+.cyberpunk-panel {
+  background: linear-gradient(180deg, #151821 0%, #10131a 100%);
+  border: 1px solid #232838;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cyberpunk-panel:hover {
+  border-color: rgba(240, 75, 36, 0.35);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 20px rgba(240, 75, 36, 0.08);
+}
+
+/* ============================================================
+   1. CERTIFICATE VAULT WINDOW (Left Column)
+   ============================================================ */
+.cert-vault-window {
+  display: flex;
+  flex-direction: column;
+}
+
+/* macOS Window Header */
+.window-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #0e1117;
+  border-bottom: 1px solid #232838;
+}
+
+.window-titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.window-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.window-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.window-dot-red {
+  background: #ef4444;
+}
+
+.window-dot-yellow {
+  background: #eab308;
+}
+
+.window-dot-green {
+  background: #22c55e;
+}
+
+.window-path {
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: #cbd5e1;
+  letter-spacing: 0.02em;
+}
+
+.window-status-badge {
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #4ade80;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* Tab Bar */
+.cert-vault-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(14, 17, 23, 0.65);
+  border-bottom: 1px solid #232838;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.cert-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.cert-tab-btn:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.cert-tab-btn.is-active {
+  background: rgba(234, 88, 12, 0.14);
+  border-color: rgba(234, 88, 12, 0.6);
+  color: #fb923c;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(234, 88, 12, 0.15);
+}
+
+/* Overview Toolbar */
+.cert-overview-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(10, 13, 18, 0.95);
+  border-bottom: 1px solid #1e2433;
+  gap: 12px;
+}
+
+.cert-overview-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+}
+
+.cert-overview-count .toolbar-icon {
+  color: #ea580c;
+  font-size: 13px;
+}
+
+.cert-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.cert-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: #94a3b8;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cert-toggle-btn:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.cert-toggle-btn.is-active {
+  color: #fb923c;
+  background: rgba(234, 88, 12, 0.16);
+  border-color: rgba(234, 88, 12, 0.5);
+  font-weight: 600;
+}
+
+/* Certificate Stage / Document Preview */
+.cert-preview-stage {
+  background: #090b0e;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 440px;
+  position: relative;
+}
+
+/* Overview Mode Stage Layout */
+.cert-preview-stage.is-overview-grid {
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 16px;
+}
+
+/* Overview Grid of Certificates */
+.cert-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  width: 100%;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.cert-overview-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cert-overview-grid::-webkit-scrollbar-track {
+  background: rgba(14, 17, 23, 0.5);
+  border-radius: 4px;
+}
+
+.cert-overview-grid::-webkit-scrollbar-thumb {
+  background: #232838;
+  border-radius: 4px;
+}
+
+.cert-overview-grid::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}
+
+/* Certificate Overview Card */
+.cert-overview-card {
+  background: #0d1017;
+  border: 1px solid #1e2433;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+
+.cert-overview-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(234, 88, 12, 0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(234, 88, 12, 0.15);
+}
+
+.cert-overview-thumbnail-wrapper {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  background: #050608;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #1a1e2b;
+}
+
+.cert-overview-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+
+.cert-overview-card:hover .cert-overview-thumb {
+  transform: scale(1.05);
+}
+
+.cert-overview-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 13, 20, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fb923c;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  backdrop-filter: blur(2px);
+}
+
+.cert-overview-card:hover .cert-overview-hover-overlay {
+  opacity: 1;
+}
+
+.cert-overview-card-info {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  background: #10141d;
+}
+
+.cert-overview-badge {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid;
+}
+
+.cert-overview-title {
+  margin: 0;
+  font-family: 'Lexend', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #f1f5f9;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Empty State for tabs with 0 certificates */
+.cert-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  gap: 12px;
+  color: #64748b;
+}
+
+.cert-empty-icon {
+  font-size: 36px;
+  color: #475569;
+}
+
+.cert-empty-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+}
+
+.cert-empty-desc {
+  font-family: 'Lexend', sans-serif;
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+.cert-document-wrapper {
+  max-width: 100%;
+  max-height: 480px;
+  background: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cert-document-wrapper:hover {
+  transform: scale(1.015);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.8), 0 0 20px rgba(240, 75, 36, 0.2);
+}
+
+.cert-preview-image {
+  max-width: 100%;
+  max-height: 480px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Sub-navigator for multi-award galleries */
+.cert-subnav {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(14, 17, 23, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+.cert-subnav-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.cert-subnav-btn:hover:not(:disabled) {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cert-subnav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cert-subnav-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.cert-subnav-pill {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cert-subnav-pill:hover {
+  color: #f1f5f9;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cert-subnav-pill.is-active {
+  color: #fb923c;
+  background: rgba(234, 88, 12, 0.14);
+  border-color: rgba(234, 88, 12, 0.55);
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(234, 88, 12, 0.15);
+}
+
+/* Certificate Vault Footer */
+.cert-vault-footer {
+  padding: 14px 18px;
+  background: #0e1117;
+  border-top: 1px solid #232838;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cert-status-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11.5px;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+.cert-status-info .status-icon {
+  color: #4ade80;
+  font-size: 14px;
+}
+
+.cert-action-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cert-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.cert-action-btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+}
+
+.cert-action-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.cert-action-btn-primary {
+  background: #ea580c;
+  border: 1px solid #f97316;
+  color: #ffffff;
+}
+
+.cert-action-btn-primary:hover {
+  background: #c2410c;
+  border-color: #ea580c;
+  box-shadow: 0 0 16px rgba(234, 88, 12, 0.35);
+}
+
+/* ============================================================
+   2. SCHOLASTIC CHRONOLOGY (Right Column)
+   ============================================================ */
+.chronology-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.chronology-header {
+  padding: 16px 20px;
+  background: #0e1117;
+  border-bottom: 1px solid #232838;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.chronology-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.chronology-icon {
+  color: #ea580c;
+  font-size: 16px;
+}
+
+.chronology-badge {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ea580c;
+  background: rgba(234, 88, 12, 0.1);
+  border: 1px solid rgba(234, 88, 12, 0.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+/* Timeline Container */
+.chronology-timeline {
+  padding: 24px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Connecting Vertical Line Rail */
+.chronology-rail {
+  position: absolute;
+  top: 36px;
+  bottom: 40px;
+  left: 27px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    #38bdf8 0%,
+    #3b82f6 45%,
+    #e6e6fa 90%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Timeline Node */
+.chronology-node {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.chronology-marker {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #10131a;
+  margin-top: 2px;
+  flex-shrink: 0;
+  background: var(--node-theme, #f97316);
+  color: var(--node-theme, #f97316);
+  box-shadow: 0 0 12px var(--node-theme, #f97316);
+}
+
+/* Fallback overrides if explicit theme classes are passed */
+.marker-orange {
+  background: #f97316;
+  color: #f97316;
+}
+
+.marker-cyan {
+  background: #38bdf8;
+  color: #38bdf8;
+}
+
+.marker-mint {
+  background: #4ade80;
+  color: #4ade80;
+}
+
+.chronology-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.chronology-node-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.chronology-eyebrow {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--node-theme, #ea580c);
+}
+
+.eyebrow-orange {
+  color: #ea580c;
+}
+
+.eyebrow-cyan {
+  color: #38bdf8;
+}
+
+.eyebrow-mint {
+  color: #4ade80;
+}
+
+.chronology-dates {
+  font-family: 'Fira Code', monospace;
+  font-size: 11.5px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.chronology-institution {
+  font-family: 'Lexend', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 2px 0;
+  line-height: 1.25;
+}
+
+.chronology-degree {
+  font-family: 'Lexend', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 0 10px 0;
+  line-height: 1.4;
+  color: var(--node-theme, #fdba74);
+  color: color-mix(in srgb, var(--node-theme, #fdba74) 75%, #ffffff);
+}
+
+.degree-orange {
+  color: #fdba74;
+}
+
+.degree-cyan {
+  color: #7dd3fc;
+}
+
+.degree-mint {
+  color: #86efac;
+}
+
+.chronology-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chronology-bullet-item {
+  font-family: 'Lexend', sans-serif;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #cbd5e1;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.chronology-bullet-dot {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.chronology-description {
+  font-family: 'Lexend', sans-serif;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #94a3b8;
+  margin: 0 0 10px 0;
+}
+
+/* Rank Pills for Secondary School */
+.chronology-rank-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 12px 0;
+}
+
+.chronology-rank-pill {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+/* Node Footer Row */
+.chronology-node-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 4px;
+}
+
+.chronology-location {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: #8c92a4;
+}
+
+.chronology-action-link {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  color: var(--node-theme, #fb923c);
+}
+
+.chronology-action-link:hover {
+  transform: translateX(2px);
+  filter: brightness(1.25);
+}
+
+.link-orange {
+  color: #fb923c;
+}
+
+.link-orange:hover {
+  color: #fdba74;
+}
+
+.link-cyan {
+  color: #38bdf8;
+}
+
+.link-cyan:hover {
+  color: #7dd3fc;
+}
+
+.link-mint {
+  color: #4ade80;
+}
+
+.link-mint:hover {
+  color: #86efac;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ============================================================ */
+@media (max-width: 1024px) {
+  .education-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .education-page-container {
+    padding: 16px 12px 48px;
+  }
+
+  .window-titlebar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .window-path {
+    font-size: 10.5px;
+  }
+
+  .chronology-timeline {
+    padding: 20px 14px;
+  }
+
+  .chronology-rail {
+    left: 21px;
+  }
+
+  .chronology-node {
+    gap: 12px;
+  }
+
+  .cert-preview-stage {
+    min-height: 320px;
+    padding: 16px 12px;
+  }
+
+  .cert-overview-grid {
+    grid-template-columns: 1fr;
+    max-height: 440px;
+  }
+
+  .cert-overview-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

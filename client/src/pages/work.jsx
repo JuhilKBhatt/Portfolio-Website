@@ -16,6 +16,7 @@ import { groupWorkDurations, formatDuration } from "../scripts/utility";
 import { DownOutlined } from "@ant-design/icons";
 import "../styles/cardSection.css";
 import LoadingScreen from "../components/LoadingScreen";
+import PageTitle from "../components/PageTitle";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -30,14 +31,13 @@ export default function Work() {
 
   return (
     <div className="card-section-container">
-      <div className="work-header">
-        <Title level={2} className="card-section-title">
-          Work Experience
-        </Title>
-        <Paragraph className="work-subtitle">
-          A breakdown of roles I've worked in and the time spent in each - from customer support to IT & management.
-        </Paragraph>
-        <div className="card-section-divider" />
+      <div style={{ maxWidth: 860, margin: "0 auto" }}>
+        <PageTitle
+          tag="CAREER LOG"
+          title="Work Experience"
+          subtitle="A breakdown of roles I've worked in and the time spent in each - from customer support to IT & management."
+          meta="PRODUCTION VERIFIED"
+        />
       </div>
 
       <Card className="card-section fade-in-up" variant="borderless">

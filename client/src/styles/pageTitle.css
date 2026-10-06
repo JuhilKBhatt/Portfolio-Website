@@ -1,0 +1,172 @@
+/* ./client/src/styles/pageTitle.css */
+
+.page-title-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: clamp(28px, 4vw, 42px);
+  box-sizing: border-box;
+}
+
+.page-title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.page-title-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.page-title-tag {
+  color: #d97736;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.page-title-heading {
+  color: #f0f2f5;
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(28px, 2.5vw + 16px, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.page-title-subtitle {
+  color: #9ca3af;
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(14px, 0.8vw + 11px, 16px);
+  line-height: 1.6;
+  max-width: 720px;
+  margin: 2px 0 0 0;
+}
+
+.page-title-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.page-title-meta {
+  color: #8c92a4;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.page-title-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 6px 14px;
+  color: #d1d5db;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.page-title-action:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(217, 119, 54, 0.4);
+  color: #f6a77c;
+  transform: translateY(-1px);
+}
+
+.page-title-action:active {
+  transform: translateY(0);
+}
+
+/* Gradient accent divider */
+.page-title-divider {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    #F04B24 0%,
+    rgba(240, 75, 36, 0.5) 120px,
+    rgba(255, 255, 255, 0.08) 280px,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  margin-top: 18px;
+  border-radius: 2px;
+}
+
+/* Centered variant */
+.page-title-container.is-centered {
+  align-items: center;
+  text-align: center;
+}
+
+.page-title-container.is-centered .page-title-header {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.page-title-container.is-centered .page-title-left {
+  align-items: center;
+  text-align: center;
+}
+
+.page-title-container.is-centered .page-title-subtitle {
+  margin: 0 auto;
+}
+
+.page-title-container.is-centered .page-title-right {
+  margin-top: 12px;
+}
+
+.page-title-container.is-centered .page-title-divider {
+  width: 80px;
+  height: 4px;
+  background: #F04B24;
+  margin: 20px auto 0;
+  border-radius: 4px;
+}
+
+/* Responsive wrap on mobile */
+@media (max-width: 768px) {
+  .page-title-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .page-title-right {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 0;
+  }
+}

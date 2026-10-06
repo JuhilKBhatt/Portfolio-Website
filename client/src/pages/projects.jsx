@@ -3,6 +3,7 @@
 import { Layout } from "antd";
 import { useProjects } from "../hooks/useProjects";
 import ProjectCard from "../components/ProjectCard";
+import PageTitle from "../components/PageTitle";
 import LoadingScreen from "../components/LoadingScreen";
 import "../styles/projects.css";
 
@@ -35,13 +36,12 @@ export default function Projects() {
 
   return (
     <Layout.Content className="projects-container with-bg">
-      <div className="projects-header">
-        <h1 className="projects-title">Projects</h1>
-        <p className="projects-subtitle">
-          A showcase of the tools, ideas, and creations I've built from full stack platforms to game prototypes.
-        </p>
-        <div className="projects-divider" />
-      </div>
+      <PageTitle
+        tag="REPOSITORIES"
+        title="Projects"
+        subtitle="A showcase of the tools, ideas, and creations I've built from full stack platforms to game prototypes."
+        meta={!loading && visibleProjects.length > 0 ? `${visibleProjects.length} ACTIVE BUILDS` : null}
+      />
       {content}
     </Layout.Content>
   );

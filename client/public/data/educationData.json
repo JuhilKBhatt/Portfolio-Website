@@ -1,60 +1,166 @@
 [
   {
-    "id": "1",
-    "name": "Arthur Phillip High School",
-    "dateFrom": "02/2015",
-    "dateTo": "12/2021",
-    "degree": "Higher School Certificate",
-    "description": [
-      "School Service Award (Year 8)",
-      "Certificate of Commendation (Year 9)",
-      "1st in Industrial Technology - Multimedia (Year 9)",
-      "1st in Information Technology - Electronics (Year 9)",
-      "Recognition of Student Excellence (Year 10)",
-      "Certification of Participation - Work Experience (Year 10)",
-      "1st in Idustrial Technology - Electronics (Year 10)",
-      "Recognition of Student Excellence (Year 11)",
-      "Recognition of Student Excellence (Year 11)",
-      "1st in Software Design and Development & Information Process and Technology (Year 11)"
+    "id": "Google Skills",
+    "name": "Google Skills",
+    "tabLabel": "Google Skills",
+    "tabIcon": "file",
+    "statusLabel": "CERTIFICATIONS",
+    "statusTheme": "#F7B529",
+    "dateFrom": "09/2026",
+    "dateTo": "",
+    "degree": "",
+    "location": "Remote",
+    "actionLabel": "VIEW CERTIFICATES",
+    "bullets": [
+      "Upskilling in various Google Certificates"
     ],
-    "certificate": [
-        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657182/SSAYear8_nsfxo8.png",
-        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657158/CofCYear9_nbg7bb.png",
-        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657187/1stITMYear9_uwtkef.png",
-        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657173/1stITEYear9_fzmhk2.png",
-        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657203/RofSEYear10_eeg30i.png",
-        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657192/CofPYear10_oxnfyi.png",
-        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657177/1stITEYear10_gkzcqy.png",
-        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657167/EofSEYear11_edvfu9.png",
-        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657198/RofSEYear11_idebuy.png",
-        "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657161/1stSDDIPTYear11_lmboxi.png"
-    ]
+    "certificates": []
   },
   {
-    "id": "2",
+    "id": "uts",
     "name": "University of Technology Sydney",
+    "tabLabel": "UTS Bachelor's Dual Degree",
+    "tabIcon": "audit",
+    "statusLabel": "TERTIARY EDUCATION",
+    "statusTheme": "#0F4BEB",
     "dateFrom": "02/2022",
     "dateTo": "05/2027",
     "degree": "Bachelor of Science in Information Technology + International Studies (Japan)",
-    "description": ["Not Finished"],
-    "certificate": [
-      "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1789909270/LDT_certificate_2022_SPRING_31265_24577013_pdrsx1.jpg"
+    "location": "Sydney, NSW, Australia",
+    "actionLabel": "VIEW CERTIFICATES",
+    "bullets": [
+      "Major: Enterprise Systems Development",
+      "Sub-Major: Computer Graphs and Animation & Networking and Cybersecurity",
+      "International Studies Major: Japan Language and Culture"
+    ],
+    "certificates": [
+      {
+        "id": "uts-ldt",
+        "title": "Academic Language Certificate",
+        "shortTitle": "Academic Language",
+        "pdfUrl": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1789909270/LDT_certificate_2022_SPRING_31265_24577013_pdrsx1.jpg",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1789909270/LDT_certificate_2022_SPRING_31265_24577013_pdrsx1.jpg"
+      }
     ]
-  },{
-    "id": "3",
+  },
+  {
+    "id": "ynu",
     "name": "Yokohama National University",
+    "tabLabel": "YNU Acceptance & Mobility (横浜国大)",
+    "tabIcon": "file",
+    "statusLabel": "GLOBAL MOBILITY PROGRAM",
+    "statusTheme": "#005bac",
     "dateFrom": "04/2026",
     "dateTo": "08/2026",
     "degree": "Global Exchange Program",
-    "description": [
-      "Subjects:",
-      "J200 - Intensive Japanese Language",
-      "Data Literacy for Problem Solving",
-      "High School Teaching Internship | 1 b (Yokohama Suiran High School)"
+    "location": "Yokohama, Kanagawa, Japan",
+    "actionLabel": "VIEW CERTIFICATES",
+    "bullets": [
+      "J200 - Intensive Japanese Language Immersion",
+      "Data Literacy for Problem Solving - Applied Analytical Methodologies",
+      "Teaching Internship - High School Educator placement at Yokohama Suiran High School"
     ],
-    "certificate": [
-      "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1788053374/New_Colombo_Plan_Completion_Certificate_of_Japan_Exchange_i4awej.png",
-      "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1788053337/PW_COA_BHATT_Juhil_Kalpeshkumar_copy_hjjwbm.png"
+    "certificates": [
+      {
+        "id": "ncp",
+        "title": "Australian Gov NCP Mobility Certificate",
+        "shortTitle": "NCP Mobility Certificate",
+        "pdfUrl": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1788053374/New_Colombo_Plan_Completion_Certificate_of_Japan_Exchange_i4awej.png",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1788053374/New_Colombo_Plan_Completion_Certificate_of_Japan_Exchange_i4awej.png"
+      },
+      {
+        "id": "ynu-coa",
+        "title": "Yokohama National University Letter of Acceptance",
+        "shortTitle": "YNU Acceptance Letter",
+        "pdfUrl": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1788053337/PW_COA_BHATT_Juhil_Kalpeshkumar_copy_hjjwbm.png",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1788053337/PW_COA_BHATT_Juhil_Kalpeshkumar_copy_hjjwbm.png"
+      }
+    ]
+  },
+  {
+    "id": "aphs",
+    "name": "Arthur Phillip High School",
+    "tabLabel": "APHS Academic Honors",
+    "tabIcon": "trophy",
+    "statusLabel": "SECONDARY EDUCATION",
+    "statusTheme": "#E6E6FA",
+    "dateFrom": "02/2015",
+    "dateTo": "12/2021",
+    "degree": "Higher School Certificate (HSC)",
+    "location": "Parramatta, NSW, Australia",
+    "bullets": [
+      "Industrial Technology Multimedia",
+      "Software Design & Development",
+      "Information Technology Electronics",
+      "Information Processing and Technology"
+    ],
+    "rankPills": [
+      "1st in Software Design & Dev",
+      "1st in IT Electronics",
+      "1st in Multimedia"
+    ],
+    "actionLabel": "VIEW CERTIFICATES",
+    "certificates": [
+      {
+        "id": "aphs-1",
+        "title": "School Service Award (Year 8)",
+        "shortTitle": "Service Award (Yr 8)",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657182/SSAYear8_nsfxo8.png"
+      },
+      {
+        "id": "aphs-2",
+        "title": "Certificate of Commendation (Year 9)",
+        "shortTitle": "Commendation (Yr 9)",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657158/CofCYear9_nbg7bb.png"
+      },
+      {
+        "id": "aphs-3",
+        "title": "1st in Industrial Technology - Multimedia (Year 9)",
+        "shortTitle": "1st Multimedia (Yr 9)",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657187/1stITMYear9_uwtkef.png"
+      },
+      {
+        "id": "aphs-4",
+        "title": "1st in Information Technology - Electronics (Year 9)",
+        "shortTitle": "1st IT Electronics (Yr 9)",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657173/1stITEYear9_fzmhk2.png"
+      },
+      {
+        "id": "aphs-5",
+        "title": "Recognition of Student Excellence (Year 10)",
+        "shortTitle": "Excellence (Yr 10)",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657203/RofSEYear10_eeg30i.png"
+      },
+      {
+        "id": "aphs-6",
+        "title": "Certification of Participation - Work Experience (Year 10)",
+        "shortTitle": "Work Exp (Yr 10)",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657192/CofPYear10_oxnfyi.png"
+      },
+      {
+        "id": "aphs-7",
+        "title": "1st in Industrial Technology - Electronics (Year 10)",
+        "shortTitle": "1st IT Electronics (Yr 10)",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657177/1stITEYear10_gkzcqy.png"
+      },
+      {
+        "id": "aphs-8",
+        "title": "Recognition of Student Excellence (Year 11)",
+        "shortTitle": "Excellence (Yr 11)",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657167/EofSEYear11_edvfu9.png"
+      },
+      {
+        "id": "aphs-9",
+        "title": "Recognition of Student Excellence (Year 11)",
+        "shortTitle": "Excellence (Yr 11)",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657198/RofSEYear11_idebuy.png"
+      },
+      {
+        "id": "aphs-10",
+        "title": "1st in Software Design & Dev & Info Process & Tech (Year 11)",
+        "shortTitle": "1st SDD & IPT (Yr 11)",
+        "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657161/1stSDDIPTYear11_lmboxi.png"
+      }
     ]
   }
 ]
