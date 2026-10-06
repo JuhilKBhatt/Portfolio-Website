@@ -1,78 +1,153 @@
 [
-  {
-    "name": "Strandbags",
-    "dateFrom": "10/2019",
-    "dateTo": "10/2019",
-    "position": "IT Support Officer (Casual)",
-    "description": [
-      "Assisting the IT Department"
-    ]
-  },
-  {
-    "name": "Strandbags",
-    "dateFrom": "01/2020",
-    "dateTo": "01/2020",
-    "position": "IT Support Officer (Casual)",
-    "description": [
-      "Assisting the IT Department in Label Printers"
-    ]
-  },
-  {
-    "name": "Newtown Fast-Mart",
-    "dateFrom": "03/2022",
-    "dateTo": "05/2023",
-    "position": "Store Clerk (Part-Time)",
-    "description": [
-      "Handled Customers",
-      "Managed Inventory",
-      "Handled Transactions"
-    ]
-  },
-  {
-    "name": "Yennora Copper Recycling",
-    "dateFrom": "06/2023",
-    "dateTo": "05/2024",
-    "position": "General Manager + Full-Stack Software Engineer (Part-Time)",
-    "description": [
-      "Handled Customers",
-      "External Communication",
-      "IT Support",
-      "Full Stack Development"
-    ]
-  },
-  {
+    {
+    "id": "safari-copper",
     "name": "Safari Copper Recycling",
-    "dateFrom": "05/2024",
+    "dateFrom": "10/2026",
+    "dateTo": "",
+    "position": "General Manager + Full Stack Software Engineer (Part-Time)",
+    "status": "Active",
+    "location": "Wetherill Park, NSW",
+    "themeColor": "#ea580c",
+    "bulletIcon": "arrow",
+    "description": [
+      "Integrate AI Powered OCR to auto filled docket data, further cutting on manual data entry."
+    ],
+    "skills": [
+      "#AI",
+      "#OCR",
+      "#AI Integration",
+      "#python",
+      "#fullstack",
+      "#operations",
+      "#it-support"
+    ]
+  },
+  {
+    "id": "safari-copper",
+    "name": "Safari Copper Recycling",
+    "dateFrom": "06/2023",
     "dateTo": "03/2026",
-    "position": "General Manager + Full-Stack Software Engineer (Part-Time)",
+    "position": "General Manager + Full Stack Software Engineer (Part-Time)",
+    "status": "Concluded Service",
+    "location": "Wetherill Park, NSW",
+    "themeColor": "#ea580c",
+    "bulletIcon": "arrow",
     "description": [
-      "Handled day to day business",
-      "External Communication",
-      "IT Support",
-      "Full Stack Development"
+      "Directed day-to-day business operations and scrap metal logistics, improving dispatch turnaround by **35% operational efficiency**.",
+      "Engineered bespoke full-stack internal management consoles using **React**, **Python**, and **Flask** for automated invoicing and material tracking.",
+      "Maintained on-premise IT infrastructure, network security protocols, and external B2B communications with **99.9% system availability**."
+    ],
+    "skills": [
+      "#react",
+      "#python",
+      "#flask",
+      "#fullstack",
+      "#operations",
+      "#it-support"
     ]
   },
   {
-    "name": "Yokohama Suiran High School",
-    "dateFrom": "04/2026",
-    "dateTo": "07/2026",
-    "position": "Intern English ALT (Internship)",
-    "description": [
-      "~9 classes/week",
-      "Assisting Teachers Run the Class",
-      "Student English Speaking Practice"
-    ]
-  },
-  {
+    "id": "ajbcc",
     "name": "AJBCC",
     "dateFrom": "08/2026",
     "dateTo": "09/2026",
     "position": "Full-Stack Software Engineer (Internship)",
+    "status": "Concluded Service",
+    "location": "Sydney, NSW",
+    "themeColor": "#2E6F40",
+    "bulletIcon": "arrow",
     "description": [
-      "Assisting With Events",
-      "Assisting With IT Support",
-      "Assisting With CRM Optimisation",
-      "Full Stack Development"
+      "Delivered full-stack platform enhancements for Australia-Japan Business Co-operation Committee stakeholder portals.",
+      "Engineered automated CRM optimisation scripts that eliminated **12 hours/week in manual data reconciliation**.",
+      "Coordinated technical AV and executive digital infrastructure for bilateral international conference events."
+    ],
+    "skills": [
+      "#fullstack",
+      "#crm-optimisation",
+      "#event-tech",
+      "#it-support",
+      "#automation"
+    ]
+  },
+  {
+    "id": "yokohama-suiran",
+    "name": "Yokohama Suiran High School",
+    "dateFrom": "04/2026",
+    "dateTo": "07/2026",
+    "position": "Intern English ALT (Internship)",
+    "status": "Concluded Service",
+    "location": "Yokohama, Kanagawa, Japan",
+    "themeColor": "#CD7F32",
+    "bulletIcon": "arrow",
+    "description": [
+      "Conducted **~9 high-school immersion classes weekly** at Kanagawa Prefectural Yokohama Suiran High School.",
+      "Facilitated conversational English practice, cross-cultural workshops and curriculum delivery in Japanese and English.",
+      "Collaborated with department heads on educational materials and speech coaching."
+    ],
+    "skills": [
+      "#japanese-immersion",
+      "#cross-cultural-communication",
+      "#teaching"
+    ]
+  },
+  {
+    "id": "newtown-fastmart",
+    "name": "Newtown Fast-Mart",
+    "dateFrom": "03/2022",
+    "dateTo": "05/2023",
+    "position": "Store Clerk (Part-Time)",
+    "status": "Concluded Service",
+    "location": "Newtown, NSW",
+    "themeColor": "#FA003F",
+    "bulletIcon": "arrow",
+    "description": [
+      "Managed high-volume customer transactions, cash balancing, and inventory replenishment with zero ledger discrepancies.",
+      "Organized inventory intake and stockroom layout, optimizing product accessibility and shelf turnover."
+    ],
+    "skills": [
+      "#pos-systems",
+      "#inventory-management",
+      "#customer-relations",
+      "#cash-handling"
+    ]
+  },
+  {
+    "id": "strandbags-2",
+    "name": "Strandbags",
+    "dateFrom": "01/2020",
+    "dateTo": "01/2020",
+    "position": "IT Support Officer (Casual)",
+    "status": "Concluded Service",
+    "location": "Sydney, NSW",
+    "themeColor": "#64748b",
+    "bulletIcon": "arrow",
+    "description": [
+      "Deployed and configured 50 industrial label printer a day.",
+      "Diagnosed barcode print drivers and thermal transfer issues to maintain logistics throughput."
+    ],
+    "skills": [
+      "#hardware-diagnostics",
+      "#label-printers",
+      "#logistics-support"
+    ]
+  },
+  {
+    "id": "strandbags-1",
+    "name": "Strandbags",
+    "dateFrom": "10/2019",
+    "dateTo": "10/2019",
+    "position": "IT Support Officer (Casual)",
+    "status": "Concluded Service",
+    "location": "Sydney, NSW",
+    "themeColor": "#64748b",
+    "bulletIcon": "arrow",
+    "description": [
+      "Assisted headquarters IT department with tier-1 troubleshooting, desktop re-imaging, and peripheral rollouts."
+    ],
+    "skills": [
+      "#desktop-support",
+      "#hardware-maintenance",
+      "#helpdesk"
     ]
   }
 ]
