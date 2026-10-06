@@ -1,0 +1,520 @@
+/* ./client/src/styles/radarGraph.css */
+
+.radar-graph-container {
+  width: 100%;
+  background: linear-gradient(180deg, #181b21 0%, #13161b 100%);
+  border: 1px solid #2a2e38;
+  border-radius: 14px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  padding: clamp(20px, 3vw, 32px);
+  margin-top: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Category Filter Tabs Navigation */
+.radar-tabs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.radar-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  color: #9ca3af;
+  font-family: 'Lexend', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.radar-tab-btn:hover {
+  background: rgba(217, 119, 54, 0.08);
+  border-color: rgba(217, 119, 54, 0.35);
+  color: #f3f4f6;
+}
+
+.radar-tab-btn.is-active {
+  background: rgba(217, 119, 54, 0.16);
+  border-color: #d97736;
+  color: #fdba74;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(217, 119, 54, 0.2);
+}
+
+.radar-tab-icon {
+  font-size: 13px;
+}
+
+.radar-tab-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 10px;
+  color: #d1d5db;
+}
+
+.radar-tab-btn.is-active .radar-tab-badge {
+  background: rgba(217, 119, 54, 0.35);
+  color: #ffedd5;
+}
+
+/* Two-column Layout */
+.radar-graph-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(320px, 1.15fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+}
+
+/* SVG Chart Area */
+.radar-svg-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radar-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.5));
+}
+
+/* Grid & Axes */
+.radar-grid-polygon {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.07);
+  stroke-width: 1;
+  transition: stroke 0.3s ease;
+}
+
+.radar-grid-polygon-outer {
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 1.5;
+}
+
+.radar-axis-line {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+
+/* Data Polygon */
+.radar-data-polygon {
+  fill: url(#radarGradient);
+  stroke: #d97736;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 10px rgba(217, 119, 54, 0.45));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.radar-data-polygon:hover {
+  stroke: #f97316;
+  filter: drop-shadow(0 0 16px rgba(249, 115, 22, 0.7));
+}
+
+.radar-data-spoke {
+  stroke: #d97736;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 8px rgba(217, 119, 54, 0.5));
+}
+
+/* Vertex Points */
+.radar-vertex-group {
+  cursor: pointer;
+}
+
+.radar-vertex-halo {
+  fill: rgba(217, 119, 54, 0.2);
+  transition: r 0.25s ease, fill 0.25s ease;
+}
+
+.radar-vertex-group:hover .radar-vertex-halo,
+.radar-vertex-group.is-active .radar-vertex-halo {
+  r: 12;
+  fill: rgba(249, 115, 22, 0.45);
+}
+
+.radar-vertex-point {
+  fill: #f97316;
+  stroke: #181b21;
+  stroke-width: 2.5;
+  transition: transform 0.2s ease, fill 0.2s ease;
+}
+
+.radar-vertex-group:hover .radar-vertex-point,
+.radar-vertex-group.is-active .radar-vertex-point {
+  fill: #ffedd5;
+  stroke: #ea580c;
+}
+
+/* Labels on SVG perimeter */
+.radar-label {
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  fill: #9ca3af;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: fill 0.2s ease, transform 0.2s ease;
+}
+
+.radar-label:hover,
+.radar-label.is-active {
+  fill: #f97316;
+  font-weight: 700;
+}
+
+.radar-label-count {
+  font-family: 'Lexend', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  fill: #6b7280;
+}
+
+.radar-label.is-active + .radar-label-count {
+  fill: #fdba74;
+}
+
+/* Center Core */
+.radar-center-core {
+  fill: #1f232b;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 1.5;
+}
+
+/* Right Details Panel */
+.radar-details-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 420px;
+}
+
+.radar-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.radar-details-title {
+  color: #e5e7eb;
+  font-family: 'Lexend', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.radar-details-subtitle {
+  color: #9ca3af;
+  font-family: 'Lexend', sans-serif;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.radar-details-total {
+  color: #d97736;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(217, 119, 54, 0.12);
+  border: 1px solid rgba(217, 119, 54, 0.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.radar-back-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f3f4f6;
+  font-family: 'Lexend', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.radar-back-btn:hover {
+  background: rgba(217, 119, 54, 0.15);
+  border-color: #d97736;
+  color: #fdba74;
+}
+
+/* Category Cards List (Overview Mode) */
+.radar-categories-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.radar-categories-grid::-webkit-scrollbar,
+.radar-tools-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.radar-categories-grid::-webkit-scrollbar-track,
+.radar-tools-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+
+.radar-categories-grid::-webkit-scrollbar-thumb,
+.radar-tools-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+.radar-category-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.radar-category-card:hover,
+.radar-category-card.is-active {
+  background: rgba(217, 119, 54, 0.06);
+  border-color: rgba(217, 119, 54, 0.4);
+  transform: translateX(3px);
+}
+
+.radar-category-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.radar-category-name {
+  color: #f3f4f6;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.radar-category-card.is-active .radar-category-name {
+  color: #f97316;
+}
+
+.radar-category-count {
+  color: #8c92a4;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+}
+
+/* Skill Tags inside card */
+.radar-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.radar-skill-tag {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: #cbd5e1;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.radar-skill-tag:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.radar-more-tag {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.radar-category-card.is-active .radar-skill-tag {
+  border-color: rgba(217, 119, 54, 0.25);
+  background: rgba(217, 119, 54, 0.08);
+  color: #fdba74;
+}
+
+/* Drill-Down View (Category Specific) */
+.radar-category-drilldown {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.radar-projects-summary {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.radar-projects-summary-title {
+  display: block;
+  font-size: 11px;
+  font-family: 'Lexend', sans-serif;
+  color: #9ca3af;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.radar-projects-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.radar-project-badge {
+  background: rgba(217, 119, 54, 0.08);
+  border: 1px solid rgba(217, 119, 54, 0.25);
+  color: #fed7aa;
+  font-family: 'Lexend', sans-serif;
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.radar-tools-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.radar-tool-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.radar-tool-card:hover,
+.radar-tool-card.is-active {
+  background: rgba(217, 119, 54, 0.06);
+  border-color: rgba(217, 119, 54, 0.35);
+  transform: translateX(3px);
+}
+
+.radar-tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.radar-tool-name {
+  color: #f3f4f6;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.radar-tool-card.is-active .radar-tool-name {
+  color: #f97316;
+}
+
+.radar-tool-count {
+  color: #d97736;
+  font-family: 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.radar-tool-projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.radar-tool-project-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  font-family: 'Lexend', sans-serif;
+  font-size: 10.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Mobile & Tablet Responsiveness */
+@media (max-width: 860px) {
+  .radar-graph-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .radar-svg-wrapper {
+    max-width: 380px;
+  }
+
+  .radar-categories-grid,
+  .radar-tools-list {
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .radar-graph-container {
+    padding: 16px;
+  }
+
+  .radar-tab-btn {
+    font-size: 11.5px;
+    padding: 5px 10px;
+  }
+
+  .radar-svg-wrapper {
+    max-width: 310px;
+  }
+
+  .radar-label {
+    font-size: 9.5px;
+  }
+}
