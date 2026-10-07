@@ -1,12 +1,33 @@
 {
   "title": "Portfolio Website",
-  "description": "A full-stack personal portfolio website showcasing my projects, skills, and experience, built with dynamic GitHub repo ingestion, AWS serverless contact pipeline, and Docker containerisation.",
+  "description": "A high-performance full-stack personal portfolio platform built with React 18, Vite, and Python Flask. Features dynamic multi-repository metadata ingestion, zero-dependency interactive SVG Radar Graph skill visualization, AWS serverless contact outreach pipeline, and containerized deployment with Nginx and Cloudflare edge caching.",
   "techStack": {
-    "Frontend": ["React", "Vite", "CSS", "Ant Design"],
-    "Backend": ["Python", "Flask", "Gunicorn"],
-    "AI": ["Gemini API", "Claude API"],
-    "DevSecOps": ["Docker", "Nginx", "Cloudflare", "AWS", "Cloudinary", "GitHub Actions"],
-    "Test Automation": ["Pytest"]
+    "Frontend": [
+      "React",
+      "Vite",
+      "CSS",
+      "Ant Design"
+    ],
+    "Backend": [
+      "Python",
+      "Flask",
+      "Gunicorn"
+    ],
+    "AI": [
+      "Gemini AI"
+    ],
+    "DevSecOps": [
+      "Docker",
+      "Docker Compose",
+      "Nginx",
+      "Cloudflare",
+      "AWS",
+      "Cloudinary",
+      "GitHub Actions"
+    ],
+    "Test Automation": [
+      "Pytest"
+    ]
   },
   "liveDemo": "https://juhilkbhatt.github.io/Portfolio-Website/",
   "images": [
@@ -18,11 +39,13 @@
   "category": "Full Stack",
   "type": "Solo",
   "version": "Prod",
-  "versionNumber": "1.0.0",
+  "versionNumber": "2.0.0",
   "Highlights": [
-    "Dynamic GitHub Repo Ingestion",
-    "AWS Serverless Contact Pipeline",
-    "Self Hosted on Ubuntu Server"
+    "Dynamic GitHub repo ingestion engine parsing remote PortfolioWebsiteInfo.json metadata with multi-tier caching for instantaneous 0ms repeat page loads",
+    "Serverless contact outreach pipeline powered by AWS API Gateway and Lambda, eliminating server-side SMTP overhead",
+    "Self-hosted containerized architecture on Ubuntu Server with Docker, Nginx reverse proxy, Gzip compression, and Cloudflare edge caching",
+    "Interactive 5-discipline SVG Radar Graph dynamically mapping technical competencies across Frontend, Backend, AI, DevSecOps, and Test Automation",
+    "Hardened security and performance architecture featuring Flask rate limiting, authenticated cache purging, strict HTTP headers, and Cloudinary media optimization"
   ],
   "Visibilty": true
 }
