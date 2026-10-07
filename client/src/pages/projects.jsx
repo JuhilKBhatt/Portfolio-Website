@@ -1,17 +1,18 @@
-// ./client/src/pages/Projects.jsx
-
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { Layout } from "antd";
 import { useProjects } from "../hooks/useProjects";
 import ProjectCard from "../components/ProjectCard";
 import PageTitle from "../components/PageTitle";
-import LoadingScreen from "../components/LoadingScreen";
 import "../styles/projects.css";
+
+const BATCH_SIZE = 6;
 
 export default function Projects() {
   const { projects, loading } = useProjects("juhilkbhatt");
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const [sortBy, setSortBy] = useState("priority");
+  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
+  const sentinelRef = useRef(null);
 
   const visibleProjects = useMemo(() => {
     return projects.filter(
@@ -82,9 +83,49 @@ export default function Projects() {
     return sorted;
   }, [visibleProjects, selectedCategory, sortBy]);
 
+  const handleCategoryChange = (catName) => {
+    setSelectedCategory(catName);
+    setVisibleCount(BATCH_SIZE);
+  };
+
+  const handleSortChange = (newSort) => {
+    setSortBy(newSort);
+    setVisibleCount(BATCH_SIZE);
+  };
+
+  const displayedProjects = useMemo(() => {
+    return filteredAndSortedProjects.slice(0, visibleCount);
+  }, [filteredAndSortedProjects, visibleCount]);
+
+  const hasMore = visibleCount < filteredAndSortedProjects.length;
+
+  useEffect(() => {
+    if (!hasMore || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setVisibleCount((prev) => Math.min(prev + BATCH_SIZE, filteredAndSortedProjects.length));
+        }
+      },
+      { rootMargin: "450px 0px" } // Pre-fetch next batch 450px before user hits bottom
+    );
+
+    const el = sentinelRef.current;
+    if (el) observer.observe(el);
+
+    return () => {
+      if (el) observer.unobserve(el);
+    };
+  }, [hasMore, filteredAndSortedProjects.length]);
+
   let content;
   if (loading) {
-    content = <LoadingScreen inline />;
+    content = (
+      <div className="projects-grid fade-in">
+        <ProjectCard.Skeleton count={6} />
+      </div>
+    );
   } else if (visibleProjects.length === 0) {
     content = <p style={{ textAlign: "center", color: "#94a3b8" }}>No visible projects to show.</p>;
   } else if (filteredAndSortedProjects.length === 0) {
@@ -94,7 +135,7 @@ export default function Projects() {
         <button
           type="button"
           className="projects-reset-filter-btn"
-          onClick={() => setSelectedCategory("ALL")}
+          onClick={() => handleCategoryChange("ALL")}
         >
           View All Projects
         </button>
@@ -102,16 +143,36 @@ export default function Projects() {
     );
   } else {
     content = (
-      <div className="projects-grid fade-in">
-        {filteredAndSortedProjects.map((project, index) => {
-          const key = project.id || project.name || index;
-          return (
-            <div className="projects-grid-item" key={key}>
-              <ProjectCard project={project} index={index} />
+      <>
+        <div className="projects-grid fade-in">
+          {displayedProjects.map((project, index) => {
+            const key = project.id || project.name || index;
+            return (
+              <div className="projects-grid-item" key={key}>
+                <ProjectCard project={project} index={index} />
+              </div>
+            );
+          })}
+        </div>
+
+        {hasMore && (
+          <div className="projects-lazy-footer">
+            <div ref={sentinelRef} className="projects-lazy-sentinel" />
+            <div className="projects-lazy-status">
+              <span className="projects-lazy-pill">
+                // BUFFER: {displayedProjects.length} OF {filteredAndSortedProjects.length} BUILDS DEPLOYED
+              </span>
+              <button
+                type="button"
+                className="projects-load-all-btn"
+                onClick={() => setVisibleCount(filteredAndSortedProjects.length)}
+              >
+                [ DEPLOY ALL {filteredAndSortedProjects.length} BUILDS ]
+              </button>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        )}
+      </>
     );
   }
 
@@ -143,7 +204,7 @@ export default function Projects() {
                   role="tab"
                   aria-selected={isActive}
                   className={`project-category-tab ${isActive ? "is-active" : ""}`}
-                  onClick={() => setSelectedCategory(cat.name)}
+                  onClick={() => handleCategoryChange(cat.name)}
                 >
                   <span>{cat.label}</span>
                   <span className="project-tab-count">{cat.count}</span>
@@ -158,7 +219,7 @@ export default function Projects() {
               <button
                 type="button"
                 className={`projects-sort-btn ${sortBy === "priority" ? "is-active" : ""}`}
-                onClick={() => setSortBy("priority")}
+                onClick={() => handleSortChange("priority")}
                 title="Sort by priority"
               >
                 Priority
@@ -166,7 +227,7 @@ export default function Projects() {
               <button
                 type="button"
                 className={`projects-sort-btn ${sortBy === "category" ? "is-active" : ""}`}
-                onClick={() => setSortBy("category")}
+                onClick={() => handleSortChange("category")}
                 title="Sort alphabetically by category"
               >
                 Category
@@ -174,7 +235,7 @@ export default function Projects() {
               <button
                 type="button"
                 className={`projects-sort-btn ${sortBy === "name" ? "is-active" : ""}`}
-                onClick={() => setSortBy("name")}
+                onClick={() => handleSortChange("name")}
                 title="Sort alphabetically by title"
               >
                 Name

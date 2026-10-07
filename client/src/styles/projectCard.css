@@ -475,3 +475,46 @@
     font-size: 12px;
   }
 }
+
+/* Deferred Preview & Zero-CLS Skeleton Loading States */
+.project-media-deferred {
+  width: 100%;
+  height: 100%;
+  background: #0c0e14;
+}
+
+.project-card-skeleton {
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0.06);
+  background: linear-gradient(180deg, #13161f 0%, #0e1118 100%);
+}
+
+.project-card-skeleton-media {
+  background: linear-gradient(90deg, #131722 0%, #1e2436 50%, #131722 100%);
+  background-size: 200% 100%;
+  animation: projectCardShimmer 2s infinite ease-in-out;
+}
+
+.project-skeleton-line {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.04) 100%);
+  background-size: 200% 100%;
+  animation: projectCardShimmer 2s infinite ease-in-out;
+  border-radius: 4px;
+}
+
+.project-skeleton-highlights {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 14px;
+}
+
+@keyframes projectCardShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

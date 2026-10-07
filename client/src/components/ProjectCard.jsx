@@ -8,7 +8,7 @@ import {
   PlayCircleOutlined,
   FolderOpenOutlined,
 } from "@ant-design/icons";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import "../styles/projectCard.css";
 
 function optimizeImageUrl(url, width = 800) {
@@ -51,6 +51,36 @@ export default function ProjectCard({ project, index }) {
   const info = project?.portfolio_info;
   const isVisible = Boolean(info && info.Visibilty === true);
   const [imageFailed, setImageFailed] = useState(false);
+  const cardRef = useRef(null);
+  const [hasEnteredViewport, setHasEnteredViewport] = useState(false);
+  const [isInViewport, setIsInViewport] = useState(false);
+
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") {
+      setHasEnteredViewport(true);
+      setIsInViewport(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasEnteredViewport(true);
+          setIsInViewport(true);
+        } else {
+          setIsInViewport(false);
+        }
+      },
+      { rootMargin: "300px 0px" } // Pre-load media 300px before appearing in viewport
+    );
+
+    const el = cardRef.current;
+    if (el) observer.observe(el);
+
+    return () => {
+      if (el) observer.unobserve(el);
+    };
+  }, []);
 
   const filteredImages = useMemo(() => {
     return isVisible ? (info?.images || []).filter(Boolean) : [];
@@ -126,10 +156,30 @@ export default function ProjectCard({ project, index }) {
       return <ProjectPlaceholder title={info?.title || project?.name} />;
     }
 
+    // Lazy rendering: if offscreen and hasn't entered viewport yet, render lightweight native image
+    // without initializing the heavy Ant Design Carousel / slick-slider timers
+    if (!hasEnteredViewport) {
+      return (
+        <img
+          alt={`${info?.title || project?.name} Cover Preview`}
+          src={optimizeImageUrl(filteredImages[0], 800)}
+          className="project-image"
+          loading="lazy"
+          decoding="async"
+          onError={() => setImageFailed(true)}
+        />
+      );
+    }
+
     if (filteredImages.length > 1) {
       return (
         <Image.PreviewGroup>
-          <Carousel autoplay dots className="project-carousel">
+          <Carousel
+            autoplay={isInViewport}
+            dots
+            lazyLoad="ondemand"
+            className="project-carousel"
+          >
             {filteredImages.map((url, i) => (
               <div key={url || i} className="project-carousel-slide">
                 <Image
@@ -138,6 +188,7 @@ export default function ProjectCard({ project, index }) {
                   alt={`${info?.title || project?.name} Screenshot ${i + 1}`}
                   className="project-image"
                   loading="lazy"
+                  decoding="async"
                   onError={() => setImageFailed(true)}
                 />
               </div>
@@ -154,15 +205,16 @@ export default function ProjectCard({ project, index }) {
         preview={{ src: optimizeImageUrl(filteredImages[0], 2560) }}
         className="project-image"
         loading="lazy"
+        decoding="async"
         onError={() => setImageFailed(true)}
       />
     );
-  }, [imageFailed, filteredImages, info?.title, project?.name]);
+  }, [imageFailed, filteredImages, hasEnteredViewport, isInViewport, info?.title, project?.name]);
 
   if (!isVisible) return null;
 
   return (
-    <article className="project-card">
+    <article ref={cardRef} className="project-card">
       {/* 1. Media Preview on Top with Overlaid Badges */}
       <div className="project-card-media">
         {mediaContent}
@@ -324,4 +376,47 @@ ProjectCard.propTypes = {
     }),
   }),
   index: PropTypes.number,
+};
+
+/**
+ * Skeleton loader component matching exact ProjectCard dimensions for 0-CLS loading states
+ */
+ProjectCard.Skeleton = function ProjectCardSkeleton({ count = 6 }) {
+  return (
+    <>
+      {Array.from({ length: count }).map((_, idx) => (
+        <div className="projects-grid-item" key={idx}>
+          <div className="project-card project-card-skeleton" aria-hidden="true">
+            <div className="project-card-media project-card-skeleton-media" />
+            <div className="project-card-body">
+              <div className="project-card-title-row">
+                <div className="project-skeleton-line" style={{ width: "65%", height: "24px" }} />
+                <div className="project-skeleton-line" style={{ width: "48px", height: "18px", borderRadius: "10px" }} />
+              </div>
+              <div className="project-skeleton-line" style={{ width: "100%", height: "13px", marginTop: "12px" }} />
+              <div className="project-skeleton-line" style={{ width: "85%", height: "13px", marginTop: "6px", marginBottom: "16px" }} />
+              <div className="project-skeleton-highlights">
+                <div className="project-skeleton-line" style={{ width: "45%", height: "12px", marginBottom: "10px" }} />
+                <div className="project-skeleton-line" style={{ width: "95%", height: "11px", marginBottom: "6px" }} />
+                <div className="project-skeleton-line" style={{ width: "80%", height: "11px" }} />
+              </div>
+              <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginTop: "16px" }}>
+                <div className="project-skeleton-line" style={{ width: "65px", height: "20px", borderRadius: "4px" }} />
+                <div className="project-skeleton-line" style={{ width: "80px", height: "20px", borderRadius: "4px" }} />
+                <div className="project-skeleton-line" style={{ width: "55px", height: "20px", borderRadius: "4px" }} />
+              </div>
+            </div>
+            <div className="project-card-footer">
+              <div className="project-skeleton-line" style={{ flex: 1, height: "34px", borderRadius: "6px" }} />
+              <div className="project-skeleton-line" style={{ flex: 1, height: "34px", borderRadius: "6px" }} />
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+};
+
+ProjectCard.Skeleton.propTypes = {
+  count: PropTypes.number,
 };
