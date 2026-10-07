@@ -1,4 +1,4 @@
-// ./client/src/pages/work.jsx
+// ./client/src/pages/experience.jsx
 
 import React, { useEffect, useState, useMemo } from "react";
 import { FilterOutlined } from "@ant-design/icons";
@@ -30,7 +30,7 @@ function renderHighlightedText(text) {
   });
 }
 
-export default function Work() {
+export default function Experience() {
   const [workData, setWorkData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCompany, setSelectedCompany] = useState("ALL");
