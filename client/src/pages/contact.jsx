@@ -11,8 +11,8 @@ export default function Contact() {
       <div className="contact-form-container">
         <PageTitle
           tag="DISPATCH"
-          title="Direct Outreach & Dispatch"
-          subtitle="Send project proposals, hiring opportunities, or direct technical inquiries. Messages submit directly through the AWS serverless triage pipeline."
+          title="Get In Touch"
+          subtitle="I'd love to hear from you! Whether you have a question or just want to say hi, feel free to drop a message below."
           meta="AWS SERVERLESS TRIAGE"
         />
         <DispatchContactForm />

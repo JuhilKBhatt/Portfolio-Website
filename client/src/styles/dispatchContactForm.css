@@ -307,7 +307,6 @@
 }
 
 .dispatch-security-row {
-  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 6px;
