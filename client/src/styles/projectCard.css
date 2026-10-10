@@ -50,14 +50,36 @@
 }
 
 /* Carousel Inner Reset */
+.project-card,
+.projects-grid-item {
+  min-width: 0;
+}
+
+.project-carousel {
+  position: absolute;
+  inset: 0;
+}
+
 .project-carousel,
 .project-carousel .slick-slider,
 .project-carousel .slick-list,
-.project-carousel .slick-track,
 .project-carousel .slick-slide > div,
 .project-carousel-slide {
   width: 100%;
   height: 100%;
+}
+
+.project-carousel .slick-track {
+  display: flex;
+  height: 100%;
+}
+
+.project-carousel .slick-slide {
+  height: auto;
+}
+
+.project-carousel-slide .ant-image {
+  display: block;
 }
 
 .project-carousel .slick-dots {
