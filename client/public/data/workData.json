@@ -1,72 +1,80 @@
 [
-    {
-    "id": "safari-copper",
-    "name": "Safari Copper Recycling",
+  {
+    "id": "safari-copper-current",
+    "name": "Safari Copper Recycling Pty Ltd",
     "dateFrom": "10/2026",
     "dateTo": "",
-    "position": "General Manager + Full Stack Software Engineer (Part-Time)",
+    "position": "Software Engineer & Operations Manager (Full-Time)",
     "status": "Active",
     "location": "Wetherill Park, NSW",
     "themeColor": "#ea580c",
-    "bulletIcon": "arrow",
+    "bulletIcon": "code",
     "description": [
-      "Integrate AI Powered OCR to auto filled docket data, further cutting on manual data entry."
+      "Engineered and integrated an **AI-powered OCR** pipeline into the enterprise docket platform to automatically extract and populate physical weighbridge data, further **reducing manual data entry** and processing latency.",
+      "Architected a zero-footprint, hardware-isolated **secure USB** environment to execute and host sensitive accounting workflows directly from encrypted external media with zero local host data persistence.",
+      "Continued end-to-end technical ownership of the remote full-stack invoicing system (**1,200+ monthly transactions**, **99% availability**) and overarching commercial operations managing **+$200,000 in monthly cash flow** across **6 material categories**."
     ],
     "skills": [
-      "#AI",
-      "#OCR",
-      "#AI Integration",
       "#python",
+      "#react",
+      "#flask",
+      "#ai-ocr",
       "#fullstack",
-      "#operations",
-      "#it-support"
+      "#cybersecurity",
+      "#system-architecture",
+      "#operations-management"
     ]
   },
   {
     "id": "safari-copper",
-    "name": "Safari Copper Recycling",
+    "name": "Safari Copper Recycling Pty Ltd",
     "dateFrom": "06/2023",
     "dateTo": "03/2026",
-    "position": "General Manager + Full Stack Software Engineer (Part-Time)",
+    "position": "Software Engineer & Operations Manager (Part-Time)",
     "status": "Concluded Service",
     "location": "Wetherill Park, NSW",
     "themeColor": "#ea580c",
-    "bulletIcon": "arrow",
+    "bulletIcon": "code",
     "description": [
-      "Directed day-to-day business operations and scrap metal logistics, improving dispatch turnaround by **35% operational efficiency**.",
-      "Engineered bespoke full-stack internal management consoles using **React**, **Python**, and **Flask** for automated invoicing and material tracking.",
-      "Maintained on-premise IT infrastructure, network security protocols, and external B2B communications with **99.9% system availability**."
+      "Designed, deployed, and maintained a remotely accessible **full-stack enterprise docket and invoicing application** (**React**, **Python**, **Flask**), processing **1,200+ transactions per month** with **99% uptime**.",
+      "Automated financial workflows handling **+$200,000 in monthly cash flow**, eliminating **100+ hours of manual data entry per month** and improving dispatch turnaround by **35% operational efficiency**.",
+      "Directed overarching business and IT operations, including managing **+$200,000 in monthly cash flow**, tracking physical inventory across **6 material categories**, maintaining on-premise network infrastructure, and leading external B2B stakeholder communications."
     ],
     "skills": [
       "#react",
       "#python",
       "#flask",
       "#fullstack",
-      "#operations",
-      "#it-support"
+      "#enterprise-software",
+      "#process-automation",
+      "#operations-management",
+      "#it-infrastructure"
     ]
   },
   {
     "id": "ajbcc",
-    "name": "AJBCC",
+    "name": "Australia Japan Business Co-operation Committee",
     "dateFrom": "08/2026",
     "dateTo": "09/2026",
-    "position": "Full-Stack Software Engineer (Internship)",
+    "position": "Software Engineer (Internship)",
     "status": "Concluded Service",
     "location": "Sydney, NSW",
     "themeColor": "#2E6F40",
-    "bulletIcon": "arrow",
+    "bulletIcon": "code",
     "description": [
-      "Delivered full-stack platform enhancements for Australia-Japan Business Co-operation Committee stakeholder portals.",
-      "Engineered automated CRM optimisation scripts that eliminated **12 hours/week in manual data reconciliation**.",
-      "Coordinated technical AV and executive digital infrastructure for bilateral international conference events."
+      "Engineered and deployed a production **Python API** on **Render** integrating **Glue Up** with **Xero**, automating cross-platform invoice synchronisation and financial ledger mapping within a rapid **2-week timeframe**.",
+      "Developed automated **CRM data hygiene modules** leveraging **REST APIs** and programmatic **.xlsx parsing** to archive dormant contacts and algorithmically predict duplicate entries, eliminating **12+ hours/week in manual data reconciliation**.",
+      "Delivered full-stack stakeholder portal enhancements and coordinated technical AV and digital infrastructure for executive bilateral Australia-Japan conference events."
     ],
     "skills": [
-      "#fullstack",
-      "#crm-optimisation",
-      "#event-tech",
-      "#it-support",
-      "#automation"
+      "#python",
+      "#rest-apis",
+      "#render",
+      "#xero-api",
+      "#glue-up",
+      "#crm-automation",
+      "#data-engineering",
+      "#fullstack"
     ]
   },
   {
@@ -74,20 +82,22 @@
     "name": "Yokohama Suiran High School",
     "dateFrom": "04/2026",
     "dateTo": "07/2026",
-    "position": "Intern English ALT (Internship)",
+    "position": "Assistant Language Teacher (Internship)",
     "status": "Concluded Service",
     "location": "Yokohama, Kanagawa, Japan",
     "themeColor": "#CD7F32",
     "bulletIcon": "arrow",
     "description": [
-      "Conducted **~9 high-school immersion classes weekly** at Kanagawa Prefectural Yokohama Suiran High School.",
-      "Facilitated conversational English practice, cross-cultural workshops and curriculum delivery in Japanese and English.",
-      "Collaborated with department heads on educational materials and speech coaching."
+      "Delivered **9+ weekly immersion classes** for senior high school cohorts at Kanagawa Prefectural Yokohama Suiran High School, driving measurable improvements in student spoken fluency and engagement.",
+      "Designed and facilitated cross-cultural workshops and bilingual curriculum modules in **Japanese and English** tailored to diverse student proficiency levels.",
+      "Collaborated with faculty department heads on instructional design, academic assessment standardization, and competitive speech coaching."
     ],
     "skills": [
-      "#japanese-immersion",
-      "#cross-cultural-communication",
-      "#teaching"
+      "#bilingual-communication",
+      "#japanese-business-culture",
+      "#stakeholder-collaboration",
+      "#public-speaking",
+      "#curriculum-design"
     ]
   },
   {
@@ -95,20 +105,21 @@
     "name": "Newtown Fast-Mart",
     "dateFrom": "03/2022",
     "dateTo": "05/2023",
-    "position": "Store Clerk (Part-Time)",
+    "position": "Retail Operations Associate (Part-Time)",
     "status": "Concluded Service",
     "location": "Newtown, NSW",
     "themeColor": "#FA003F",
     "bulletIcon": "arrow",
     "description": [
-      "Managed high-volume customer transactions, cash balancing, and inventory replenishment with zero ledger discrepancies.",
-      "Organized inventory intake and stockroom layout, optimizing product accessibility and shelf turnover."
+      "Processed high-volume POS transactions, end-of-day cash reconciliations, and supplier deliveries while maintaining **100% ledger accuracy** with zero cash discrepancies.",
+      "Optimized stockroom inventory tracking, demand replenishment, and merchandising layouts to accelerate product turnover and reduce stockout incidents."
     ],
     "skills": [
       "#pos-systems",
-      "#inventory-management",
-      "#customer-relations",
-      "#cash-handling"
+      "#inventory-control",
+      "#financial-reconciliation",
+      "#client-relations",
+      "#operations"
     ]
   },
   {
@@ -122,13 +133,14 @@
     "themeColor": "#64748b",
     "bulletIcon": "arrow",
     "description": [
-      "Deployed and configured 50 industrial label printer a day.",
-      "Diagnosed barcode print drivers and thermal transfer issues to maintain logistics throughput."
+      "Provisioned, configured, and deployed **50+ industrial thermal label printers daily** across national retail distribution workflows ahead of schedule.",
+      "Diagnosed and resolved barcode print driver, firmware, and thermal transfer hardware bottlenecks to sustain **100% logistics dispatch throughput**."
     ],
     "skills": [
-      "#hardware-diagnostics",
-      "#label-printers",
-      "#logistics-support"
+      "#hardware-provisioning",
+      "#driver-diagnostics",
+      "#industrial-peripherals",
+      "#logistics-it-support"
     ]
   },
   {
@@ -142,12 +154,13 @@
     "themeColor": "#64748b",
     "bulletIcon": "arrow",
     "description": [
-      "Assisted headquarters IT department with tier-1 troubleshooting, desktop re-imaging, and peripheral rollouts."
+      "Executed Tier-1/Tier-2 helpdesk troubleshooting, automated SOE desktop re-imaging, and enterprise peripheral rollouts for corporate headquarters staff."
     ],
     "skills": [
-      "#desktop-support",
-      "#hardware-maintenance",
-      "#helpdesk"
+      "#tier-1-helpdesk",
+      "#soe-imaging",
+      "#endpoint-management",
+      "#it-support"
     ]
   }
 ]

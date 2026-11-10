@@ -4,15 +4,16 @@
     "name": "Google Skills",
     "tabLabel": "Google Skills",
     "tabIcon": "file",
-    "statusLabel": "CERTIFICATIONS",
+    "statusLabel": "PROFESSIONAL CERTIFICATIONS",
     "statusTheme": "#F7B529",
     "dateFrom": "09/2026",
     "dateTo": "",
-    "degree": "",
+    "degree": "Cloud, AI & Software Engineering Specializations",
     "location": "Remote",
     "actionLabel": "VIEW CERTIFICATES",
     "bullets": [
-      "Upskilling in various Google Certificates"
+      "Completing industry-recognized Google Cloud, Artificial Intelligence, and Enterprise Software Engineering professional credentials.",
+      "Applying cloud-native architecture, automated CI/CD workflows, and generative AI integration patterns to production software systems."
     ],
     "certificates": []
   },
@@ -24,14 +25,19 @@
     "statusLabel": "TERTIARY EDUCATION",
     "statusTheme": "#0F4BEB",
     "dateFrom": "02/2022",
-    "dateTo": "05/2027",
-    "degree": "Bachelor of Science in Information Technology + International Studies (Japan)",
+    "dateTo": "03/2027",
+    "degree": "Bachelor of Science in Information Technology & Bachelor of International Studies",
     "location": "Sydney, NSW, Australia",
     "actionLabel": "VIEW CERTIFICATES",
     "bullets": [
-      "Major: Enterprise Systems Development",
-      "Sub-Major: Computer Graphs and Animation & Networking and Cybersecurity",
-      "International Studies Major: Japan Language and Culture"
+      "Expected Completion: Early 2027 - Only one subject remaining, with full availability for full-time employment.",
+      "Academic Standing: WAM 76.54 (Distinction Average).",
+      "IT Major: Enterprise Systems Development | Sub-Majors: Computer Graphics and Animation, Networking and Cybersecurity.",
+      "International Studies Major: Japanese Language and Culture."
+    ],
+    "rankPills": [
+      "WAM: 76.54 (Distinction)",
+      "Full-Time Available (1 Subject Remaining)"
     ],
     "certificates": [
       {
@@ -50,15 +56,20 @@
     "tabIcon": "file",
     "statusLabel": "GLOBAL MOBILITY PROGRAM",
     "statusTheme": "#005bac",
-    "dateFrom": "04/2026",
+    "dateFrom": "03/2026",
     "dateTo": "08/2026",
     "degree": "Global Exchange Program",
     "location": "Yokohama, Kanagawa, Japan",
     "actionLabel": "VIEW CERTIFICATES",
     "bullets": [
-      "J200 - Intensive Japanese Language Immersion",
-      "Data Literacy for Problem Solving - Applied Analytical Methodologies",
-      "Teaching Internship - High School Educator placement at Yokohama Suiran High School"
+      "Japanese Grade: A (High Distinction) - J200 Intensive Japanese Language and Cross-Cultural Immersion.",
+      "New Colombo Plan (NCP) Mobility Recipient: Awarded Australian Government scholarship for bilateral academic and industry engagement in Japan.",
+      "Technical Coursework: Data Literacy for Problem Solving (Applied Statistical & Analytical Methodologies).",
+      "Industry Practicum: Concurrent Assistant Language Teacher (ALT) internship at Kanagawa Prefectural Yokohama Suiran High School."
+    ],
+    "rankPills": [
+      "Japanese Grade: A (High Distinction)",
+      "New Colombo Plan Scholar"
     ],
     "certificates": [
       {
@@ -89,15 +100,14 @@
     "degree": "Higher School Certificate (HSC)",
     "location": "Parramatta, NSW, Australia",
     "bullets": [
-      "Industrial Technology Multimedia",
-      "Software Design & Development",
-      "Information Technology Electronics",
-      "Information Processing and Technology"
+      "Graduated with 1st-in-Cohort academic rankings across four computing, software engineering and electronics subjects.",
+      "STEM Specialization: Software Design & Development, Information Processes & Technology, IT Electronics and Industrial Technology Multimedia.",
+      "Awarded 10+ formal academic honors including multiple Principal's Recognitions of Student Excellence."
     ],
     "rankPills": [
       "1st in Software Design & Dev",
       "1st in IT Electronics",
-      "1st in Multimedia"
+      "1st in Industrial Technology x 3"
     ],
     "actionLabel": "VIEW CERTIFICATES",
     "certificates": [
@@ -157,7 +167,7 @@
       },
       {
         "id": "aphs-10",
-        "title": "1st in Software Design & Dev & Info Process & Tech (Year 11)",
+        "title": "1st in Software Design & Development and Information Processes & Technology (Year 11)",
         "shortTitle": "1st SDD & IPT (Yr 11)",
         "url": "https://res.cloudinary.com/dmj4ggkjq/image/upload/v1752657161/1stSDDIPTYear11_lmboxi.png"
       }
